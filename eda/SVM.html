@@ -8620,12 +8620,12 @@ weighted avg       0.77      0.77      0.76       231
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=39f3de55">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=39f3de55">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Đánh giá K-Fold</span>
@@ -8637,12 +8637,27 @@ weighted avg       0.77      0.77      0.76       231
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a8faa1c9-0f86-48d2-99ef-9b6c0d9bb792">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Scores từng fold: [0.74074074 0.72222222 0.74074074 0.7962963  0.81481481 0.74074074
+ 0.74074074 0.77358491 0.8490566  0.79245283]
+Mean Accuracy: 0.7711
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a8faa1c9-0f86-48d2-99ef-9b6c0d9bb792">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Lưu kết quả vào Excel (dữ liệu gốc)</span>
@@ -8676,12 +8691,25 @@ weighted avg       0.77      0.77      0.76       231
 </div>
 </div>
 </div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Đã ghi kết quả SVM (dữ liệu gốc) vào thư mục ket_qua
+</pre>
+</div>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=03473552-5742-43b5-af52-ab2bab247783">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">X2</span> <span class="o">=</span> <span class="n">df_final</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'Outcome'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -8700,12 +8728,12 @@ weighted avg       0.77      0.77      0.76       231
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d11e3c5b-77cd-482f-8493-99ed262a9f8a">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d11e3c5b-77cd-482f-8493-99ed262a9f8a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Khởi tạo và huấn luyện SVM trên dữ liệu sạch</span>
@@ -8726,12 +8754,37 @@ weighted avg       0.77      0.77      0.76       231
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5caa99de-62c7-4d20-8f60-ee828abc8e31">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Validation Accuracy: 0.7840
+Test Accuracy: 0.7532
+[[133  17]
+ [ 40  41]]
+              precision    recall  f1-score   support
+
+           0       0.77      0.89      0.82       150
+           1       0.71      0.51      0.59        81
+
+    accuracy                           0.75       231
+   macro avg       0.74      0.70      0.71       231
+weighted avg       0.75      0.75      0.74       231
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=5caa99de-62c7-4d20-8f60-ee828abc8e31">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Đánh giá K-Fold</span>
@@ -8743,12 +8796,27 @@ weighted avg       0.77      0.77      0.76       231
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=87d1a7cc-901f-421d-9c11-4dcaa9f51307">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Scores từng fold: [0.7037037  0.72222222 0.74074074 0.7962963  0.81481481 0.75925926
+ 0.74074074 0.77358491 0.83018868 0.77358491]
+Mean Accuracy: 0.7655
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=87d1a7cc-901f-421d-9c11-4dcaa9f51307">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Lưu kết quả vào Excel (dữ liệu đã xử lý)</span>
@@ -8780,32 +8848,31 @@ weighted avg       0.77      0.77      0.76       231
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b673f367-e117-4e64-8225-9581c5b8c289">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Đã ghi kết quả SVM (dữ liệu đã xử lý) vào thư mục ket_qua
+</pre>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=36edfb51">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=07fad1c9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h5 id="Thay-%C4%91%E1%BB%95i-c%C3%A1c-th%C3%B4ng-s%E1%BB%91-m%C3%B4-h%C3%ACnh-(d%E1%BB%AF-li%E1%BB%87u-%C4%91%C3%A3-x%E1%BB%AD-l%C3%BD)">Thay đổi các thông số mô hình (dữ liệu đã xử lý)<a class="anchor-link" href="#Thay-%C4%91%E1%BB%95i-c%C3%A1c-th%C3%B4ng-s%E1%BB%91-m%C3%B4-h%C3%ACnh-(d%E1%BB%AF-li%E1%BB%87u-%C4%91%C3%A3-x%E1%BB%AD-l%C3%BD)">¶</a></h5>
+<h5 id="Thay-%C4%91%E1%BB%95i-c%C3%A1c-th%C3%B4ng-s%E1%BB%91-m%C3%B4-h%C3%ACnh">Thay đổi các thông số mô hình<a class="anchor-link" href="#Thay-%C4%91%E1%BB%95i-c%C3%A1c-th%C3%B4ng-s%E1%BB%91-m%C3%B4-h%C3%ACnh">¶</a></h5>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4fb66b8e">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3569367b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8813,14 +8880,10 @@ weighted avg       0.77      0.77      0.76       231
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span>
-
-<span class="c1"># Tuning: đổi kernel, C, gamma</span>
-<span class="n">svm_model3</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">svm_model3</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span>
     <span class="n">kernel</span><span class="o">=</span><span class="s1">'rbf'</span><span class="p">,</span>
-    <span class="n">C</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">gamma</span><span class="o">=</span><span class="s1">'scale'</span><span class="p">,</span>
-    <span class="n">class_weight</span><span class="o">=</span><span class="s1">'balanced'</span><span class="p">,</span>
     <span class="n">random_state</span><span class="o">=</span><span class="n">seed</span>
 <span class="p">)</span>
 
@@ -8843,7 +8906,7 @@ weighted avg       0.77      0.77      0.76       231
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b4e36f84">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=10a3188e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8853,7 +8916,7 @@ weighted avg       0.77      0.77      0.76       231
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7802c874">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c3e8e819">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8864,7 +8927,7 @@ weighted avg       0.77      0.77      0.76       231
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">scores_svm3</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">svm_model3</span><span class="p">,</span> <span class="n">X_train2</span><span class="p">,</span> <span class="n">y_train2</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">svm_model3</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train2</span><span class="p">,</span> <span class="n">y_train2</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">'Scores từng fold:'</span><span class="p">,</span> <span class="n">scores_svm3</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Mean Accuracy: </span><span class="si">{</span><span class="n">scores_svm3</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Mean Accuracy:'</span><span class="p">,</span> <span class="n">scores_svm3</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">svm_model3</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 </pre></div>
@@ -8872,7 +8935,7 @@ weighted avg       0.77      0.77      0.76       231
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4f8c1101">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c3a90934">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8910,7 +8973,7 @@ weighted avg       0.77      0.77      0.76       231
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0bd39966-ec55-4829-9e8a-329ebb0f7f5f">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fea32263">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8918,7 +8981,7 @@ weighted avg       0.77      0.77      0.76       231
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter<span class="w"> </span>nbconvert<span class="w"> </span>--to<span class="w"> </span>html<span class="w"> </span>SVM.ipynb
 </pre></div>
 </div>
 </div>
