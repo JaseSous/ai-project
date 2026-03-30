@@ -7538,7 +7538,7 @@ The structure is similar to a typical Iris classification example: load data, ex
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [33]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Load libraries</span>
@@ -7582,7 +7582,7 @@ The structure is similar to a typical Iris classification example: load data, ex
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [34]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s2">"data/banknote_authentication.csv"</span>
@@ -7617,7 +7617,7 @@ The structure is similar to a typical Iris classification example: load data, ex
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [35]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># shape</span>
@@ -7822,12 +7822,41 @@ memory usage: 53.7 KB
 </div>
 </div>
 </div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=48a1bb36">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><strong>Nhận xét</strong>:</p>
+<ul>
+<li>Dữ liệu có 5 tính chất: variance, skewness, curtosis, entropy, class</li>
+<li>Các features là đặc trưng toán học trích xuất từ ảnh qua Wavelet Transform</li>
+<li>Tổng số dòng dữ liệu là 1372 dòng</li>
+<li>Dữ liệu để phân lớp ở cột class (0 = thật, 1 = giả)</li>
+<li><strong>Giá trị thiếu:</strong> Qua quan sát hàm <code>.info()</code>, không có cột nào chứa giá trị <code>null</code>. Điều này cho thấy tập dữ liệu khá sạch về mặt kỹ thuật, không cần áp dụng các kỹ thuật xử lý dữ liệu thiếu (Imputation).</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=21345f2e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="C%C3%A1c-t%C3%ADnh-ch%E1%BA%A5t-th%E1%BB%91ng-k%C3%AA-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-s%E1%BB%91"><strong>Các tính chất thống kê trên dữ liệu số</strong><a class="anchor-link" href="#C%C3%A1c-t%C3%ADnh-ch%E1%BA%A5t-th%E1%BB%91ng-k%C3%AA-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-s%E1%BB%91">¶</a></h4>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=05e94c2f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [36]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">description</span> <span class="o">=</span> <span class="n">df_dataset</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
@@ -7936,7 +7965,7 @@ memory usage: 53.7 KB
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=48a1bb36">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=da5d38c4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7944,11 +7973,53 @@ memory usage: 53.7 KB
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p><strong>Nhận xét</strong>:</p>
 <ul>
-<li>Dữ liệu có 5 tính chất: variance, skewness, curtosis, entropy, class</li>
-<li>Các features là đặc trưng toán học trích xuất từ ảnh qua Wavelet Transform</li>
-<li>Tổng số dòng dữ liệu là 1372 dòng</li>
-<li>Dữ liệu để phân lớp ở cột class (0 = thật, 1 = giả)</li>
+<li><strong>Sự chênh lệch thang đo:</strong> Dải giá trị của các đặc trưng có sự khác biệt đáng kể. Ví dụ: <code>skewness</code> có biên độ từ <strong>-13.77 đến 12.95</strong>, trong khi <code>entropy</code> chỉ dao động từ <strong>-8.54 đến 2.44</strong>.<ul>
+<li><strong>Hệ quả:</strong> Việc các đặc trưng có thang đo không đồng nhất sẽ làm ảnh hưởng đến các thuật toán dựa trên khoảng cách (như kNN, SVM). Do đó, bước <strong>Chuẩn hóa dữ liệu (Standardization)</strong> là bắt buộc ở giai đoạn tiền xử lý.</li>
 </ul>
+</li>
+<li><strong>Sự xuất hiện của số âm:</strong> Các giá trị âm xuất hiện ở tất cả các đặc trưng đầu vào. Điều này phản ánh tính chất của phép biến đổi Wavelet được sử dụng để trích xuất đặc trưng từ hình ảnh tờ tiền.</li>
+<li><strong>Đặc trưng mục tiêu (Target):</strong> Giá trị trung bình của cột <code>class</code> là khoảng <strong>0.45</strong>, cho thấy tỉ lệ tiền giả (1) và tiền thật (0) khá cân bằng (xấp xỉ 45:55), không xảy ra tình trạng lệch lớp nghiêm trọng.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8a10cd65">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="T%E1%BA%A7n-s%E1%BB%91-xu%E1%BA%A5t-hi%E1%BB%87n-(Distribution)-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-ph%C3%A2n-l%E1%BB%9Bp-(Outcome)-v%C3%A0-d%E1%BB%AF-li%E1%BB%87u-danh-m%E1%BB%A5c-(Category)"><strong>Tần số xuất hiện (Distribution) trên dữ liệu phân lớp (Outcome) và dữ liệu danh mục (Category)</strong><a class="anchor-link" href="#T%E1%BA%A7n-s%E1%BB%91-xu%E1%BA%A5t-hi%E1%BB%87n-(Distribution)-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-ph%C3%A2n-l%E1%BB%9Bp-(Outcome)-v%C3%A0-d%E1%BB%AF-li%E1%BB%87u-danh-m%E1%BB%A5c-(Category)">¶</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2b5a2ac9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [37]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df_dataset</span><span class="p">[</span><span class="s2">"class"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[37]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>class
+0    762
+1    610
+Name: count, dtype: int64</pre>
+</div>
 </div>
 </div>
 </div>
@@ -7959,7 +8030,7 @@ memory usage: 53.7 KB
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="(2)-Ki%E1%BB%83m-tra-t%C3%ADnh-to%C3%A0n-v%E1%BA%B9n-c%E1%BB%A7a-d%E1%BB%AF-li%E1%BB%87u">(2) <strong>Kiểm tra tính toàn vẹn của dữ liệu</strong><a class="anchor-link" href="#(2)-Ki%E1%BB%83m-tra-t%C3%ADnh-to%C3%A0n-v%E1%BA%B9n-c%E1%BB%A7a-d%E1%BB%AF-li%E1%BB%87u">¶</a></h4><ul>
+<h4 id="Ki%E1%BB%83m-tra-t%C3%ADnh-to%C3%A0n-v%E1%BA%B9n-c%E1%BB%A7a-d%E1%BB%AF-li%E1%BB%87u"><strong>Kiểm tra tính toàn vẹn của dữ liệu</strong><a class="anchor-link" href="#Ki%E1%BB%83m-tra-t%C3%ADnh-to%C3%A0n-v%E1%BA%B9n-c%E1%BB%A7a-d%E1%BB%AF-li%E1%BB%87u">¶</a></h4><ul>
 <li>Dữ liệu có bị trùng lặp không? Hiển thị dòng bị vi phạm.</li>
 <li>Dữ liệu có tồn tại giá trị Null không? Hiển thị dòng bị vi phạm.</li>
 <li>Dữ liệu có tồn tại giá trị NaN không? Hiển thị dòng bị vi phạm.</li>
@@ -7972,7 +8043,7 @@ memory usage: 53.7 KB
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [38]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">has_null</span> <span class="o">=</span> <span class="n">df_dataset</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()</span> <span class="c1"># tim null, roi xem co bao nhieu gia tri null,check co cai nao lon hon 0 ko</span>
@@ -8012,7 +8083,7 @@ memory usage: 53.7 KB
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [39]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Xóa dòng trùng lặp</span>
@@ -8038,266 +8109,6 @@ memory usage: 53.7 KB
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=21345f2e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="(3)-C%C3%A1c-t%C3%ADnh-ch%E1%BA%A5t-th%E1%BB%91ng-k%C3%AA-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-s%E1%BB%91">(3) <strong>Các tính chất thống kê trên dữ liệu số</strong><a class="anchor-link" href="#(3)-C%C3%A1c-t%C3%ADnh-ch%E1%BA%A5t-th%E1%BB%91ng-k%C3%AA-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-s%E1%BB%91">¶</a></h4>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=6cfb2263">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">description</span> <span class="o">=</span> <span class="n">df_dataset</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
-<span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>count</th>
-<th>mean</th>
-<th>std</th>
-<th>min</th>
-<th>25%</th>
-<th>50%</th>
-<th>75%</th>
-<th>max</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>variance</th>
-<td>1348.0</td>
-<td>0.445785</td>
-<td>2.862906</td>
-<td>-7.0421</td>
-<td>-1.78665</td>
-<td>0.518735</td>
-<td>2.853250</td>
-<td>6.8248</td>
-</tr>
-<tr>
-<th>skewness</th>
-<td>1348.0</td>
-<td>1.909039</td>
-<td>5.868600</td>
-<td>-13.7731</td>
-<td>-1.62700</td>
-<td>2.334150</td>
-<td>6.796025</td>
-<td>12.9516</td>
-</tr>
-<tr>
-<th>curtosis</th>
-<td>1348.0</td>
-<td>1.413578</td>
-<td>4.328365</td>
-<td>-5.2861</td>
-<td>-1.54560</td>
-<td>0.605495</td>
-<td>3.199800</td>
-<td>17.9274</td>
-</tr>
-<tr>
-<th>entropy</th>
-<td>1348.0</td>
-<td>-1.168712</td>
-<td>2.085877</td>
-<td>-8.5482</td>
-<td>-2.39310</td>
-<td>-0.578890</td>
-<td>0.403863</td>
-<td>2.4495</td>
-</tr>
-<tr>
-<th>class</th>
-<td>1348.0</td>
-<td>0.452522</td>
-<td>0.497925</td>
-<td>0.0000</td>
-<td>0.00000</td>
-<td>0.000000</td>
-<td>1.000000</td>
-<td>1.0000</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8a10cd65">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="(4)-T%E1%BA%A7n-s%E1%BB%91-xu%E1%BA%A5t-hi%E1%BB%87n-(Distribution)-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-ph%C3%A2n-l%E1%BB%9Bp-(Outcome)-v%C3%A0-d%E1%BB%AF-li%E1%BB%87u-danh-m%E1%BB%A5c-(Category)">(4) <strong>Tần số xuất hiện (Distribution) trên dữ liệu phân lớp (Outcome) và dữ liệu danh mục (Category)</strong><a class="anchor-link" href="#(4)-T%E1%BA%A7n-s%E1%BB%91-xu%E1%BA%A5t-hi%E1%BB%87n-(Distribution)-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-ph%C3%A2n-l%E1%BB%9Bp-(Outcome)-v%C3%A0-d%E1%BB%AF-li%E1%BB%87u-danh-m%E1%BB%A5c-(Category)">¶</a></h4>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2b5a2ac9">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">df_dataset</span><span class="p">[</span><span class="s2">"class"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[24]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>class
-0    738
-1    610
-Name: count, dtype: int64</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f5a8a19c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Ki%E1%BB%83m-tra-v%C3%A0-lo%E1%BA%A1i-b%E1%BB%8F-d%E1%BB%AF-li%E1%BB%87u-l%E1%BB%97i,-ngo%E1%BA%A1i-l%E1%BB%87">Kiểm tra và loại bỏ dữ liệu lỗi, ngoại lệ<a class="anchor-link" href="#Ki%E1%BB%83m-tra-v%C3%A0-lo%E1%BA%A1i-b%E1%BB%8F-d%E1%BB%AF-li%E1%BB%87u-l%E1%BB%97i,-ngo%E1%BA%A1i-l%E1%BB%87">¶</a></h2>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a5ac216c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">value_ranges</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"variance"</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
-    <span class="s2">"skewness"</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
-    <span class="s2">"curtosis"</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
-    <span class="s2">"entropy"</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b737a172">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">detect_errors</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">value_ranges</span><span class="p">):</span>
-    <span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
-
-    <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="p">(</span><span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">)</span> <span class="ow">in</span> <span class="n">value_ranges</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-            <span class="k">continue</span>
-        
-        <span class="c1"># Chỉ check range, không check == 0</span>
-        <span class="n">invalid_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">min_val</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">max_val</span><span class="p">)</span>
-
-        <span class="n">invalid_values</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">invalid_mask</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">invalid_values</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
-            <span class="n">errors</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s2">"count"</span><span class="p">:</span> <span class="n">invalid_mask</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
-                <span class="s2">"min_actual"</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
-                <span class="s2">"max_actual"</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
-                <span class="s2">"problem_values"</span><span class="p">:</span> <span class="n">invalid_values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-            <span class="p">}</span>
-
-    <span class="k">return</span> <span class="n">errors</span>
-
-<span class="c1"># Kiểm tra class riêng</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">detect_class_errors</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-    <span class="n">invalid_class</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="s2">"class"</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Class lỗi (không phải 0 hoặc 1): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">invalid_class</span><span class="p">)</span><span class="si">}</span><span class="s2"> dòng"</span><span class="p">)</span>
-
-<span class="n">errors</span> <span class="o">=</span> <span class="n">detect_errors</span><span class="p">(</span><span class="n">df_dataset</span><span class="p">,</span> <span class="n">value_ranges</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"==== Dữ liệu lỗi được phát hiện ===="</span><span class="p">)</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">errors</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Không có giá trị lỗi!"</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">errors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">'count'</span><span class="p">]</span><span class="si">}</span><span class="s2"> giá trị lỗi"</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"- Range thực tế: </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">'min_actual'</span><span class="p">]</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">'max_actual'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"- Giá trị có vấn đề: </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">'problem_values'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="n">detect_class_errors</span><span class="p">(</span><span class="n">df_dataset</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>==== Dữ liệu lỗi được phát hiện ====
-Không có giá trị lỗi!
-Class lỗi (không phải 0 hoặc 1): 0 dòng
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a9a4b672">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -8313,7 +8124,7 @@ Class lỗi (không phải 0 hoặc 1): 0 dòng
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [40]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
@@ -8361,7 +8172,7 @@ Class lỗi (không phải 0 hoặc 1): 0 dòng
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [28]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [41]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
@@ -8406,7 +8217,7 @@ Class lỗi (không phải 0 hoặc 1): 0 dòng
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [42]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -8446,7 +8257,7 @@ Class lỗi (không phải 0 hoặc 1): 0 dòng
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [43]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df_dataset</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'class'</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">'blue'</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">'red'</span><span class="p">})</span>
@@ -8485,7 +8296,7 @@ Class lỗi (không phải 0 hoặc 1): 0 dòng
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [44]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
@@ -8493,57 +8304,52 @@ Class lỗi (không phải 0 hoặc 1): 0 dòng
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
 
-<span class="c1"># --- Bước 0: Giả sử df_dataset đã được load ---</span>
-<span class="c1"># (Nếu bạn chưa có df_dataset, hãy đảm bảo đã load nó trước cell này)</span>
-
-<span class="c1"># 1. Tạo thư mục 'database' nếu chưa tồn tại</span>
-<span class="n">folder_name</span> <span class="o">=</span> <span class="s1">'database'</span>
+<span class="c1"># 1. Tạo thư mục</span>
+<span class="n">folder_name</span> <span class="o">=</span> <span class="s1">'data'</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">folder_name</span><span class="p">):</span>
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">folder_name</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Đã tạo thư mục: </span><span class="si">{</span><span class="n">folder_name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="c1"># 2. Tách đặc trưng (X) và nhãn (y)</span>
+<span class="c1"># 2. Tách X, y</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">df_dataset</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'class'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">df_dataset</span><span class="p">[</span><span class="s1">'class'</span><span class="p">]</span>
 
-<span class="c1"># 3. Chia tập dữ liệu: </span>
-<span class="c1"># Chia lần 1: Lấy 70% cho Train, 30% còn lại là tập tạm (temp)</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_temp</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_temp</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="c1"># 3. Chia dữ liệu</span>
 
-<span class="c1"># Chia lần 2: Chia 30% tập tạm thành 2 nửa (mỗi nửa 15% tổng dữ liệu) cho Valid và Test</span>
-<span class="n">X_val</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_temp</span><span class="p">,</span> <span class="n">y_temp</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="c1"># Bước 1: tách 30% test</span>
+<span class="n">X_train_val</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train_val</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span>
+<span class="p">)</span>
 
-<span class="c1"># 4. Chuẩn hóa dữ liệu (StandardScaler)</span>
+<span class="c1"># Bước 2: từ 70% còn lại -&gt; tách valid (15% tổng)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X_train_val</span><span class="p">,</span> <span class="n">y_train_val</span><span class="p">,</span>
+    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2143</span><span class="p">,</span>  <span class="c1"># = 15/70</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">stratify</span><span class="o">=</span><span class="n">y_train_val</span>
+<span class="p">)</span>
+
+<span class="c1"># 4. Scale</span>
 <span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
-<span class="c1"># Chỉ fit trên tập Train để tránh rò rỉ thông tin (Data Leakage)</span>
 <span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 <span class="n">X_val_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
 <span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 
-<span class="c1"># 5. Hàm hỗ trợ đóng gói và lưu CSV</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">save_dataset</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">,</span> <span class="n">y_original</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
-    <span class="c1"># Chuyển mảng numpy sau khi scale về DataFrame và gán lại tên cột</span>
+<span class="c1"># 5. Lưu</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">save_dataset</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">,</span> <span class="n">y_original</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
     <span class="n">df_scaled</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-    <span class="c1"># Gán nhãn y (reset index để tránh lệch dòng khi ghép)</span>
     <span class="n">df_scaled</span><span class="p">[</span><span class="s1">'class'</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_original</span><span class="o">.</span><span class="n">values</span>
-    
-    <span class="c1"># Lưu file</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder_name</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">file_name</span><span class="si">}</span><span class="s2">.csv"</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder_name</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.csv"</span><span class="p">)</span>
     <span class="n">df_scaled</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">path</span>
 
-<span class="c1"># 6. Thực hiện lưu</span>
 <span class="n">path_train</span> <span class="o">=</span> <span class="n">save_dataset</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="s1">'train_data'</span><span class="p">)</span>
 <span class="n">path_val</span> <span class="o">=</span> <span class="n">save_dataset</span><span class="p">(</span><span class="n">X_val_scaled</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="s1">'valid_data'</span><span class="p">)</span>
 <span class="n">path_test</span> <span class="o">=</span> <span class="n">save_dataset</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="s1">'test_data'</span><span class="p">)</span>
 
-<span class="c1"># 7. Hiển thị kết quả kiểm tra</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Kích thước tập Train: </span><span class="si">{</span><span class="n">X_train_scaled</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> -&gt; Lưu tại: </span><span class="si">{</span><span class="n">path_train</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Kích thước tập Valid: </span><span class="si">{</span><span class="n">X_val_scaled</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> -&gt; Lưu tại: </span><span class="si">{</span><span class="n">path_val</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Kích thước tập Test : </span><span class="si">{</span><span class="n">X_test_scaled</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> -&gt; Lưu tại: </span><span class="si">{</span><span class="n">path_test</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Hoàn tất! Bạn có thể kiểm tra thư mục 'database' ở menu bên trái Jupyter."</span><span class="p">)</span>
+<span class="c1"># 6. Kiểm tra</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Train:"</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Valid:"</span><span class="p">,</span> <span class="n">X_val</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Test :"</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8556,12 +8362,9 @@ Class lỗi (không phải 0 hoặc 1): 0 dòng
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>------------------------------
-Kích thước tập Train: (943, 4) -&gt; Lưu tại: database\train_data.csv
-Kích thước tập Valid: (202, 4) -&gt; Lưu tại: database\valid_data.csv
-Kích thước tập Test : (203, 4) -&gt; Lưu tại: database\test_data.csv
-------------------------------
-Hoàn tất! Bạn có thể kiểm tra thư mục 'database' ở menu bên trái Jupyter.
+<pre>Train: (740, 4)
+Valid: (203, 4)
+Test : (405, 4)
 </pre>
 </div>
 </div>
