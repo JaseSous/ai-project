@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>pima_indian_diabetes</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>LR_model</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7511,19 +7511,18 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e227ff5a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=aa4da13e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Diabetes-Classification-(Similar-to-Iris-Example)">Diabetes Classification (Similar to Iris Example)<a class="anchor-link" href="#Diabetes-Classification-(Similar-to-Iris-Example)">¶</a></h1><p>This notebook demonstrates a simple machine learning workflow using the <strong>Pima Indians Diabetes dataset</strong>.
-The structure is similar to a typical Iris classification example: load data, explore, split data, train models, and evaluate performance.</p>
+<h1 id="Logistic-Regression">Logistic Regression<a class="anchor-link" href="#Logistic-Regression">¶</a></h1>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8ab1cf0a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0fc125b8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7533,51 +7532,7 @@ The structure is similar to a typical Iris classification example: load data, ex
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=83f54286">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [48]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Load libraries</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span> <span class="c1">#os dung de doc duong dan file, tao xoa thu muc kiem tra file ton tai,sys lay tham so dong lenh vaf dung thoat chuong trinh</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">IPython</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span> <span class="c1"># dung cho viec hien hinh anh</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span> <span class="c1"># ve do thi </span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span> <span class="c1"># dung su ly du lieu dang bang doc , loc du lieu tu csv excel</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span> <span class="c1"># ve bieu do nang cao</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span> <span class="c1"># luu va load mo hinh machine learning</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">OneHotEncoder</span><span class="p">,</span> <span class="n">LabelEncoder</span><span class="p">,</span> <span class="n">OrdinalEncoder</span> <span class="c1"># chuyen du lieu thanh vecto ,text thanh so, du lieu thu tu</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">MinMaxScaler</span><span class="p">,</span> <span class="n">StandardScaler</span> <span class="c1"># chuan hoa du lieu tu 0 -&gt;1,Chuẩn hóa dữ liệu theo mean = 0 và std = 1</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span> <span class="c1"># chia va train/ test</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
-
-<span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">"figure.figsize"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'figure.dpi'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
-
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a59ef948">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="2.-Load-Dataset">2. Load Dataset<a class="anchor-link" href="#2.-Load-Dataset">¶</a></h2>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c0960f24">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9af73dff">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7585,511 +7540,141 @@ The structure is similar to a typical Iris classification example: load data, ex
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s2">"../data/pima-indians-diabetes.csv"</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
 
-<span class="n">data_names</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"Pregnancies"</span><span class="p">,</span>
-    <span class="s2">"Glucose"</span><span class="p">,</span>
-    <span class="s2">"BloodPressure"</span><span class="p">,</span>
-    <span class="s2">"SkinThickness"</span><span class="p">,</span>
-    <span class="s2">"Insulin"</span><span class="p">,</span>
-    <span class="s2">"BMI"</span><span class="p">,</span>
-    <span class="s2">"DiabetesPedigreeFunction"</span><span class="p">,</span>
-    <span class="s2">"Age"</span><span class="p">,</span>
-    <span class="s2">"Outcome"</span>
-<span class="p">]</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">cross_val_score</span><span class="p">,</span> <span class="n">GridSearchCV</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> 
+                             <span class="n">f1_score</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">)</span>
 
-<span class="n">df_dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">data_names</span><span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">'ignore'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=49358d3f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5f263761">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="3.-Ph%C3%A2n-t%C3%ADch-d%E1%BB%AF-li%E1%BB%87u-(Analyze-Data)">3. Phân tích dữ liệu (Analyze Data)<a class="anchor-link" href="#3.-Ph%C3%A2n-t%C3%ADch-d%E1%BB%AF-li%E1%BB%87u-(Analyze-Data)">¶</a></h2>
+<h2 id="Load-Data">Load Data<a class="anchor-link" href="#Load-Data">¶</a></h2>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=1698c31c">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=74c9b061">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [50]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># shape</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'+ Shape : </span><span class="si">{</span><span class="n">df_dataset</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-<span class="c1"># types</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'+ Data Types: </span><span class="se">\n</span><span class="si">{</span><span class="n">df_dataset</span><span class="o">.</span><span class="n">dtypes</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-<span class="c1"># head, tail</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'+ Contents: '</span><span class="p">)</span>
-<span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">df_dataset</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
-<span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">df_dataset</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
-<span class="c1"># info</span>
-<span class="n">df_dataset</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># 1. CẤU HÌNH ĐƯỜNG DẪN</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="s1">'../data/'</span>
+<span class="n">target_col</span> <span class="o">=</span> <span class="s1">'class'</span>  <span class="c1"># Tên cột nhãn (0: thật, 1: giả)</span>
+
+<span class="c1"># 2. LOAD DỮ LIỆU ĐÃ SCALED</span>
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">'train_data.csv'</span><span class="p">))</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">'test_data.csv'</span><span class="p">))</span>
+
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">target_col</span><span class="p">])</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span>
+
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">test_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">target_col</span><span class="p">])</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Training data shape: </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Testing data shape: </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>+ Shape : (768, 9)
-+ Data Types: 
-Pregnancies                   int64
-Glucose                       int64
-BloodPressure                 int64
-SkinThickness                 int64
-Insulin                       int64
-BMI                         float64
-DiabetesPedigreeFunction    float64
-Age                           int64
-Outcome                       int64
-dtype: object
-+ Contents: 
-</pre>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e0e5095a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>Pregnancies</th>
-<th>Glucose</th>
-<th>BloodPressure</th>
-<th>SkinThickness</th>
-<th>Insulin</th>
-<th>BMI</th>
-<th>DiabetesPedigreeFunction</th>
-<th>Age</th>
-<th>Outcome</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>0</th>
-<td>6</td>
-<td>148</td>
-<td>72</td>
-<td>35</td>
-<td>0</td>
-<td>33.6</td>
-<td>0.627</td>
-<td>50</td>
-<td>1</td>
-</tr>
-<tr>
-<th>1</th>
-<td>1</td>
-<td>85</td>
-<td>66</td>
-<td>29</td>
-<td>0</td>
-<td>26.6</td>
-<td>0.351</td>
-<td>31</td>
-<td>0</td>
-</tr>
-<tr>
-<th>2</th>
-<td>8</td>
-<td>183</td>
-<td>64</td>
-<td>0</td>
-<td>0</td>
-<td>23.3</td>
-<td>0.672</td>
-<td>32</td>
-<td>1</td>
-</tr>
-<tr>
-<th>3</th>
-<td>1</td>
-<td>89</td>
-<td>66</td>
-<td>23</td>
-<td>94</td>
-<td>28.1</td>
-<td>0.167</td>
-<td>21</td>
-<td>0</td>
-</tr>
-<tr>
-<th>4</th>
-<td>0</td>
-<td>137</td>
-<td>40</td>
-<td>35</td>
-<td>168</td>
-<td>43.1</td>
-<td>2.288</td>
-<td>33</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Danh-s%C3%A1ch-l%C6%B0u-k%E1%BA%BFt-qu%E1%BA%A3-%C4%91%E1%BB%83-xu%E1%BA%A5t-CSV">Danh sách lưu kết quả để xuất CSV<a class="anchor-link" href="#Danh-s%C3%A1ch-l%C6%B0u-k%E1%BA%BFt-qu%E1%BA%A3-%C4%91%E1%BB%83-xu%E1%BA%A5t-CSV">¶</a></h3>
 </div>
 </div>
 </div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>Pregnancies</th>
-<th>Glucose</th>
-<th>BloodPressure</th>
-<th>SkinThickness</th>
-<th>Insulin</th>
-<th>BMI</th>
-<th>DiabetesPedigreeFunction</th>
-<th>Age</th>
-<th>Outcome</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>763</th>
-<td>10</td>
-<td>101</td>
-<td>76</td>
-<td>48</td>
-<td>180</td>
-<td>32.9</td>
-<td>0.171</td>
-<td>63</td>
-<td>0</td>
-</tr>
-<tr>
-<th>764</th>
-<td>2</td>
-<td>122</td>
-<td>70</td>
-<td>27</td>
-<td>0</td>
-<td>36.8</td>
-<td>0.340</td>
-<td>27</td>
-<td>0</td>
-</tr>
-<tr>
-<th>765</th>
-<td>5</td>
-<td>121</td>
-<td>72</td>
-<td>23</td>
-<td>112</td>
-<td>26.2</td>
-<td>0.245</td>
-<td>30</td>
-<td>0</td>
-</tr>
-<tr>
-<th>766</th>
-<td>1</td>
-<td>126</td>
-<td>60</td>
-<td>0</td>
-<td>0</td>
-<td>30.1</td>
-<td>0.349</td>
-<td>47</td>
-<td>1</td>
-</tr>
-<tr>
-<th>767</th>
-<td>1</td>
-<td>93</td>
-<td>70</td>
-<td>31</td>
-<td>0</td>
-<td>30.4</td>
-<td>0.315</td>
-<td>23</td>
-<td>0</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>&lt;class 'pandas.core.frame.DataFrame'&gt;
-RangeIndex: 768 entries, 0 to 767
-Data columns (total 9 columns):
- #   Column                    Non-Null Count  Dtype  
----  ------                    --------------  -----  
- 0   Pregnancies               768 non-null    int64  
- 1   Glucose                   768 non-null    int64  
- 2   BloodPressure             768 non-null    int64  
- 3   SkinThickness             768 non-null    int64  
- 4   Insulin                   768 non-null    int64  
- 5   BMI                       768 non-null    float64
- 6   DiabetesPedigreeFunction  768 non-null    float64
- 7   Age                       768 non-null    int64  
- 8   Outcome                   768 non-null    int64  
-dtypes: float64(2), int64(7)
-memory usage: 54.1 KB
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=05e94c2f">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d94e11fe">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [51]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">description</span> <span class="o">=</span> <span class="n">df_dataset</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
-<span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">results_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Dự đoán và trích xuất các chỉ số phân loại theo yêu cầu (Acc, Prec, Rec, F1, AUC)"""</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    <span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="c1"># Lấy xác suất của class 1 để tính AUC</span>
+    
+    <span class="n">acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">prec</span> <span class="o">=</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">rec</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
+    
+    <span class="n">res</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">'Algorithm'</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+        <span class="s1">'Accuracy'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s1">'Precision'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">prec</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s1">'Recall'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s1">'F1-Score'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s1">'AUC'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">auc</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="n">results_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">] Acc: </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> | Prec: </span><span class="si">{</span><span class="n">prec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> | Rec: </span><span class="si">{</span><span class="n">rec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> | F1: </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> | AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>count</th>
-<th>mean</th>
-<th>std</th>
-<th>min</th>
-<th>25%</th>
-<th>50%</th>
-<th>75%</th>
-<th>max</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>Pregnancies</th>
-<td>768.0</td>
-<td>3.845052</td>
-<td>3.369578</td>
-<td>0.000</td>
-<td>1.00000</td>
-<td>3.0000</td>
-<td>6.00000</td>
-<td>17.00</td>
-</tr>
-<tr>
-<th>Glucose</th>
-<td>768.0</td>
-<td>120.894531</td>
-<td>31.972618</td>
-<td>0.000</td>
-<td>99.00000</td>
-<td>117.0000</td>
-<td>140.25000</td>
-<td>199.00</td>
-</tr>
-<tr>
-<th>BloodPressure</th>
-<td>768.0</td>
-<td>69.105469</td>
-<td>19.355807</td>
-<td>0.000</td>
-<td>62.00000</td>
-<td>72.0000</td>
-<td>80.00000</td>
-<td>122.00</td>
-</tr>
-<tr>
-<th>SkinThickness</th>
-<td>768.0</td>
-<td>20.536458</td>
-<td>15.952218</td>
-<td>0.000</td>
-<td>0.00000</td>
-<td>23.0000</td>
-<td>32.00000</td>
-<td>99.00</td>
-</tr>
-<tr>
-<th>Insulin</th>
-<td>768.0</td>
-<td>79.799479</td>
-<td>115.244002</td>
-<td>0.000</td>
-<td>0.00000</td>
-<td>30.5000</td>
-<td>127.25000</td>
-<td>846.00</td>
-</tr>
-<tr>
-<th>BMI</th>
-<td>768.0</td>
-<td>31.992578</td>
-<td>7.884160</td>
-<td>0.000</td>
-<td>27.30000</td>
-<td>32.0000</td>
-<td>36.60000</td>
-<td>67.10</td>
-</tr>
-<tr>
-<th>DiabetesPedigreeFunction</th>
-<td>768.0</td>
-<td>0.471876</td>
-<td>0.331329</td>
-<td>0.078</td>
-<td>0.24375</td>
-<td>0.3725</td>
-<td>0.62625</td>
-<td>2.42</td>
-</tr>
-<tr>
-<th>Age</th>
-<td>768.0</td>
-<td>33.240885</td>
-<td>11.760232</td>
-<td>21.000</td>
-<td>24.00000</td>
-<td>29.0000</td>
-<td>41.00000</td>
-<td>81.00</td>
-</tr>
-<tr>
-<th>Outcome</th>
-<td>768.0</td>
-<td>0.348958</td>
-<td>0.476951</td>
-<td>0.000</td>
-<td>0.00000</td>
-<td>0.0000</td>
-<td>1.00000</td>
-<td>1.00</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=48a1bb36">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=de9ed008">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><strong>Nhận xét</strong>:</p>
-<ul>
-<li>Dữ liệu có 9 tính chất để phân lớp: Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age, Outcome</li>
-<li>Giá trị của từng tính chất lần lượt:số lần mang thai, mg/dL, mmHg, mm, µU/mL, kg/m², giá trị càng lờn càng bị</li>
-<li>Tổng số dòng dữ liệu là 768 dòng</li>
-<li>Dữ liệu để phân lớp ở cột Outcome</li>
-</ul>
+<h3 id="3.-CH%E1%BA%A0Y-BASELINE-MODEL-(Tham-s%E1%BB%91-m%E1%BA%B7c-%C4%91%E1%BB%8Bnh)">3. CHẠY BASELINE MODEL (Tham số mặc định)<a class="anchor-link" href="#3.-CH%E1%BA%A0Y-BASELINE-MODEL-(Tham-s%E1%BB%91-m%E1%BA%B7c-%C4%91%E1%BB%8Bnh)">¶</a></h3>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c26d7c10">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="(2)-Ki%E1%BB%83m-tra-t%C3%ADnh-to%C3%A0n-v%E1%BA%B9n-c%E1%BB%A7a-d%E1%BB%AF-li%E1%BB%87u">(2) <strong>Kiểm tra tính toàn vẹn của dữ liệu</strong><a class="anchor-link" href="#(2)-Ki%E1%BB%83m-tra-t%C3%ADnh-to%C3%A0n-v%E1%BA%B9n-c%E1%BB%A7a-d%E1%BB%AF-li%E1%BB%87u">¶</a></h4><ul>
-<li>Dữ liệu có bị trùng lặp không? Hiển thị dòng bị vi phạm.</li>
-<li>Dữ liệu có tồn tại giá trị Null không? Hiển thị dòng bị vi phạm.</li>
-<li>Dữ liệu có tồn tại giá trị NaN không? Hiển thị dòng bị vi phạm.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=aab45637">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=eedc30ad">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [52]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">has_null</span> <span class="o">=</span> <span class="n">df_dataset</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()</span> <span class="c1"># tim null, roi xem co bao nhieu gia tri null,check co cai nao lon hon 0 ko</span>
-<span class="n">has_nan</span>  <span class="o">=</span> <span class="n">df_dataset</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
-<span class="n">n_duplicated</span> <span class="o">=</span> <span class="n">df_dataset</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Tính toàn vẹn dữ liệu:'</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'+ Có giá trị Null: </span><span class="si">{</span><span class="n">has_null</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">has_null</span><span class="p">:</span>
-    <span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">df_dataset</span><span class="p">[</span><span class="n">df_dataset</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)])</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'+ Có giá trị Nan: </span><span class="si">{</span><span class="n">has_nan</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">has_nan</span><span class="p">:</span>
-    <span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">df_dataset</span><span class="p">[</span><span class="n">df_dataset</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)])</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'+ Số dòng trùng: </span><span class="si">{</span><span class="n">n_duplicated</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- Training Baseline Logistic Regression ---"</span><span class="p">)</span>
+<span class="n">lr_baseline</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># 5-Fold Cross Validation trên tập Train</span>
+<span class="n">cv_scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">lr_baseline</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">'accuracy'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"5-Fold CV Accuracy (Train): </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cv_scores</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (+/- </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">cv_scores</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+
+<span class="c1"># Huấn luyện và Đánh giá trên tập Test</span>
+<span class="n">lr_baseline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">lr_baseline</span><span class="p">,</span> <span class="s2">"Logistic Regression (Baseline)"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8102,312 +7687,116 @@ memory usage: 54.1 KB
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Tính toàn vẹn dữ liệu:
-+ Có giá trị Null: False
-+ Có giá trị Nan: False
-+ Số dòng trùng: 0
+<pre>--- Đang huấn luyện Baseline ---
+===&gt; LR_Baseline - Accuracy: 0.9926 | TP: 123, FP: 2, TN: 145, FN: 0
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=21345f2e">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5e34c2e4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="(3)-C%C3%A1c-t%C3%ADnh-ch%E1%BA%A5t-th%E1%BB%91ng-k%C3%AA-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-s%E1%BB%91">(3) <strong>Các tính chất thống kê trên dữ liệu số</strong><a class="anchor-link" href="#(3)-C%C3%A1c-t%C3%ADnh-ch%E1%BA%A5t-th%E1%BB%91ng-k%C3%AA-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-s%E1%BB%91">¶</a></h4>
+<h3 id="4.-CH%E1%BA%A0Y-TUNING-MODEL-(D%C3%B9ng-GridSearchCV)">4. CHẠY TUNING MODEL (Dùng GridSearchCV)<a class="anchor-link" href="#4.-CH%E1%BA%A0Y-TUNING-MODEL-(D%C3%B9ng-GridSearchCV)">¶</a></h3>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=6cfb2263">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=530f0eab">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [53]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">description</span> <span class="o">=</span> <span class="n">df_dataset</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
-<span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- Tuning Logistic Regression ---"</span><span class="p">)</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>count</th>
-<th>mean</th>
-<th>std</th>
-<th>min</th>
-<th>25%</th>
-<th>50%</th>
-<th>75%</th>
-<th>max</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>Pregnancies</th>
-<td>768.0</td>
-<td>3.845052</td>
-<td>3.369578</td>
-<td>0.000</td>
-<td>1.00000</td>
-<td>3.0000</td>
-<td>6.00000</td>
-<td>17.00</td>
-</tr>
-<tr>
-<th>Glucose</th>
-<td>768.0</td>
-<td>120.894531</td>
-<td>31.972618</td>
-<td>0.000</td>
-<td>99.00000</td>
-<td>117.0000</td>
-<td>140.25000</td>
-<td>199.00</td>
-</tr>
-<tr>
-<th>BloodPressure</th>
-<td>768.0</td>
-<td>69.105469</td>
-<td>19.355807</td>
-<td>0.000</td>
-<td>62.00000</td>
-<td>72.0000</td>
-<td>80.00000</td>
-<td>122.00</td>
-</tr>
-<tr>
-<th>SkinThickness</th>
-<td>768.0</td>
-<td>20.536458</td>
-<td>15.952218</td>
-<td>0.000</td>
-<td>0.00000</td>
-<td>23.0000</td>
-<td>32.00000</td>
-<td>99.00</td>
-</tr>
-<tr>
-<th>Insulin</th>
-<td>768.0</td>
-<td>79.799479</td>
-<td>115.244002</td>
-<td>0.000</td>
-<td>0.00000</td>
-<td>30.5000</td>
-<td>127.25000</td>
-<td>846.00</td>
-</tr>
-<tr>
-<th>BMI</th>
-<td>768.0</td>
-<td>31.992578</td>
-<td>7.884160</td>
-<td>0.000</td>
-<td>27.30000</td>
-<td>32.0000</td>
-<td>36.60000</td>
-<td>67.10</td>
-</tr>
-<tr>
-<th>DiabetesPedigreeFunction</th>
-<td>768.0</td>
-<td>0.471876</td>
-<td>0.331329</td>
-<td>0.078</td>
-<td>0.24375</td>
-<td>0.3725</td>
-<td>0.62625</td>
-<td>2.42</td>
-</tr>
-<tr>
-<th>Age</th>
-<td>768.0</td>
-<td>33.240885</td>
-<td>11.760232</td>
-<td>21.000</td>
-<td>24.00000</td>
-<td>29.0000</td>
-<td>41.00000</td>
-<td>81.00</td>
-</tr>
-<tr>
-<th>Outcome</th>
-<td>768.0</td>
-<td>0.348958</td>
-<td>0.476951</td>
-<td>0.000</td>
-<td>0.00000</td>
-<td>0.0000</td>
-<td>1.00000</td>
-<td>1.00</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8a10cd65">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="(4)-T%E1%BA%A7n-s%E1%BB%91-xu%E1%BA%A5t-hi%E1%BB%87n-(Distribution)-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-ph%C3%A2n-l%E1%BB%9Bp-(Outcome)-v%C3%A0-d%E1%BB%AF-li%E1%BB%87u-danh-m%E1%BB%A5c-(Category)">(4) <strong>Tần số xuất hiện (Distribution) trên dữ liệu phân lớp (Outcome) và dữ liệu danh mục (Category)</strong><a class="anchor-link" href="#(4)-T%E1%BA%A7n-s%E1%BB%91-xu%E1%BA%A5t-hi%E1%BB%87n-(Distribution)-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-ph%C3%A2n-l%E1%BB%9Bp-(Outcome)-v%C3%A0-d%E1%BB%AF-li%E1%BB%87u-danh-m%E1%BB%A5c-(Category)">¶</a></h4>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2b5a2ac9">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [54]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">df_dataset</span><span class="p">[</span><span class="s2">"Outcome"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[54]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>Outcome
-0    500
-1    268
-Name: count, dtype: int64</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f5a8a19c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Ki%E1%BB%83m-tra-v%C3%A0-lo%E1%BA%A1i-b%E1%BB%8F-d%E1%BB%AF-li%E1%BB%87u-l%E1%BB%97i,-ngo%E1%BA%A1i-l%E1%BB%87">Kiểm tra và loại bỏ dữ liệu lỗi, ngoại lệ<a class="anchor-link" href="#Ki%E1%BB%83m-tra-v%C3%A0-lo%E1%BA%A1i-b%E1%BB%8F-d%E1%BB%AF-li%E1%BB%87u-l%E1%BB%97i,-ngo%E1%BA%A1i-l%E1%BB%87">¶</a></h2>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a5ac216c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">physiological_ranges</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"Pregnancies"</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
-    <span class="s2">"Glucose"</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
-    <span class="s2">"BloodPressure"</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">140</span><span class="p">),</span>
-    <span class="s2">"SkinThickness"</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
-    <span class="s2">"Insulin"</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">900</span><span class="p">),</span>
-    <span class="s2">"BMI"</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">70</span><span class="p">),</span>
-    <span class="s2">"DiabetesPedigreeFunction"</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">),</span>
-    <span class="s2">"Age"</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+<span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'C'</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+    <span class="s1">'penalty'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'l1'</span><span class="p">,</span> <span class="s1">'l2'</span><span class="p">],</span>
+    <span class="s1">'solver'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'liblinear'</span><span class="p">,</span> <span class="s1">'saga'</span><span class="p">]</span> 
 <span class="p">}</span>
+
+<span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
+    <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span> 
+    <span class="n">param_grid</span><span class="p">,</span> 
+    <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
+    <span class="n">scoring</span><span class="o">=</span><span class="s1">'accuracy'</span><span class="p">,</span> 
+    <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">grid_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">lr_tuned</span> <span class="o">=</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">best_estimator_</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Best Parameters: </span><span class="si">{</span><span class="n">grid_search</span><span class="o">.</span><span class="n">best_params_</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Best 5-Fold CV Accuracy: </span><span class="si">{</span><span class="n">grid_search</span><span class="o">.</span><span class="n">best_score_</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Đánh giá model đã tune trên tập Test</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">lr_tuned</span><span class="p">,</span> <span class="s2">"Logistic Regression (Tuned)"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b737a172">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>V1 Accuracy (Test): 0.99
+V2 Best Params: {'C': 100, 'penalty': 'l2'}
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=91c5ce1a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="(5)-L%C6%B0u-k%E1%BA%BFt-qu%E1%BA%A3">(5) Lưu kết quả<a class="anchor-link" href="#(5)-L%C6%B0u-k%E1%BA%BFt-qu%E1%BA%A3">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=486dadf4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">detect_physiological_errors</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">physiological_ranges</span><span class="p">):</span>
-    <span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># CẤU HÌNH ĐƯỜNG DẪN LƯU</span>
+<span class="n">save_path</span> <span class="o">=</span> <span class="s1">'../experiment/LR/'</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="n">zero_invalid_cols</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s2">"Glucose"</span><span class="p">,</span> <span class="s2">"BloodPressure"</span><span class="p">,</span> <span class="s2">"SkinThickness"</span><span class="p">,</span> <span class="s2">"Insulin"</span><span class="p">,</span> <span class="s2">"BMI"</span>
-    <span class="p">]</span>
+<span class="c1"># 1. TỔNG HỢP &amp; LƯU CSV</span>
+<span class="n">df_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results_list</span><span class="p">)</span>
+<span class="n">csv_output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'lr_evaluation_results.csv'</span><span class="p">)</span>
+<span class="n">df_results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">csv_output</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="p">(</span><span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">)</span> <span class="ow">in</span> <span class="n">physiological_ranges</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-            <span class="k">continue</span>
-        
-        <span class="n">invalid_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">min_val</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">max_val</span><span class="p">)</span>
+<span class="c1"># 2. LƯU MODELS (.pkl)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'lr_baseline.pkl'</span><span class="p">),</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">lr_baseline</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 
-        <span class="c1"># chỉ thêm điều kiện == 0 cho các cột cần</span>
-        <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">zero_invalid_cols</span><span class="p">:</span>
-            <span class="n">invalid_mask</span> <span class="o">|=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'lr_tuned.pkl'</span><span class="p">),</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">lr_tuned</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 
-        <span class="n">invalid_values</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">invalid_mask</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Đã lưu file CSV tại: </span><span class="si">{</span><span class="n">csv_output</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Đã lưu models tại: </span><span class="si">{</span><span class="n">save_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">invalid_values</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
-            <span class="n">errors</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s2">"count"</span><span class="p">:</span> <span class="n">invalid_mask</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
-                <span class="s2">"min_actual"</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
-                <span class="s2">"max_actual"</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
-                <span class="s2">"problem_values"</span><span class="p">:</span> <span class="n">invalid_values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-            <span class="p">}</span>
-
-    <span class="k">return</span> <span class="n">errors</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=bbf2b481">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">errors</span><span class="o">=</span> <span class="n">detect_physiological_errors</span><span class="p">(</span><span class="n">df_dataset</span><span class="p">,</span><span class="n">physiological_ranges</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s2">"====Dữ liệu lỗi được phát hiện===="</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">errors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">'count'</span><span class="p">]</span><span class="si">}</span><span class="s2"> giá trị lỗi"</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"- Range thực tế: </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">'min_actual'</span><span class="p">]</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">'max_actual'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"- Giá trị có vấn đề  </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">'problem_values'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_results</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8422,25 +7811,83 @@ Name: count, dtype: int64</pre>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[4]</span><span class="ansi-green-fg">, line 1</span>
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> errors= detect_physiological_errors(<span class="ansi-yellow-bg">df_dataset</span>,physiological_ranges)
-<span class="ansi-green-fg">      2</span> <span style="color: rgb(0,135,0)">print</span> (<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">====Dữ liệu lỗi được phát hiện====</span><span class="ansi-yellow-fg">"</span>)
-<span class="ansi-green-fg">      3</span> <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> col, info <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> errors.items():
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[55]</span><span class="ansi-green-fg">, line 29</span>
+<span class="ansi-green-fg">     27</span> baseline_lr = LinearRegression()
+<span class="ansi-green-fg">     28</span> baseline_lr.fit(X_train, y_train) <span style="color: rgb(95,135,135)"># Giả sử bạn đã có X_train, y_train</span>
+<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">29</span> results_list.append(<span class="ansi-yellow-bg">calculate_metrics</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">baseline_lr</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">X_test</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">y_test</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-fg ansi-yellow-bg">LR Baseline (V1)</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-bg">)</span>)
+<span class="ansi-green-fg">     31</span> <span style="color: rgb(95,135,135)"># 1.2. Version 2: Tuned (Mô hình tinh chỉnh - ví dụ thêm tham số)</span>
+<span class="ansi-green-fg">     32</span> <span style="color: rgb(95,135,135)"># Giả sử đây là kết quả từ GridSearchCV hoặc thông số bạn chọn</span>
+<span class="ansi-green-fg">     33</span> best_lr = LinearRegression(fit_intercept=<span class="ansi-bold" style="color: rgb(0,135,0)">True</span>) 
 
-<span class="ansi-red-fg">NameError</span>: name 'df_dataset' is not defined</pre>
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[55]</span><span class="ansi-green-fg">, line 19</span>, in <span class="ansi-cyan-fg">calculate_metrics</span><span class="ansi-blue-fg">(model, X_test, y_test, model_name)</span>
+<span class="ansi-green-fg">     14</span> <span class="ansi-yellow-fg">"""Hàm phụ để tính toán và lưu chỉ số vào list"""</span>
+<span class="ansi-green-fg">     15</span> y_pred = model.predict(X_test)
+<span class="ansi-green-fg">     16</span> metrics = {
+<span class="ansi-green-fg">     17</span>     <span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">Model Version</span><span class="ansi-yellow-fg">'</span>: model_name,
+<span class="ansi-green-fg">     18</span>     <span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">MAE</span><span class="ansi-yellow-fg">'</span>: mean_absolute_error(y_test, y_pred),
+<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">19</span>     <span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">RMSE</span><span class="ansi-yellow-fg">'</span>: <span class="ansi-yellow-bg">mean_squared_error</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">y_test</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">y_pred</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">squared</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg ansi-bold" style="color: rgb(0,135,0)">False</span><span class="ansi-yellow-bg">)</span>,
+<span class="ansi-green-fg">     20</span>     <span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">R2 Score</span><span class="ansi-yellow-fg">'</span>: r2_score(y_test, y_pred)
+<span class="ansi-green-fg">     21</span> }
+<span class="ansi-green-fg">     22</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> metrics
+
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">c:\ProgramData\anaconda3\Lib\site-packages\sklearn\utils\_param_validation.py:196</span>, in <span class="ansi-cyan-fg">validate_params.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
+<span class="ansi-green-fg">    193</span> func_sig = signature(func)
+<span class="ansi-green-fg">    195</span> <span style="color: rgb(95,135,135)"># Map *args/**kwargs to the function signature</span>
+<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">196</span> params = <span class="ansi-yellow-bg">func_sig</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">bind</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">    197</span> params.apply_defaults()
+<span class="ansi-green-fg">    199</span> <span style="color: rgb(95,135,135)"># ignore self/cls and positional/keyword markers</span>
+
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">c:\ProgramData\anaconda3\Lib\inspect.py:3304</span>, in <span class="ansi-cyan-fg">Signature.bind</span><span class="ansi-blue-fg">(self, *args, **kwargs)</span>
+<span class="ansi-green-fg">   3299</span> <span class="ansi-bold" style="color: rgb(0,135,0)">def</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-fg">bind</span>(<span style="color: rgb(0,135,0)">self</span>, /, *args, **kwargs):
+<span class="ansi-green-fg">   3300</span> <span style="color: rgb(188,188,188)">    </span><span class="ansi-yellow-fg">"""Get a BoundArguments object, that maps the passed `args`</span>
+<span class="ansi-green-fg">   3301</span> <span class="ansi-yellow-fg">    and `kwargs` to the function's signature.  Raises `TypeError`</span>
+<span class="ansi-green-fg">   3302</span> <span class="ansi-yellow-fg">    if the passed arguments can not be bound.</span>
+<span class="ansi-green-fg">   3303</span> <span class="ansi-yellow-fg">    """</span>
+<span class="ansi-green-fg">-&gt; </span><span class="ansi-green-fg">3304</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_bind</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
+
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">c:\ProgramData\anaconda3\Lib\inspect.py:3293</span>, in <span class="ansi-cyan-fg">Signature._bind</span><span class="ansi-blue-fg">(self, args, kwargs, partial)</span>
+<span class="ansi-green-fg">   3283</span>         <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span class="ansi-bold" style="color: rgb(215,95,95)">TypeError</span>(
+<span class="ansi-green-fg">   3284</span>             <span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">got some positional-only arguments passed as </span><span class="ansi-yellow-fg">'</span>
+<span class="ansi-green-fg">   3285</span>             <span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">keyword arguments: </span><span class="ansi-bold" style="color: rgb(175,95,135)">{arg!r}</span><span class="ansi-yellow-fg">'</span>.format(
+<span class="ansi-green-fg">   (...)</span><span class="ansi-green-fg">   3290</span>             ),
+<span class="ansi-green-fg">   3291</span>         )
+<span class="ansi-green-fg">   3292</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">else</span>:
+<span class="ansi-green-fg">-&gt; </span><span class="ansi-green-fg">3293</span>         <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span class="ansi-bold" style="color: rgb(215,95,95)">TypeError</span>(
+<span class="ansi-green-fg">   3294</span>             <span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">got an unexpected keyword argument </span><span class="ansi-bold" style="color: rgb(175,95,135)">{arg!r}</span><span class="ansi-yellow-fg">'</span>.format(
+<span class="ansi-green-fg">   3295</span>                 arg=<span style="color: rgb(0,135,0)">next</span>(<span style="color: rgb(0,135,0)">iter</span>(kwargs))))
+<span class="ansi-green-fg">   3297</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span style="color: rgb(0,135,0)">self</span>._bound_arguments_cls(<span style="color: rgb(0,135,0)">self</span>, arguments)
+
+<span class="ansi-red-fg">TypeError</span>: got an unexpected keyword argument 'squared'</pre>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9b13f644">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=8d4a705b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>!jupyter nbconvert --to html pima_indian_diabetes.ipynb</p>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter<span class="w"> </span>nbconvert<span class="w"> </span>--to<span class="w"> </span>html<span class="w"> </span>LR_model.ipynb
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>[NbConvertApp] Converting notebook LR_model.ipynb to html
+[NbConvertApp] Writing 299772 bytes to LR_model.html
+</pre>
+</div>
 </div>
 </div>
 </div>
