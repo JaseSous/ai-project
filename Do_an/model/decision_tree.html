@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>LR_model</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>decision_tree</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7517,7 +7517,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Logistic-Regression">Logistic Regression<a class="anchor-link" href="#Logistic-Regression">¶</a></h1>
+<h1 id="Decision-Tree">Decision Tree<a class="anchor-link" href="#Decision-Tree">¶</a></h1>
 </div>
 </div>
 </div>
@@ -7537,7 +7537,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [70]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -7545,14 +7545,14 @@ a.anchor-link {
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">StackingClassifier</span><span class="p">,</span> <span class="n">RandomForestClassifier</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">PolynomialFeatures</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">cross_val_score</span><span class="p">,</span> <span class="n">GridSearchCV</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> 
-                             <span class="n">f1_score</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span>
+    <span class="n">f1_score</span><span class="p">,</span> <span class="n">roc_auc_score</span>
+<span class="p">)</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">'ignore'</span><span class="p">)</span>
@@ -7577,7 +7577,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [71]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># 1. LOAD DỮ LIỆU ĐÃ SCALED</span>
@@ -7632,7 +7632,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [72]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">results_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -7681,15 +7681,15 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [73]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- V1: Baseline Logistic Regression ---"</span><span class="p">)</span>
-<span class="c1"># Sử dụng cấu hình mặc định để làm mốc so sánh (Baseline)</span>
-<span class="n">v1_model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">v1_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- V1: Baseline Decision Tree ---"</span><span class="p">)</span>
 
-<span class="n">evaluate_model</span><span class="p">(</span><span class="n">v1_model</span><span class="p">,</span> <span class="s2">"V1: LR Baseline"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">dt_baseline</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">dt_baseline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">dt_baseline</span><span class="p">,</span> <span class="s2">"V1: DT Baseline"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7702,19 +7702,19 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>--- V1: Baseline Logistic Regression ---
-[V1: LR Baseline] Acc: 0.99 | Prec: 0.97 | Rec: 1.00 | F1: 0.99 | AUC: 1.00
+<pre>--- V1: Baseline Decision Tree ---
+[V1: DT Baseline] Acc: 1.00 | Prec: 0.99 | Rec: 1.00 | F1: 1.00 | AUC: 1.00
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[73]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'Algorithm': 'V1: LR Baseline',
- 'Accuracy': 0.99,
- 'Precision': 0.97,
+<pre>{'Algorithm': 'V1: DT Baseline',
+ 'Accuracy': 1.0,
+ 'Precision': 0.99,
  'Recall': 1.0,
- 'F1-Score': 0.99,
+ 'F1-Score': 1.0,
  'AUC': 1.0}</pre>
 </div>
 </div>
@@ -7736,29 +7736,32 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [74]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- V2: GridSearchCV Tuning ---"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- V2: GridSearchCV Tuning Decision Tree ---"</span><span class="p">)</span>
+
 <span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'C'</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
-    <span class="s1">'penalty'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'l1'</span><span class="p">,</span> <span class="s1">'l2'</span><span class="p">],</span>
-    <span class="s1">'solver'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'liblinear'</span><span class="p">,</span> <span class="s1">'saga'</span><span class="p">]</span>
+    <span class="s1">'criterion'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'gini'</span><span class="p">,</span> <span class="s1">'entropy'</span><span class="p">,</span> <span class="s1">'log_loss'</span><span class="p">],</span>
+    <span class="s1">'max_depth'</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+    <span class="s1">'min_samples_split'</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>
+    <span class="s1">'min_samples_leaf'</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+    <span class="s1">'class_weight'</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s1">'balanced'</span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
-    <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span> 
-    <span class="n">param_grid</span><span class="p">,</span> 
-    <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
-    <span class="n">scoring</span><span class="o">=</span><span class="s1">'accuracy'</span><span class="p">,</span> 
+    <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+    <span class="n">param_grid</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">scoring</span><span class="o">=</span><span class="s1">'accuracy'</span><span class="p">,</span>
     <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
 <span class="p">)</span>
 
 <span class="n">grid_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">v2_model</span> <span class="o">=</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">best_estimator_</span>
+<span class="n">dt_tuned</span> <span class="o">=</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">best_estimator_</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Best Params found by CV: </span><span class="si">{</span><span class="n">grid_search</span><span class="o">.</span><span class="n">best_params_</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="n">evaluate_model</span><span class="p">(</span><span class="n">v2_model</span><span class="p">,</span> <span class="s2">"V2: LR Tuned (GridSearch)"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">dt_tuned</span><span class="p">,</span> <span class="s2">"V2: DT Tuned (GridSearch)"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7771,21 +7774,21 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>--- V2: GridSearchCV Tuning ---
-Best Params found by CV: {'C': 1, 'penalty': 'l1', 'solver': 'liblinear'}
-[V2: LR Tuned (GridSearch)] Acc: 0.99 | Prec: 0.97 | Rec: 1.00 | F1: 0.99 | AUC: 1.00
+<pre>--- V2: GridSearchCV Tuning Decision Tree ---
+Best Params found by CV: {'class_weight': None, 'criterion': 'entropy', 'max_depth': None, 'min_samples_leaf': 1, 'min_samples_split': 2}
+[V2: DT Tuned (GridSearch)] Acc: 0.98 | Prec: 0.98 | Rec: 0.98 | F1: 0.98 | AUC: 0.98
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[74]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'Algorithm': 'V2: LR Tuned (GridSearch)',
- 'Accuracy': 0.99,
- 'Precision': 0.97,
- 'Recall': 1.0,
- 'F1-Score': 0.99,
- 'AUC': 1.0}</pre>
+<pre>{'Algorithm': 'V2: DT Tuned (GridSearch)',
+ 'Accuracy': 0.98,
+ 'Precision': 0.98,
+ 'Recall': 0.98,
+ 'F1-Score': 0.98,
+ 'AUC': 0.98}</pre>
 </div>
 </div>
 </div>
@@ -7795,25 +7798,31 @@ Best Params found by CV: {'C': 1, 'penalty': 'l1', 'solver': 'liblinear'}
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [75]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- V3: Ensemble Learning (Stacking) ---"</span><span class="p">)</span>
-<span class="c1"># Kết hợp Random Forest và KNN làm Base Models</span>
-<span class="c1"># Dùng chính Logistic Regression (đã tune ở V2) làm Meta-Model (Final Estimator)</span>
+
 <span class="n">base_estimators</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">(</span><span class="s1">'rf'</span><span class="p">,</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)),</span>
     <span class="p">(</span><span class="s1">'knn'</span><span class="p">,</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
 <span class="p">]</span>
 
+<span class="n">dt_meta</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">max_depth</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">2</span>
+<span class="p">)</span>
+
 <span class="n">v3_model</span> <span class="o">=</span> <span class="n">StackingClassifier</span><span class="p">(</span>
     <span class="n">estimators</span><span class="o">=</span><span class="n">base_estimators</span><span class="p">,</span>
-    <span class="n">final_estimator</span><span class="o">=</span><span class="n">v2_model</span><span class="p">,</span> <span class="c1"># Boosting mô hình LR của chúng ta</span>
-    <span class="n">cv</span><span class="o">=</span><span class="mi">5</span>
+    <span class="n">final_estimator</span><span class="o">=</span><span class="n">dt_meta</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
 <span class="p">)</span>
 
 <span class="n">v3_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">evaluate_model</span><span class="p">(</span><span class="n">v3_model</span><span class="p">,</span> <span class="s2">"V3: LR Stacking Ensemble"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">v3_model</span><span class="p">,</span> <span class="s2">"V3: DT Stacking Ensemble"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7827,14 +7836,14 @@ Best Params found by CV: {'C': 1, 'penalty': 'l1', 'solver': 'liblinear'}
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>--- V3: Ensemble Learning (Stacking) ---
-[V3: LR Stacking Ensemble] Acc: 1.00 | Prec: 0.99 | Rec: 1.00 | F1: 1.00 | AUC: 1.00
+[V3: DT Stacking Ensemble] Acc: 1.00 | Prec: 0.99 | Rec: 1.00 | F1: 1.00 | AUC: 1.00
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[75]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'Algorithm': 'V3: LR Stacking Ensemble',
+<pre>{'Algorithm': 'V3: DT Stacking Ensemble',
  'Accuracy': 1.0,
  'Precision': 0.99,
  'Recall': 1.0,
@@ -7860,24 +7869,25 @@ Best Params found by CV: {'C': 1, 'penalty': 'l1', 'solver': 'liblinear'}
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [76]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># CẤU HÌNH ĐƯỜNG DẪN LƯU</span>
-<span class="n">save_path</span> <span class="o">=</span> <span class="s1">'../experiment/LR/'</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># 5. LƯU KẾT QUẢ VÀ MODEL</span>
+<span class="n">save_path</span> <span class="o">=</span> <span class="s1">'../experiment/DecisionTree/'</span>
 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="c1"># 1. TỔNG HỢP &amp; LƯU CSV</span>
 <span class="n">df_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results_list</span><span class="p">)</span>
-<span class="n">csv_output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'lr_evaluation_results.csv'</span><span class="p">)</span>
+<span class="n">csv_output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'decision_tree_results.csv'</span><span class="p">)</span>
 <span class="n">df_results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">csv_output</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="c1"># 2. LƯU MODELS (.pkl)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'lr_baseline.pkl'</span><span class="p">),</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">lr_baseline</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'dt_baseline.pkl'</span><span class="p">),</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">dt_baseline</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'lr_tuned.pkl'</span><span class="p">),</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">lr_tuned</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'dt_tuned.pkl'</span><span class="p">),</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">dt_tuned</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'dt_stacking.pkl'</span><span class="p">),</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">v3_model</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Đã lưu file CSV tại: </span><span class="si">{</span><span class="n">csv_output</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -7898,8 +7908,8 @@ Best Params found by CV: {'C': 1, 'penalty': 'l1', 'solver': 'liblinear'}
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>----------------------------------------
-✅ Đã lưu file CSV tại: ../experiment/LR/lr_evaluation_results.csv
-✅ Đã lưu models tại: ../experiment/LR/
+✅ Đã lưu file CSV tại: ../experiment/DecisionTree/decision_tree_results.csv
+✅ Đã lưu models tại: ../experiment/DecisionTree/
 ----------------------------------------
 </pre>
 </div>
@@ -7936,30 +7946,30 @@ Best Params found by CV: {'C': 1, 'penalty': 'l1', 'solver': 'liblinear'}
 <tbody>
 <tr>
 <th>0</th>
-<td>V1: LR Baseline</td>
+<td>V1: DT Baseline</td>
+<td>1.00</td>
 <td>0.99</td>
-<td>0.97</td>
-<td>1.0</td>
-<td>0.99</td>
-<td>1.0</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.00</td>
 </tr>
 <tr>
 <th>1</th>
-<td>V2: LR Tuned (GridSearch)</td>
-<td>0.99</td>
-<td>0.97</td>
-<td>1.0</td>
-<td>0.99</td>
-<td>1.0</td>
+<td>V2: DT Tuned (GridSearch)</td>
+<td>0.98</td>
+<td>0.98</td>
+<td>0.98</td>
+<td>0.98</td>
+<td>0.98</td>
 </tr>
 <tr>
 <th>2</th>
-<td>V3: LR Stacking Ensemble</td>
+<td>V3: DT Stacking Ensemble</td>
 <td>1.00</td>
 <td>0.99</td>
-<td>1.0</td>
 <td>1.00</td>
-<td>1.0</td>
+<td>1.00</td>
+<td>1.00</td>
 </tr>
 </tbody>
 </table>
@@ -7973,10 +7983,10 @@ Best Params found by CV: {'C': 1, 'penalty': 'l1', 'solver': 'liblinear'}
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [77]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter<span class="w"> </span>nbconvert<span class="w"> </span>--to<span class="w"> </span>html<span class="w"> </span>LR_model.ipynb
+<div class="highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter<span class="w"> </span>nbconvert<span class="w"> </span>--to<span class="w"> </span>html<span class="w"> </span>decision_tree.ipynb
 </pre></div>
 </div>
 </div>
@@ -7989,8 +7999,8 @@ Best Params found by CV: {'C': 1, 'penalty': 'l1', 'solver': 'liblinear'}
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>[NbConvertApp] Converting notebook LR_model.ipynb to html
-[NbConvertApp] Writing 306145 bytes to LR_model.html
+<pre>[NbConvertApp] Converting notebook decision_tree.ipynb to html
+[NbConvertApp] Writing 306953 bytes to decision_tree.html
 </pre>
 </div>
 </div>
