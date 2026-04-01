@@ -7773,131 +7773,20 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>--- V2: GridSearchCV Tuning ---
+Best Params found by CV: {'max_depth': None, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 200}
+[V2: RF Tuned (GridSearch)] Acc: 1.00 | Prec: 1.00 | Rec: 1.00 | F1: 1.00 | AUC: 1.00
 </pre>
 </div>
 </div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[5]</span><span class="ansi-green-fg">, line 18</span>
-<span class="ansi-green-fg">      2</span> param_grid = {
-<span class="ansi-green-fg">      3</span>     <span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">n_estimators</span><span class="ansi-yellow-fg">'</span>: [<span class="ansi-green-fg">100</span>, <span class="ansi-green-fg">200</span>, <span class="ansi-green-fg">300</span>],
-<span class="ansi-green-fg">      4</span>     <span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">max_depth</span><span class="ansi-yellow-fg">'</span>: [<span class="ansi-bold" style="color: rgb(0,135,0)">None</span>, <span class="ansi-green-fg">10</span>, <span class="ansi-green-fg">20</span>, <span class="ansi-green-fg">30</span>],
-<span class="ansi-green-fg">   (...)</span><span class="ansi-green-fg">      7</span>     <span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">max_features</span><span class="ansi-yellow-fg">'</span>: [<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">sqrt</span><span class="ansi-yellow-fg">'</span>, <span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">log2</span><span class="ansi-yellow-fg">'</span>]
-<span class="ansi-green-fg">      8</span> }
-<span class="ansi-green-fg">     10</span> grid_search = GridSearchCV(
-<span class="ansi-green-fg">     11</span>     RandomForestClassifier(random_state=<span class="ansi-green-fg">42</span>),
-<span class="ansi-green-fg">     12</span>     param_grid,
-<span class="ansi-green-fg">   (...)</span><span class="ansi-green-fg">     15</span>     n_jobs=-<span class="ansi-green-fg">1</span>
-<span class="ansi-green-fg">     16</span> )
-<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">18</span> <span class="ansi-yellow-bg">grid_search</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">fit</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">X_train</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">y_train</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">     19</span> RandomForest_tuned_model = grid_search.best_estimator_
-<span class="ansi-green-fg">     21</span> <span style="color: rgb(0,135,0)">print</span>(<span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Best Params found by CV: </span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>grid_search.best_params_<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span class="ansi-yellow-fg">"</span>)
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">c:\ProgramData\anaconda3\Lib\site-packages\sklearn\base.py:1365</span>, in <span class="ansi-cyan-fg">_fit_context.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="ansi-blue-fg">(estimator, *args, **kwargs)</span>
-<span class="ansi-green-fg">   1358</span>     estimator._validate_params()
-<span class="ansi-green-fg">   1360</span> <span class="ansi-bold" style="color: rgb(0,135,0)">with</span> config_context(
-<span class="ansi-green-fg">   1361</span>     skip_parameter_validation=(
-<span class="ansi-green-fg">   1362</span>         prefer_skip_nested_validation <span class="ansi-bold" style="color: rgb(175,0,255)">or</span> global_skip_validation
-<span class="ansi-green-fg">   1363</span>     )
-<span class="ansi-green-fg">   1364</span> ):
-<span class="ansi-green-fg">-&gt; </span><span class="ansi-green-fg">1365</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">fit_method</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">estimator</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">c:\ProgramData\anaconda3\Lib\site-packages\sklearn\model_selection\_search.py:1051</span>, in <span class="ansi-cyan-fg">BaseSearchCV.fit</span><span class="ansi-blue-fg">(self, X, y, **params)</span>
-<span class="ansi-green-fg">   1045</span>     results = <span style="color: rgb(0,135,0)">self</span>._format_results(
-<span class="ansi-green-fg">   1046</span>         all_candidate_params, n_splits, all_out, all_more_results
-<span class="ansi-green-fg">   1047</span>     )
-<span class="ansi-green-fg">   1049</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> results
-<span class="ansi-green-fg">-&gt; </span><span class="ansi-green-fg">1051</span> <span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_run_search</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">evaluate_candidates</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">   1053</span> <span style="color: rgb(95,135,135)"># multimetric is determined here because in the case of a callable</span>
-<span class="ansi-green-fg">   1054</span> <span style="color: rgb(95,135,135)"># self.scoring the return type is only known after calling</span>
-<span class="ansi-green-fg">   1055</span> first_test_score = all_out[<span class="ansi-green-fg">0</span>][<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">test_scores</span><span class="ansi-yellow-fg">"</span>]
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">c:\ProgramData\anaconda3\Lib\site-packages\sklearn\model_selection\_search.py:1605</span>, in <span class="ansi-cyan-fg">GridSearchCV._run_search</span><span class="ansi-blue-fg">(self, evaluate_candidates)</span>
-<span class="ansi-green-fg">   1603</span> <span class="ansi-bold" style="color: rgb(0,135,0)">def</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-fg">_run_search</span>(<span style="color: rgb(0,135,0)">self</span>, evaluate_candidates):
-<span class="ansi-green-fg">   1604</span> <span style="color: rgb(188,188,188)">    </span><span class="ansi-yellow-fg">"""Search all candidates in param_grid"""</span>
-<span class="ansi-green-fg">-&gt; </span><span class="ansi-green-fg">1605</span>     <span class="ansi-yellow-bg">evaluate_candidates</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">ParameterGrid</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">param_grid</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">)</span>
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">c:\ProgramData\anaconda3\Lib\site-packages\sklearn\model_selection\_search.py:997</span>, in <span class="ansi-cyan-fg">BaseSearchCV.fit.&lt;locals&gt;.evaluate_candidates</span><span class="ansi-blue-fg">(candidate_params, cv, more_results)</span>
-<span class="ansi-green-fg">    989</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span style="color: rgb(0,135,0)">self</span>.verbose &gt; <span class="ansi-green-fg">0</span>:
-<span class="ansi-green-fg">    990</span>     <span style="color: rgb(0,135,0)">print</span>(
-<span class="ansi-green-fg">    991</span>         <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Fitting </span><span class="ansi-bold" style="color: rgb(175,95,135)">{0}</span><span class="ansi-yellow-fg"> folds for each of </span><span class="ansi-bold" style="color: rgb(175,95,135)">{1}</span><span class="ansi-yellow-fg"> candidates,</span><span class="ansi-yellow-fg">"</span>
-<span class="ansi-green-fg">    992</span>         <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg"> totalling </span><span class="ansi-bold" style="color: rgb(175,95,135)">{2}</span><span class="ansi-yellow-fg"> fits</span><span class="ansi-yellow-fg">"</span>.format(
-<span class="ansi-green-fg">    993</span>             n_splits, n_candidates, n_candidates * n_splits
-<span class="ansi-green-fg">    994</span>         )
-<span class="ansi-green-fg">    995</span>     )
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">997</span> out = <span class="ansi-yellow-bg">parallel</span><span class="ansi-yellow-bg">(</span>
-<span class="ansi-green-fg">    998</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">delayed</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">_fit_and_score</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">(</span>
-<span class="ansi-green-fg">    999</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">clone</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">base_estimator</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">   1000</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">X</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">   1001</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">y</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">   1002</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">train</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">train</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">   1003</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">test</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">test</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">   1004</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">parameters</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">parameters</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">   1005</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">split_progress</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">split_idx</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">n_splits</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">   1006</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">candidate_progress</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">cand_idx</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">n_candidates</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">   1007</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">fit_and_score_kwargs</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">   1008</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">   1009</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg ansi-bold" style="color: rgb(0,135,0)">for</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">cand_idx</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">parameters</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">split_idx</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">train</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">test</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg ansi-bold" style="color: rgb(175,0,255)">in</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">product</span><span class="ansi-yellow-bg">(</span>
-<span class="ansi-green-fg">   1010</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">enumerate</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">candidate_params</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">   1011</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">enumerate</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">cv</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">split</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">X</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">y</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">routed_params</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">splitter</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">split</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">   1012</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">   1013</span> <span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">   1015</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span style="color: rgb(0,135,0)">len</span>(out) &lt; <span class="ansi-green-fg">1</span>:
-<span class="ansi-green-fg">   1016</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span class="ansi-bold" style="color: rgb(215,95,95)">ValueError</span>(
-<span class="ansi-green-fg">   1017</span>         <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">No fits were performed. </span><span class="ansi-yellow-fg">"</span>
-<span class="ansi-green-fg">   1018</span>         <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Was the CV iterator empty? </span><span class="ansi-yellow-fg">"</span>
-<span class="ansi-green-fg">   1019</span>         <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Were there no candidates?</span><span class="ansi-yellow-fg">"</span>
-<span class="ansi-green-fg">   1020</span>     )
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">c:\ProgramData\anaconda3\Lib\site-packages\sklearn\utils\parallel.py:82</span>, in <span class="ansi-cyan-fg">Parallel.__call__</span><span class="ansi-blue-fg">(self, iterable)</span>
-<span class="ansi-green-fg">     73</span> warning_filters = warnings.filters
-<span class="ansi-green-fg">     74</span> iterable_with_config_and_warning_filters = (
-<span class="ansi-green-fg">     75</span>     (
-<span class="ansi-green-fg">     76</span>         _with_config_and_warning_filters(delayed_func, config, warning_filters),
-<span class="ansi-green-fg">   (...)</span><span class="ansi-green-fg">     80</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> delayed_func, args, kwargs <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> iterable
-<span class="ansi-green-fg">     81</span> )
-<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">82</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-yellow-bg" style="color: rgb(0,135,0)">super</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">.</span><span class="ansi-blue-fg ansi-yellow-bg">__call__</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">iterable_with_config_and_warning_filters</span><span class="ansi-yellow-bg">)</span>
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">c:\ProgramData\anaconda3\Lib\site-packages\joblib\parallel.py:2072</span>, in <span class="ansi-cyan-fg">Parallel.__call__</span><span class="ansi-blue-fg">(self, iterable)</span>
-<span class="ansi-green-fg">   2066</span> <span style="color: rgb(95,135,135)"># The first item from the output is blank, but it makes the interpreter</span>
-<span class="ansi-green-fg">   2067</span> <span style="color: rgb(95,135,135)"># progress until it enters the Try/Except block of the generator and</span>
-<span class="ansi-green-fg">   2068</span> <span style="color: rgb(95,135,135)"># reaches the first `yield` statement. This starts the asynchronous</span>
-<span class="ansi-green-fg">   2069</span> <span style="color: rgb(95,135,135)"># dispatch of the tasks to the workers.</span>
-<span class="ansi-green-fg">   2070</span> <span style="color: rgb(0,135,0)">next</span>(output)
-<span class="ansi-green-fg">-&gt; </span><span class="ansi-green-fg">2072</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> output <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span style="color: rgb(0,135,0)">self</span>.return_generator <span class="ansi-bold" style="color: rgb(0,135,0)">else</span> <span class="ansi-yellow-bg" style="color: rgb(0,135,0)">list</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">output</span><span class="ansi-yellow-bg">)</span>
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">c:\ProgramData\anaconda3\Lib\site-packages\joblib\parallel.py:1682</span>, in <span class="ansi-cyan-fg">Parallel._get_outputs</span><span class="ansi-blue-fg">(self, iterator, pre_dispatch)</span>
-<span class="ansi-green-fg">   1679</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">yield</span>
-<span class="ansi-green-fg">   1681</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">with</span> <span style="color: rgb(0,135,0)">self</span>._backend.retrieval_context():
-<span class="ansi-green-fg">-&gt; </span><span class="ansi-green-fg">1682</span>         <span class="ansi-bold" style="color: rgb(0,135,0)">yield from</span> <span style="color: rgb(0,135,0)">self</span>._retrieve()
-<span class="ansi-green-fg">   1684</span> <span class="ansi-bold" style="color: rgb(0,135,0)">except</span> <span class="ansi-bold" style="color: rgb(215,95,95)">GeneratorExit</span>:
-<span class="ansi-green-fg">   1685</span>     <span style="color: rgb(95,135,135)"># The generator has been garbage collected before being fully</span>
-<span class="ansi-green-fg">   1686</span>     <span style="color: rgb(95,135,135)"># consumed. This aborts the remaining tasks if possible and warn</span>
-<span class="ansi-green-fg">   1687</span>     <span style="color: rgb(95,135,135)"># the user if necessary.</span>
-<span class="ansi-green-fg">   1688</span>     <span style="color: rgb(0,135,0)">self</span>._exception = <span class="ansi-bold" style="color: rgb(0,135,0)">True</span>
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">c:\ProgramData\anaconda3\Lib\site-packages\joblib\parallel.py:1800</span>, in <span class="ansi-cyan-fg">Parallel._retrieve</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-fg">   1789</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span style="color: rgb(0,135,0)">self</span>.return_ordered:
-<span class="ansi-green-fg">   1790</span>     <span style="color: rgb(95,135,135)"># Case ordered: wait for completion (or error) of the next job</span>
-<span class="ansi-green-fg">   1791</span>     <span style="color: rgb(95,135,135)"># that have been dispatched and not retrieved yet. If no job</span>
-<span class="ansi-green-fg">   (...)</span><span class="ansi-green-fg">   1795</span>     <span style="color: rgb(95,135,135)"># control only have to be done on the amount of time the next</span>
-<span class="ansi-green-fg">   1796</span>     <span style="color: rgb(95,135,135)"># dispatched job is pending.</span>
-<span class="ansi-green-fg">   1797</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> (nb_jobs == <span class="ansi-green-fg">0</span>) <span class="ansi-bold" style="color: rgb(175,0,255)">or</span> (
-<span class="ansi-green-fg">   1798</span>         <span style="color: rgb(0,135,0)">self</span>._jobs[<span class="ansi-green-fg">0</span>].get_status(timeout=<span style="color: rgb(0,135,0)">self</span>.timeout) == TASK_PENDING
-<span class="ansi-green-fg">   1799</span>     ):
-<span class="ansi-green-fg">-&gt; </span><span class="ansi-green-fg">1800</span>         <span class="ansi-yellow-bg">time</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">sleep</span><span class="ansi-yellow-bg">(</span><span class="ansi-green-fg ansi-yellow-bg">0.01</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">   1801</span>         <span class="ansi-bold" style="color: rgb(0,135,0)">continue</span>
-<span class="ansi-green-fg">   1803</span> <span class="ansi-bold" style="color: rgb(0,135,0)">elif</span> nb_jobs == <span class="ansi-green-fg">0</span>:
-<span class="ansi-green-fg">   1804</span>     <span style="color: rgb(95,135,135)"># Case unordered: jobs are added to the list of jobs to</span>
-<span class="ansi-green-fg">   1805</span>     <span style="color: rgb(95,135,135)"># retrieve `self._jobs` only once completed or in error, which</span>
-<span class="ansi-green-fg">   (...)</span><span class="ansi-green-fg">   1811</span>     <span style="color: rgb(95,135,135)"># timeouts before any other dispatched job has completed and</span>
-<span class="ansi-green-fg">   1812</span>     <span style="color: rgb(95,135,135)"># been added to `self._jobs` to be retrieved.</span>
-
-<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>{'Algorithm': 'V2: RF Tuned (GridSearch)',
+ 'Accuracy': 1.0,
+ 'Precision': 1.0,
+ 'Recall': 1.0,
+ 'F1-Score': 1.0,
+ 'AUC': 1.0}</pre>
 </div>
 </div>
 </div>
@@ -7938,14 +7827,14 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>--- V3: Ensemble Learning (Stacking) ---
-[V3: LR Stacking Ensemble] Acc: 1.00 | Prec: 0.99 | Rec: 1.00 | F1: 1.00 | AUC: 1.00
+[V3: RF Stacking Ensemble] Acc: 1.00 | Prec: 0.99 | Rec: 1.00 | F1: 1.00 | AUC: 1.00
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'Algorithm': 'V3: LR Stacking Ensemble',
+<pre>{'Algorithm': 'V3: RF Stacking Ensemble',
  'Accuracy': 1.0,
  'Precision': 0.99,
  'Recall': 1.0,
@@ -7971,7 +7860,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># CẤU HÌNH ĐƯỜNG DẪN LƯU</span>
@@ -8012,8 +7901,8 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>----------------------------------------
-✅ Đã lưu file CSV tại: ../experiment/LR/lr_evaluation_results.csv
-✅ Đã lưu models tại: ../experiment/LR/
+✅ Đã lưu file CSV tại: ../experiment/Random Forest/Random_Forest_evaluation_results.csv
+✅ Đã lưu models tại: ../experiment/Random Forest/
 ----------------------------------------
 </pre>
 </div>
@@ -8050,29 +7939,29 @@ a.anchor-link {
 <tbody>
 <tr>
 <th>0</th>
-<td>V1: LR Baseline</td>
-<td>0.99</td>
-<td>0.97</td>
+<td>V1: RF Baseline</td>
 <td>1.0</td>
-<td>0.99</td>
+<td>1.00</td>
+<td>1.0</td>
+<td>1.0</td>
 <td>1.0</td>
 </tr>
 <tr>
 <th>1</th>
-<td>V2: LR Tuned (GridSearch)</td>
-<td>0.99</td>
-<td>0.97</td>
+<td>V2: RF Tuned (GridSearch)</td>
 <td>1.0</td>
-<td>0.99</td>
+<td>1.00</td>
+<td>1.0</td>
+<td>1.0</td>
 <td>1.0</td>
 </tr>
 <tr>
 <th>2</th>
-<td>V3: LR Stacking Ensemble</td>
-<td>1.00</td>
+<td>V3: RF Stacking Ensemble</td>
+<td>1.0</td>
 <td>0.99</td>
 <td>1.0</td>
-<td>1.00</td>
+<td>1.0</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -8087,7 +7976,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter<span class="w"> </span>nbconvert<span class="w"> </span>--to<span class="w"> </span>html<span class="w"> </span>Random_Forest_model.ipynb
@@ -8103,8 +7992,8 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>[NbConvertApp] Converting notebook LR_model.ipynb to html
-[NbConvertApp] Writing 306145 bytes to LR_model.html
+<pre>[NbConvertApp] Converting notebook Random_Forest_model.ipynb to html
+[NbConvertApp] Writing 328953 bytes to Random_Forest_model.html
 </pre>
 </div>
 </div>
