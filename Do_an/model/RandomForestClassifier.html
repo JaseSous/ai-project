@@ -7537,10 +7537,10 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
@@ -7581,10 +7581,10 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="c1"># 1. LOAD DỮ LIỆU ĐÃ SCALED</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># 1. LOAD DỮ LIỆU ĐÃ SCALED</span>
 <span class="n">data_dir</span> <span class="o">=</span> <span class="s1">'../data/'</span>
 <span class="n">target_col</span> <span class="o">=</span> <span class="s1">'class'</span>
 
@@ -7621,10 +7621,10 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="n">results_list</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">results_list</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">X_split</span><span class="p">,</span> <span class="n">y_split</span><span class="p">,</span> <span class="n">split_name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Dự đoán và trích xuất các chỉ số phân loại theo yêu cầu (Acc, Prec, Rec, F1, AUC)."""</span>
@@ -7660,10 +7660,10 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="c1"># K-FOLD CONFIG</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># K-FOLD CONFIG</span>
 <span class="n">kfold</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_kfold</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">X_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">cv_split</span><span class="p">):</span>
@@ -7717,15 +7717,15 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b72fe523">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b72fe523">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- V1: Baseline Random Tree ---"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- V1: Baseline Random Tree ---"</span><span class="p">)</span>
 <span class="n">RandomTree_baseline_model</span> <span class="o">=</span> <span class="n">ExtraTreesClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
 <span class="c1"># Đánh giá K-Fold trước</span>
@@ -7736,6 +7736,34 @@ a.anchor-link {
 <span class="n">evaluate_model</span><span class="p">(</span><span class="n">RandomTree_baseline_model</span><span class="p">,</span> <span class="s2">"V1: Random Tree Baseline"</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">,</span> <span class="s2">"Validation"</span><span class="p">)</span>
 <span class="n">evaluate_model</span><span class="p">(</span><span class="n">RandomTree_baseline_model</span><span class="p">,</span> <span class="s2">"V1: Random Tree Baseline"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="s2">"Test"</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>--- V1: Baseline Random Tree ---
+[V1: Random Tree Baseline | KFold] Acc: 0.9959 | Prec: 0.9918 | Rec: 1.0000 | F1: 0.9958 | AUC: 1.0000
+[V1: Random Tree Baseline | Validation] Acc: 1.0000 | Prec: 1.0000 | Rec: 1.0000 | F1: 1.0000 | AUC: 1.0000
+[V1: Random Tree Baseline | Test] Acc: 1.0000 | Prec: 1.0000 | Rec: 1.0000 | F1: 1.0000 | AUC: 1.0000
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>{'Algorithm': 'V1: Random Tree Baseline',
+ 'Split': 'Test',
+ 'Accuracy': 1.0,
+ 'Precision': 1.0,
+ 'Recall': 1.0,
+ 'F1-Score': 1.0,
+ 'AUC': 1.0}</pre>
 </div>
 </div>
 </div>
@@ -7751,15 +7779,15 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b7f65ce3">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b7f65ce3">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- V2: GridSearchCV Tuning ---"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- V2: GridSearchCV Tuning ---"</span><span class="p">)</span>
 <span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'n_estimators'</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span> <span class="s1">'max_depth'</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="s1">'min_samples_split'</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">'max_features'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'sqrt'</span><span class="p">,</span> <span class="s1">'log2'</span><span class="p">,</span> <span class="kc">None</span><span class="p">]}</span>
 
 <span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
@@ -7785,15 +7813,44 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=494c3b2d">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>--- V2: GridSearchCV Tuning ---
+Best Params found by CV: {'max_depth': None, 'max_features': 'sqrt', 'min_samples_split': 2, 'n_estimators': 300}
+[V2: Random Tree Tuned (GridSearch) | KFold] Acc: 0.9973 | Prec: 0.9944 | Rec: 1.0000 | F1: 0.9972 | AUC: 1.0000
+[V2: Random Tree Tuned (GridSearch) | Validation] Acc: 1.0000 | Prec: 1.0000 | Rec: 1.0000 | F1: 1.0000 | AUC: 1.0000
+[V2: Random Tree Tuned (GridSearch) | Test] Acc: 1.0000 | Prec: 1.0000 | Rec: 1.0000 | F1: 1.0000 | AUC: 1.0000
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>{'Algorithm': 'V2: Random Tree Tuned (GridSearch)',
+ 'Split': 'Test',
+ 'Accuracy': 1.0,
+ 'Precision': 1.0,
+ 'Recall': 1.0,
+ 'F1-Score': 1.0,
+ 'AUC': 1.0}</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=494c3b2d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- V3: Ensemble Learning (Stacking) ---"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- V3: Ensemble Learning (Stacking) ---"</span><span class="p">)</span>
 <span class="c1"># Kết hợp mô hình chính và KNN làm Base Models</span>
 <span class="n">base_estimators</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">'rt'</span><span class="p">,</span> <span class="n">ExtraTreesClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">)),</span> <span class="p">(</span><span class="s1">'knn'</span><span class="p">,</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">))]</span>
 
@@ -7814,6 +7871,34 @@ a.anchor-link {
 </div>
 </div>
 </div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>--- V3: Ensemble Learning (Stacking) ---
+[V3: Random Tree Stacking Ensemble | KFold] Acc: 0.9959 | Prec: 0.9972 | Rec: 0.9936 | F1: 0.9954 | AUC: 0.9955
+[V3: Random Tree Stacking Ensemble | Validation] Acc: 1.0000 | Prec: 1.0000 | Rec: 1.0000 | F1: 1.0000 | AUC: 1.0000
+[V3: Random Tree Stacking Ensemble | Test] Acc: 1.0000 | Prec: 1.0000 | Rec: 1.0000 | F1: 1.0000 | AUC: 1.0000
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>{'Algorithm': 'V3: Random Tree Stacking Ensemble',
+ 'Split': 'Test',
+ 'Accuracy': 1.0,
+ 'Precision': 1.0,
+ 'Recall': 1.0,
+ 'F1-Score': 1.0,
+ 'AUC': 1.0}</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f8f52e67">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -7825,15 +7910,15 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=82aaaa29">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=82aaaa29">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="c1"># CẤU HÌNH ĐƯỜNG DẪN LƯU</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># CẤU HÌNH ĐƯỜNG DẪN LƯU</span>
 <span class="n">save_path</span> <span class="o">=</span> <span class="s1">'../experiment/Random_Tree/'</span>
 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -7864,16 +7949,172 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2376e5c4">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>----------------------------------------
+✅ Đã lưu tất cả kết quả vào: ../experiment/Random_Tree/RandomForestClassifier_full_results.csv
+✅ Đã lưu models tại: ../experiment/Random_Tree/
+----------------------------------------
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Algorithm</th>
+<th>Split</th>
+<th>Accuracy</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1-Score</th>
+<th>AUC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>V1: Random Tree Baseline</td>
+<td>KFold</td>
+<td>0.9959</td>
+<td>0.9918</td>
+<td>1.0000</td>
+<td>0.9958</td>
+<td>1.0000</td>
+</tr>
+<tr>
+<th>1</th>
+<td>V1: Random Tree Baseline</td>
+<td>Validation</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+</tr>
+<tr>
+<th>2</th>
+<td>V1: Random Tree Baseline</td>
+<td>Test</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+</tr>
+<tr>
+<th>3</th>
+<td>V2: Random Tree Tuned (GridSearch)</td>
+<td>KFold</td>
+<td>0.9973</td>
+<td>0.9944</td>
+<td>1.0000</td>
+<td>0.9972</td>
+<td>1.0000</td>
+</tr>
+<tr>
+<th>4</th>
+<td>V2: Random Tree Tuned (GridSearch)</td>
+<td>Validation</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+</tr>
+<tr>
+<th>5</th>
+<td>V2: Random Tree Tuned (GridSearch)</td>
+<td>Test</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+</tr>
+<tr>
+<th>6</th>
+<td>V3: Random Tree Stacking Ensemble</td>
+<td>KFold</td>
+<td>0.9959</td>
+<td>0.9972</td>
+<td>0.9936</td>
+<td>0.9954</td>
+<td>0.9955</td>
+</tr>
+<tr>
+<th>7</th>
+<td>V3: Random Tree Stacking Ensemble</td>
+<td>Validation</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+</tr>
+<tr>
+<th>8</th>
+<td>V3: Random Tree Stacking Ensemble</td>
+<td>Test</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+<td>1.0000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2376e5c4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="err">!</span><span class="n">jupyter</span> <span class="n">nbconvert</span> <span class="o">--</span><span class="n">to</span> <span class="n">html</span> <span class="n">RandomForestClassifier</span><span class="o">.</span><span class="n">ipynb</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter<span class="w"> </span>nbconvert<span class="w"> </span>--to<span class="w"> </span>html<span class="w"> </span>RandomForestClassifier.ipynb
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>[NbConvertApp] Converting notebook RandomForestClassifier.ipynb to html
+[NbConvertApp] Writing 309297 bytes to RandomForestClassifier.html
+</pre>
 </div>
 </div>
 </div>
