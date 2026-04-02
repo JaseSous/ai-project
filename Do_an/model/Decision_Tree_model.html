@@ -7537,7 +7537,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -7550,7 +7550,7 @@ a.anchor-link {
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">PolynomialFeatures</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">cross_val_score</span><span class="p">,</span> <span class="n">GridSearchCV</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">KFold</span><span class="p">,</span> <span class="n">cross_validate</span><span class="p">,</span> <span class="n">GridSearchCV</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> 
                              <span class="n">f1_score</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">)</span>
 
@@ -7577,7 +7577,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># 1. LOAD DỮ LIỆU ĐÃ SCALED</span>
@@ -7617,7 +7617,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">results_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -7651,6 +7651,57 @@ a.anchor-link {
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2f28a1a0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># K-FOLD CONFIG</span>
+<span class="n">kfold</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_kfold</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">X_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">cv_split</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Đánh giá K-Fold và lưu kết quả trung bình vào results_list."""</span>
+    <span class="n">scoring</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">'accuracy'</span><span class="p">:</span> <span class="s1">'accuracy'</span><span class="p">,</span>
+        <span class="s1">'precision'</span><span class="p">:</span> <span class="s1">'precision'</span><span class="p">,</span>
+        <span class="s1">'recall'</span><span class="p">:</span> <span class="s1">'recall'</span><span class="p">,</span>
+        <span class="s1">'f1'</span><span class="p">:</span> <span class="s1">'f1'</span><span class="p">,</span>
+        <span class="s1">'auc'</span><span class="p">:</span> <span class="s1">'roc_auc'</span>
+    <span class="p">}</span>
+
+    <span class="n">cv_results</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span>
+        <span class="n">X_data</span><span class="p">,</span>
+        <span class="n">y_data</span><span class="p">,</span>
+        <span class="n">cv</span><span class="o">=</span><span class="n">cv_split</span><span class="p">,</span>
+        <span class="n">scoring</span><span class="o">=</span><span class="n">scoring</span><span class="p">,</span>
+        <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
+    <span class="p">)</span>
+
+    <span class="n">res</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">'Algorithm'</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+        <span class="s1">'Split'</span><span class="p">:</span> <span class="s1">'KFold'</span><span class="p">,</span>
+        <span class="s1">'Accuracy'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">cv_results</span><span class="p">[</span><span class="s1">'test_accuracy'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="s1">'Precision'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">cv_results</span><span class="p">[</span><span class="s1">'test_precision'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="s1">'Recall'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">cv_results</span><span class="p">[</span><span class="s1">'test_recall'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="s1">'F1-Score'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">cv_results</span><span class="p">[</span><span class="s1">'test_f1'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="s1">'AUC'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">cv_results</span><span class="p">[</span><span class="s1">'test_auc'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="n">results_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> | KFold] Acc: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'Accuracy'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | Prec: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'Precision'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | "</span>
+        <span class="sa">f</span><span class="s2">"Rec: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'Recall'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | F1: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'F1-Score'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | AUC: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'AUC'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=de9ed008">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -7667,14 +7718,18 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- V1: Baseline Decision Tree ---"</span><span class="p">)</span>
 <span class="c1"># Sử dụng cấu hình mặc định để làm mốc so sánh (Baseline)</span>
 <span class="n">DecisionTree_baseline_model</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">DecisionTree_baseline_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
+<span class="c1"># Đánh giá K-Fold trước</span>
+<span class="n">evaluate_kfold</span><span class="p">(</span><span class="n">DecisionTree_baseline_model</span><span class="p">,</span> <span class="s2">"V1: DecisionTree Baseline"</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">kfold</span><span class="p">)</span>
+
+<span class="c1"># Train cố định trên train set rồi đánh giá validation/test</span>
+<span class="n">DecisionTree_baseline_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">evaluate_model</span><span class="p">(</span><span class="n">DecisionTree_baseline_model</span><span class="p">,</span> <span class="s2">"V1: DecisionTree Baseline"</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">,</span> <span class="s2">"Validation"</span><span class="p">)</span>
 <span class="n">evaluate_model</span><span class="p">(</span><span class="n">DecisionTree_baseline_model</span><span class="p">,</span> <span class="s2">"V1: DecisionTree Baseline"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="s2">"Test"</span><span class="p">)</span>
 </pre></div>
@@ -7689,22 +7744,20 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>--- V1: Baseline Decision Tree ---
-[V1: DecisionTree Baseline | Validation] Acc: 0.9951 | Prec: 0.9892 | Rec: 1.0000 | F1: 0.9946 | AUC: 0.9955
-[V1: DecisionTree Baseline | Test] Acc: 0.9975 | Prec: 0.9946 | Rec: 1.0000 | F1: 0.9973 | AUC: 0.9977
+<pre>--- V1: Baseline Random Forest ---
+[V1: RandomForest Baseline] Acc: 1.00 | Prec: 1.00 | Rec: 1.00 | F1: 1.00 | AUC: 1.00
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'Algorithm': 'V1: DecisionTree Baseline',
- 'Split': 'Test',
- 'Accuracy': 0.9975,
- 'Precision': 0.9946,
+<pre>{'Algorithm': 'V1: RandomForest Baseline',
+ 'Accuracy': 1.0,
+ 'Precision': 1.0,
  'Recall': 1.0,
- 'F1-Score': 0.9973,
- 'AUC': 0.9977}</pre>
+ 'F1-Score': 1.0,
+ 'AUC': 1.0}</pre>
 </div>
 </div>
 </div>
@@ -7725,7 +7778,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- V2: GridSearchCV Tuning ---"</span><span class="p">)</span>
@@ -7740,7 +7793,7 @@ a.anchor-link {
 <span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
     <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
     <span class="n">param_grid</span><span class="p">,</span>
-    <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">=</span><span class="n">kfold</span><span class="p">,</span>
     <span class="n">scoring</span><span class="o">=</span><span class="s1">'accuracy'</span><span class="p">,</span>
     <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
 <span class="p">)</span>
@@ -7749,6 +7802,10 @@ a.anchor-link {
 <span class="n">DecisionTree_tuned_model</span> <span class="o">=</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">best_estimator_</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Best Params found by CV: </span><span class="si">{</span><span class="n">grid_search</span><span class="o">.</span><span class="n">best_params_</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Đánh giá K-Fold cho mô hình tốt nhất</span>
+<span class="n">evaluate_kfold</span><span class="p">(</span><span class="n">DecisionTree_tuned_model</span><span class="p">,</span> <span class="s2">"V2: DecisionTree Tuned (GridSearch)"</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">kfold</span><span class="p">)</span>
+
 <span class="n">evaluate_model</span><span class="p">(</span><span class="n">DecisionTree_tuned_model</span><span class="p">,</span> <span class="s2">"V2: DecisionTree Tuned (GridSearch)"</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">,</span> <span class="s2">"Validation"</span><span class="p">)</span>
 <span class="n">evaluate_model</span><span class="p">(</span><span class="n">DecisionTree_tuned_model</span><span class="p">,</span> <span class="s2">"V2: DecisionTree Tuned (GridSearch)"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="s2">"Test"</span><span class="p">)</span>
 </pre></div>
@@ -7764,22 +7821,26 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>--- V2: GridSearchCV Tuning ---
-Best Params found by CV: {'criterion': 'entropy', 'max_depth': None, 'max_features': None, 'min_samples_leaf': 1, 'min_samples_split': 2}
-[V2: DecisionTree Tuned (GridSearch) | Validation] Acc: 0.9803 | Prec: 0.9783 | Rec: 0.9783 | F1: 0.9783 | AUC: 0.9801
-[V2: DecisionTree Tuned (GridSearch) | Test] Acc: 0.9802 | Prec: 0.9781 | Rec: 0.9781 | F1: 0.9781 | AUC: 0.9801
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Best Params found by CV: {'max_depth': None, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 200}
+[V2: RandomForest Tuned (GridSearch)] Acc: 1.00 | Prec: 1.00 | Rec: 1.00 | F1: 1.00 | AUC: 1.00
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'Algorithm': 'V2: DecisionTree Tuned (GridSearch)',
- 'Split': 'Test',
- 'Accuracy': 0.9802,
- 'Precision': 0.9781,
- 'Recall': 0.9781,
- 'F1-Score': 0.9781,
- 'AUC': 0.9801}</pre>
+<pre>{'Algorithm': 'V2: RandomForest Tuned (GridSearch)',
+ 'Accuracy': 1.0,
+ 'Precision': 1.0,
+ 'Recall': 1.0,
+ 'F1-Score': 1.0,
+ 'AUC': 1.0}</pre>
 </div>
 </div>
 </div>
@@ -7789,7 +7850,7 @@ Best Params found by CV: {'criterion': 'entropy', 'max_depth': None, 'max_featur
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- V3: Ensemble Learning (Stacking) ---"</span><span class="p">)</span>
@@ -7802,8 +7863,11 @@ Best Params found by CV: {'criterion': 'entropy', 'max_depth': None, 'max_featur
 <span class="n">DecisionTree_stacking_model</span> <span class="o">=</span> <span class="n">StackingClassifier</span><span class="p">(</span>
     <span class="n">estimators</span><span class="o">=</span><span class="n">base_estimators</span><span class="p">,</span>
     <span class="n">final_estimator</span><span class="o">=</span><span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
-    <span class="n">cv</span><span class="o">=</span><span class="mi">5</span>
+    <span class="n">cv</span><span class="o">=</span><span class="n">kfold</span>
 <span class="p">)</span>
+
+<span class="c1"># Đánh giá K-Fold cho stacking</span>
+<span class="n">evaluate_kfold</span><span class="p">(</span><span class="n">DecisionTree_stacking_model</span><span class="p">,</span> <span class="s2">"V3: DecisionTree Stacking Ensemble"</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">kfold</span><span class="p">)</span>
 
 <span class="n">DecisionTree_stacking_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">evaluate_model</span><span class="p">(</span><span class="n">DecisionTree_stacking_model</span><span class="p">,</span> <span class="s2">"V3: DecisionTree Stacking Ensemble"</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">,</span> <span class="s2">"Validation"</span><span class="p">)</span>
@@ -7821,21 +7885,19 @@ Best Params found by CV: {'criterion': 'entropy', 'max_depth': None, 'max_featur
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>--- V3: Ensemble Learning (Stacking) ---
-[V3: DecisionTree Stacking Ensemble | Validation] Acc: 1.0000 | Prec: 1.0000 | Rec: 1.0000 | F1: 1.0000 | AUC: 1.0000
-[V3: DecisionTree Stacking Ensemble | Test] Acc: 0.9975 | Prec: 0.9946 | Rec: 1.0000 | F1: 0.9973 | AUC: 0.9955
+[V3: RandomForest Stacking Ensemble] Acc: 1.00 | Prec: 0.99 | Rec: 1.00 | F1: 1.00 | AUC: 1.00
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'Algorithm': 'V3: DecisionTree Stacking Ensemble',
- 'Split': 'Test',
- 'Accuracy': 0.9975,
- 'Precision': 0.9946,
+<pre>{'Algorithm': 'V3: RandomForest Stacking Ensemble',
+ 'Accuracy': 1.0,
+ 'Precision': 0.99,
  'Recall': 1.0,
- 'F1-Score': 0.9973,
- 'AUC': 0.9955}</pre>
+ 'F1-Score': 1.0,
+ 'AUC': 1.0}</pre>
 </div>
 </div>
 </div>
@@ -7856,18 +7918,24 @@ Best Params found by CV: {'criterion': 'entropy', 'max_depth': None, 'max_featur
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># CẤU HÌNH ĐƯỜNG DẪN LƯU</span>
-<span class="n">save_path</span> <span class="o">=</span> <span class="s1">'../experiment/Decision Tree/'</span>
+<span class="n">save_path</span> <span class="o">=</span> <span class="s1">'../experiment/Decision_Tree/'</span>
 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="c1"># 1. TỔNG HỢP &amp; LƯU 1 FILE CSV DUY NHẤT</span>
+<span class="c1"># 1. TỔNG HỢP &amp; LƯU CSV (bao gồm cả Validation và Test)</span>
 <span class="n">df_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results_list</span><span class="p">)</span>
-
-<span class="n">csv_output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'Decision_Tree_all_results.csv'</span><span class="p">)</span>
+<span class="n">csv_output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'Decision_Tree_evaluation_results_with_valid.csv'</span><span class="p">)</span>
 <span class="n">df_results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">csv_output</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Lưu riêng từng file để dễ xem trong experiment</span>
+<span class="n">valid_csv_output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'Decision_Tree_validation_results.csv'</span><span class="p">)</span>
+<span class="n">test_csv_output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'Decision_Tree_test_results.csv'</span><span class="p">)</span>
+
+<span class="n">df_results</span><span class="p">[</span><span class="n">df_results</span><span class="p">[</span><span class="s1">'Split'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Validation'</span><span class="p">]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">valid_csv_output</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df_results</span><span class="p">[</span><span class="n">df_results</span><span class="p">[</span><span class="s1">'Split'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Test'</span><span class="p">]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">test_csv_output</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># 2. LƯU MODELS (.pkl)</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'Decision_Tree_baseline.pkl'</span><span class="p">),</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -7880,7 +7948,9 @@ Best Params found by CV: {'criterion': 'entropy', 'max_depth': None, 'max_featur
     <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">DecisionTree_stacking_model</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Đã lưu tất cả kết quả vào: </span><span class="si">{</span><span class="n">csv_output</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Đã lưu file CSV tổng tại: </span><span class="si">{</span><span class="n">csv_output</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Đã lưu validation results tại: </span><span class="si">{</span><span class="n">valid_csv_output</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Đã lưu test results tại: </span><span class="si">{</span><span class="n">test_csv_output</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Đã lưu models tại: </span><span class="si">{</span><span class="n">save_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
 
@@ -7898,10 +7968,8 @@ Best Params found by CV: {'criterion': 'entropy', 'max_depth': None, 'max_featur
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>----------------------------------------
-✅ Đã lưu file CSV tổng tại: ../experiment/Decision_Tree/Decision_Tree_evaluation_results_with_valid.csv
-✅ Đã lưu validation results tại: ../experiment/Decision_Tree/Decision_Tree_validation_results.csv
-✅ Đã lưu test results tại: ../experiment/Decision_Tree/Decision_Tree_test_results.csv
-✅ Đã lưu models tại: ../experiment/Decision_Tree/
+✅ Đã lưu file CSV tại: ../experiment/Random Forest/Random_Forest_evaluation_results.csv
+✅ Đã lưu models tại: ../experiment/Random Forest/
 ----------------------------------------
 </pre>
 </div>
@@ -7928,7 +7996,6 @@ Best Params found by CV: {'criterion': 'entropy', 'max_depth': None, 'max_featur
 <tr style="text-align: right;">
 <th></th>
 <th>Algorithm</th>
-<th>Split</th>
 <th>Accuracy</th>
 <th>Precision</th>
 <th>Recall</th>
@@ -7939,63 +8006,30 @@ Best Params found by CV: {'criterion': 'entropy', 'max_depth': None, 'max_featur
 <tbody>
 <tr>
 <th>0</th>
-<td>V1: DecisionTree Baseline</td>
-<td>Validation</td>
-<td>0.9951</td>
-<td>0.9892</td>
-<td>1.0000</td>
-<td>0.9946</td>
-<td>0.9955</td>
+<td>V1: RandomForest Baseline</td>
+<td>1.0</td>
+<td>1.00</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
 </tr>
 <tr>
 <th>1</th>
-<td>V1: DecisionTree Baseline</td>
-<td>Test</td>
-<td>0.9975</td>
-<td>0.9946</td>
-<td>1.0000</td>
-<td>0.9973</td>
-<td>0.9977</td>
+<td>V2: RandomForest Tuned (GridSearch)</td>
+<td>1.0</td>
+<td>1.00</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
 </tr>
 <tr>
 <th>2</th>
-<td>V2: DecisionTree Tuned (GridSearch)</td>
-<td>Validation</td>
-<td>0.9803</td>
-<td>0.9783</td>
-<td>0.9783</td>
-<td>0.9783</td>
-<td>0.9801</td>
-</tr>
-<tr>
-<th>3</th>
-<td>V2: DecisionTree Tuned (GridSearch)</td>
-<td>Test</td>
-<td>0.9802</td>
-<td>0.9781</td>
-<td>0.9781</td>
-<td>0.9781</td>
-<td>0.9801</td>
-</tr>
-<tr>
-<th>4</th>
-<td>V3: DecisionTree Stacking Ensemble</td>
-<td>Validation</td>
-<td>1.0000</td>
-<td>1.0000</td>
-<td>1.0000</td>
-<td>1.0000</td>
-<td>1.0000</td>
-</tr>
-<tr>
-<th>5</th>
-<td>V3: DecisionTree Stacking Ensemble</td>
-<td>Test</td>
-<td>0.9975</td>
-<td>0.9946</td>
-<td>1.0000</td>
-<td>0.9973</td>
-<td>0.9955</td>
+<td>V3: RandomForest Stacking Ensemble</td>
+<td>1.0</td>
+<td>0.99</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
 </tr>
 </tbody>
 </table>
@@ -8009,7 +8043,7 @@ Best Params found by CV: {'criterion': 'entropy', 'max_depth': None, 'max_featur
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter<span class="w"> </span>nbconvert<span class="w"> </span>--to<span class="w"> </span>html<span class="w"> </span>Decision_Tree_model.ipynb
@@ -8025,8 +8059,8 @@ Best Params found by CV: {'criterion': 'entropy', 'max_depth': None, 'max_featur
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>[NbConvertApp] Converting notebook Decision_Tree_model.ipynb to html
-[NbConvertApp] Writing 308023 bytes to Decision_Tree_model.html
+<pre>[NbConvertApp] Converting notebook Random_Forest_model.ipynb to html
+[NbConvertApp] Writing 306635 bytes to Random_Forest_model.html
 </pre>
 </div>
 </div>
