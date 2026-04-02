@@ -1,4 +1,10 @@
-Algorithm,Accuracy,Precision,Recall,F1-Score,AUC
-V1: LDA Baseline,0.99,0.97,1.0,0.99,1.0
-V2: LDA Tuned (GridSearch),0.99,0.97,1.0,0.99,1.0
-V3: LDA Stacking Ensemble,0.99,0.97,1.0,0.99,1.0
+Algorithm,Split,Accuracy,Precision,Recall,F1-Score,AUC
+V1: LDA Baseline,KFold,0.99,0.97,1.0,0.98,1.0
+V1: LDA Baseline,Validation,0.99,0.97,1.0,0.98,1.0
+V1: LDA Baseline,Test,0.99,0.97,1.0,0.99,1.0
+V2: LDA Tuned (GridSearch),KFold,0.99,0.97,1.0,0.99,1.0
+V2: LDA Tuned (GridSearch),Validation,0.99,0.97,1.0,0.98,1.0
+V2: LDA Tuned (GridSearch),Test,0.99,0.97,1.0,0.99,1.0
+V3: LDA Stacking Ensemble,KFold,0.99,0.99,1.0,0.99,1.0
+V3: LDA Stacking Ensemble,Validation,1.0,1.0,1.0,1.0,1.0
+V3: LDA Stacking Ensemble,Test,0.99,0.97,1.0,0.99,1.0

@@ -7537,13 +7537,12 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [42]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">StackingClassifier</span><span class="p">,</span> <span class="n">RandomForestClassifier</span>
@@ -7578,17 +7577,20 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [43]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">data_dir</span> <span class="o">=</span> <span class="s1">'../data/'</span>
 <span class="n">target_col</span> <span class="o">=</span> <span class="s1">'class'</span>
 
 <span class="n">train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">'train_data.csv'</span><span class="p">))</span>
+<span class="n">valid_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">'valid_data.csv'</span><span class="p">))</span>
 <span class="n">test_df</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">'test_data.csv'</span><span class="p">))</span>
 
 <span class="n">X_train</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">target_col</span><span class="p">])</span>
 <span class="n">y_train</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span>
+<span class="n">X_valid</span> <span class="o">=</span> <span class="n">valid_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">target_col</span><span class="p">])</span>
+<span class="n">y_valid</span> <span class="o">=</span> <span class="n">valid_df</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span>
 <span class="n">X_test</span>  <span class="o">=</span> <span class="n">test_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">target_col</span><span class="p">])</span>
 <span class="n">y_test</span>  <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span>
 </pre></div>
@@ -7612,28 +7614,50 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [44]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">results_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">kfold</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">):</span>
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-    <span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
-    
+<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_kfold</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">X_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">cv_split</span><span class="p">):</span>
+    <span class="n">scoring</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">'accuracy'</span><span class="p">:</span> <span class="s1">'accuracy'</span><span class="p">,</span>
+        <span class="s1">'precision'</span><span class="p">:</span> <span class="s1">'precision'</span><span class="p">,</span>
+        <span class="s1">'recall'</span><span class="p">:</span> <span class="s1">'recall'</span><span class="p">,</span>
+        <span class="s1">'f1'</span><span class="p">:</span> <span class="s1">'f1'</span><span class="p">,</span>
+        <span class="s1">'auc'</span><span class="p">:</span> <span class="s1">'roc_auc'</span>
+    <span class="p">}</span>
+    <span class="n">cv_results</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv_split</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">scoring</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">res</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">'Algorithm'</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
-        <span class="s1">'Accuracy'</span><span class="p">:</span>  <span class="nb">round</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
-        <span class="s1">'Precision'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
-        <span class="s1">'Recall'</span><span class="p">:</span>    <span class="nb">round</span><span class="p">(</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
-        <span class="s1">'F1-Score'</span><span class="p">:</span>  <span class="nb">round</span><span class="p">(</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
-        <span class="s1">'AUC'</span><span class="p">:</span>       <span class="nb">round</span><span class="p">(</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="s1">'Split'</span><span class="p">:</span> <span class="s1">'KFold'</span><span class="p">,</span>
+        <span class="s1">'Accuracy'</span><span class="p">:</span>  <span class="nb">round</span><span class="p">(</span><span class="n">cv_results</span><span class="p">[</span><span class="s1">'test_accuracy'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s1">'Precision'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">cv_results</span><span class="p">[</span><span class="s1">'test_precision'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s1">'Recall'</span><span class="p">:</span>    <span class="nb">round</span><span class="p">(</span><span class="n">cv_results</span><span class="p">[</span><span class="s1">'test_recall'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s1">'F1-Score'</span><span class="p">:</span>  <span class="nb">round</span><span class="p">(</span><span class="n">cv_results</span><span class="p">[</span><span class="s1">'test_f1'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s1">'AUC'</span><span class="p">:</span>       <span class="nb">round</span><span class="p">(</span><span class="n">cv_results</span><span class="p">[</span><span class="s1">'test_auc'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)</span>
     <span class="p">}</span>
-    
     <span class="n">results_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">] Acc: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'Accuracy'</span><span class="p">]</span><span class="si">}</span><span class="s2"> | Prec: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'Precision'</span><span class="p">]</span><span class="si">}</span><span class="s2"> | "</span>
-          <span class="sa">f</span><span class="s2">"Rec: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'Recall'</span><span class="p">]</span><span class="si">}</span><span class="s2"> | F1: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'F1-Score'</span><span class="p">]</span><span class="si">}</span><span class="s2"> | AUC: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'AUC'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">model</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> | KFold] Acc: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'Accuracy'</span><span class="p">]</span><span class="si">}</span><span class="s2"> | F1: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'F1-Score'</span><span class="p">]</span><span class="si">}</span><span class="s2"> | AUC: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'AUC'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="c1"># Cập nhật lại evaluate_model có split_name</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">X_split</span><span class="p">,</span> <span class="n">y_split</span><span class="p">,</span> <span class="n">split_name</span><span class="p">):</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_split</span><span class="p">)</span>
+    <span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_split</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">'Algorithm'</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+        <span class="s1">'Split'</span><span class="p">:</span> <span class="n">split_name</span><span class="p">,</span>
+        <span class="s1">'Accuracy'</span><span class="p">:</span>  <span class="nb">round</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_split</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s1">'Precision'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_split</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s1">'Recall'</span><span class="p">:</span>    <span class="nb">round</span><span class="p">(</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_split</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s1">'F1-Score'</span><span class="p">:</span>  <span class="nb">round</span><span class="p">(</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_split</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s1">'AUC'</span><span class="p">:</span>       <span class="nb">round</span><span class="p">(</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_split</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">results_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">split_name</span><span class="si">}</span><span class="s2">] Acc: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'Accuracy'</span><span class="p">]</span><span class="si">}</span><span class="s2"> | F1: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'F1-Score'</span><span class="p">]</span><span class="si">}</span><span class="s2"> | AUC: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'AUC'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>
 </pre></div>
 </div>
 </div>
@@ -7655,13 +7679,16 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [45]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"V1: Baseline LDA"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- V1: Baseline LDA ---"</span><span class="p">)</span>
 <span class="n">v1_model</span> <span class="o">=</span> <span class="n">LinearDiscriminantAnalysis</span><span class="p">()</span>
+
+<span class="n">evaluate_kfold</span><span class="p">(</span><span class="n">v1_model</span><span class="p">,</span> <span class="s2">"V1: LDA Baseline"</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">kfold</span><span class="p">)</span>
 <span class="n">v1_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">evaluate_model</span><span class="p">(</span><span class="n">v1_model</span><span class="p">,</span> <span class="s2">"V1: LDA Baseline"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">v1_model</span><span class="p">,</span> <span class="s2">"V1: LDA Baseline"</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">,</span> <span class="s2">"Validation"</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">v1_model</span><span class="p">,</span> <span class="s2">"V1: LDA Baseline"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span>  <span class="n">y_test</span><span class="p">,</span>  <span class="s2">"Test"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7674,586 +7701,23 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>V1: Baseline LDA
-[V1: LDA Baseline] Acc: 0.99 | Prec: 0.97 | Rec: 1.0 | F1: 0.99 | AUC: 1.0
+<pre>--- V1: Baseline LDA ---
+[V1: LDA Baseline | KFold] Acc: 0.99 | F1: 0.98 | AUC: 1.0
+[V1: LDA Baseline | Validation] Acc: 0.99 | F1: 0.98 | AUC: 1.0
+[V1: LDA Baseline | Test] Acc: 0.99 | F1: 0.99 | AUC: 1.0
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
-<style>#sk-container-id-1 {
-  /* Definition of color scheme common for light and dark mode */
-  --sklearn-color-text: #000;
-  --sklearn-color-text-muted: #666;
-  --sklearn-color-line: gray;
-  /* Definition of color scheme for unfitted estimators */
-  --sklearn-color-unfitted-level-0: #fff5e6;
-  --sklearn-color-unfitted-level-1: #f6e4d2;
-  --sklearn-color-unfitted-level-2: #ffe0b3;
-  --sklearn-color-unfitted-level-3: chocolate;
-  /* Definition of color scheme for fitted estimators */
-  --sklearn-color-fitted-level-0: #f0f8ff;
-  --sklearn-color-fitted-level-1: #d4ebff;
-  --sklearn-color-fitted-level-2: #b3dbfd;
-  --sklearn-color-fitted-level-3: cornflowerblue;
-
-  /* Specific color for light theme */
-  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
-  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
-  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
-  --sklearn-color-icon: #696969;
-
-  @media (prefers-color-scheme: dark) {
-    /* Redefinition of color scheme for dark theme */
-    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
-    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
-    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
-    --sklearn-color-icon: #878787;
-  }
-}
-
-#sk-container-id-1 {
-  color: var(--sklearn-color-text);
-}
-
-#sk-container-id-1 pre {
-  padding: 0;
-}
-
-#sk-container-id-1 input.sk-hidden--visually {
-  border: 0;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-}
-
-#sk-container-id-1 div.sk-dashed-wrapped {
-  border: 1px dashed var(--sklearn-color-line);
-  margin: 0 0.4em 0.5em 0.4em;
-  box-sizing: border-box;
-  padding-bottom: 0.4em;
-  background-color: var(--sklearn-color-background);
-}
-
-#sk-container-id-1 div.sk-container {
-  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
-     but bootstrap.min.css set `[hidden] { display: none !important; }`
-     so we also need the `!important` here to be able to override the
-     default hidden behavior on the sphinx rendered scikit-learn.org.
-     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
-  display: inline-block !important;
-  position: relative;
-}
-
-#sk-container-id-1 div.sk-text-repr-fallback {
-  display: none;
-}
-
-div.sk-parallel-item,
-div.sk-serial,
-div.sk-item {
-  /* draw centered vertical line to link estimators */
-  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
-  background-size: 2px 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-/* Parallel-specific style estimator block */
-
-#sk-container-id-1 div.sk-parallel-item::after {
-  content: "";
-  width: 100%;
-  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
-  flex-grow: 1;
-}
-
-#sk-container-id-1 div.sk-parallel {
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  background-color: var(--sklearn-color-background);
-  position: relative;
-}
-
-#sk-container-id-1 div.sk-parallel-item {
-  display: flex;
-  flex-direction: column;
-}
-
-#sk-container-id-1 div.sk-parallel-item:first-child::after {
-  align-self: flex-end;
-  width: 50%;
-}
-
-#sk-container-id-1 div.sk-parallel-item:last-child::after {
-  align-self: flex-start;
-  width: 50%;
-}
-
-#sk-container-id-1 div.sk-parallel-item:only-child::after {
-  width: 0;
-}
-
-/* Serial-specific style estimator block */
-
-#sk-container-id-1 div.sk-serial {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--sklearn-color-background);
-  padding-right: 1em;
-  padding-left: 1em;
-}
-
-
-/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
-clickable and can be expanded/collapsed.
-- Pipeline and ColumnTransformer use this feature and define the default style
-- Estimators will overwrite some part of the style using the `sk-estimator` class
-*/
-
-/* Pipeline and ColumnTransformer style (default) */
-
-#sk-container-id-1 div.sk-toggleable {
-  /* Default theme specific background. It is overwritten whether we have a
-  specific estimator or a Pipeline/ColumnTransformer */
-  background-color: var(--sklearn-color-background);
-}
-
-/* Toggleable label */
-#sk-container-id-1 label.sk-toggleable__label {
-  cursor: pointer;
-  display: flex;
-  width: 100%;
-  margin-bottom: 0;
-  padding: 0.5em;
-  box-sizing: border-box;
-  text-align: center;
-  align-items: start;
-  justify-content: space-between;
-  gap: 0.5em;
-}
-
-#sk-container-id-1 label.sk-toggleable__label .caption {
-  font-size: 0.6rem;
-  font-weight: lighter;
-  color: var(--sklearn-color-text-muted);
-}
-
-#sk-container-id-1 label.sk-toggleable__label-arrow:before {
-  /* Arrow on the left of the label */
-  content: "▸";
-  float: left;
-  margin-right: 0.25em;
-  color: var(--sklearn-color-icon);
-}
-
-#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
-  color: var(--sklearn-color-text);
-}
-
-/* Toggleable content - dropdown */
-
-#sk-container-id-1 div.sk-toggleable__content {
-  display: none;
-  text-align: left;
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-0);
-}
-
-#sk-container-id-1 div.sk-toggleable__content.fitted {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-0);
-}
-
-#sk-container-id-1 div.sk-toggleable__content pre {
-  margin: 0.2em;
-  border-radius: 0.25em;
-  color: var(--sklearn-color-text);
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-0);
-}
-
-#sk-container-id-1 div.sk-toggleable__content.fitted pre {
-  /* unfitted */
-  background-color: var(--sklearn-color-fitted-level-0);
-}
-
-#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
-  /* Expand drop-down */
-  display: block;
-  width: 100%;
-  overflow: visible;
-}
-
-#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
-  content: "▾";
-}
-
-/* Pipeline/ColumnTransformer-specific style */
-
-#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
-  color: var(--sklearn-color-text);
-  background-color: var(--sklearn-color-unfitted-level-2);
-}
-
-#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
-  background-color: var(--sklearn-color-fitted-level-2);
-}
-
-/* Estimator-specific style */
-
-/* Colorize estimator box */
-#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-2);
-}
-
-#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-2);
-}
-
-#sk-container-id-1 div.sk-label label.sk-toggleable__label,
-#sk-container-id-1 div.sk-label label {
-  /* The background is the default theme color */
-  color: var(--sklearn-color-text-on-default-background);
-}
-
-/* On hover, darken the color of the background */
-#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
-  color: var(--sklearn-color-text);
-  background-color: var(--sklearn-color-unfitted-level-2);
-}
-
-/* Label box, darken color on hover, fitted */
-#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
-  color: var(--sklearn-color-text);
-  background-color: var(--sklearn-color-fitted-level-2);
-}
-
-/* Estimator label */
-
-#sk-container-id-1 div.sk-label label {
-  font-family: monospace;
-  font-weight: bold;
-  display: inline-block;
-  line-height: 1.2em;
-}
-
-#sk-container-id-1 div.sk-label-container {
-  text-align: center;
-}
-
-/* Estimator-specific */
-#sk-container-id-1 div.sk-estimator {
-  font-family: monospace;
-  border: 1px dotted var(--sklearn-color-border-box);
-  border-radius: 0.25em;
-  box-sizing: border-box;
-  margin-bottom: 0.5em;
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-0);
-}
-
-#sk-container-id-1 div.sk-estimator.fitted {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-0);
-}
-
-/* on hover */
-#sk-container-id-1 div.sk-estimator:hover {
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-2);
-}
-
-#sk-container-id-1 div.sk-estimator.fitted:hover {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-2);
-}
-
-/* Specification for estimator info (e.g. "i" and "?") */
-
-/* Common style for "i" and "?" */
-
-.sk-estimator-doc-link,
-a:link.sk-estimator-doc-link,
-a:visited.sk-estimator-doc-link {
-  float: right;
-  font-size: smaller;
-  line-height: 1em;
-  font-family: monospace;
-  background-color: var(--sklearn-color-background);
-  border-radius: 1em;
-  height: 1em;
-  width: 1em;
-  text-decoration: none !important;
-  margin-left: 0.5em;
-  text-align: center;
-  /* unfitted */
-  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
-  color: var(--sklearn-color-unfitted-level-1);
-}
-
-.sk-estimator-doc-link.fitted,
-a:link.sk-estimator-doc-link.fitted,
-a:visited.sk-estimator-doc-link.fitted {
-  /* fitted */
-  border: var(--sklearn-color-fitted-level-1) 1pt solid;
-  color: var(--sklearn-color-fitted-level-1);
-}
-
-/* On hover */
-div.sk-estimator:hover .sk-estimator-doc-link:hover,
-.sk-estimator-doc-link:hover,
-div.sk-label-container:hover .sk-estimator-doc-link:hover,
-.sk-estimator-doc-link:hover {
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-3);
-  color: var(--sklearn-color-background);
-  text-decoration: none;
-}
-
-div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
-.sk-estimator-doc-link.fitted:hover,
-div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
-.sk-estimator-doc-link.fitted:hover {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-3);
-  color: var(--sklearn-color-background);
-  text-decoration: none;
-}
-
-/* Span, style for the box shown on hovering the info icon */
-.sk-estimator-doc-link span {
-  display: none;
-  z-index: 9999;
-  position: relative;
-  font-weight: normal;
-  right: .2ex;
-  padding: .5ex;
-  margin: .5ex;
-  width: min-content;
-  min-width: 20ex;
-  max-width: 50ex;
-  color: var(--sklearn-color-text);
-  box-shadow: 2pt 2pt 4pt #999;
-  /* unfitted */
-  background: var(--sklearn-color-unfitted-level-0);
-  border: .5pt solid var(--sklearn-color-unfitted-level-3);
-}
-
-.sk-estimator-doc-link.fitted span {
-  /* fitted */
-  background: var(--sklearn-color-fitted-level-0);
-  border: var(--sklearn-color-fitted-level-3);
-}
-
-.sk-estimator-doc-link:hover span {
-  display: block;
-}
-
-/* "?"-specific style due to the `<a>` HTML tag */
-
-#sk-container-id-1 a.estimator_doc_link {
-  float: right;
-  font-size: 1rem;
-  line-height: 1em;
-  font-family: monospace;
-  background-color: var(--sklearn-color-background);
-  border-radius: 1rem;
-  height: 1rem;
-  width: 1rem;
-  text-decoration: none;
-  /* unfitted */
-  color: var(--sklearn-color-unfitted-level-1);
-  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
-}
-
-#sk-container-id-1 a.estimator_doc_link.fitted {
-  /* fitted */
-  border: var(--sklearn-color-fitted-level-1) 1pt solid;
-  color: var(--sklearn-color-fitted-level-1);
-}
-
-/* On hover */
-#sk-container-id-1 a.estimator_doc_link:hover {
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-3);
-  color: var(--sklearn-color-background);
-  text-decoration: none;
-}
-
-#sk-container-id-1 a.estimator_doc_link.fitted:hover {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-3);
-}
-
-.estimator-table summary {
-    padding: .5rem;
-    font-family: monospace;
-    cursor: pointer;
-}
-
-.estimator-table details[open] {
-    padding-left: 0.1rem;
-    padding-right: 0.1rem;
-    padding-bottom: 0.3rem;
-}
-
-.estimator-table .parameters-table {
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-.estimator-table .parameters-table tr:nth-child(odd) {
-    background-color: #fff;
-}
-
-.estimator-table .parameters-table tr:nth-child(even) {
-    background-color: #f6f6f6;
-}
-
-.estimator-table .parameters-table tr:hover {
-    background-color: #e0e0e0;
-}
-
-.estimator-table table td {
-    border: 1px solid rgba(106, 105, 104, 0.232);
-}
-
-.user-set td {
-    color:rgb(255, 94, 0);
-    text-align: left;
-}
-
-.user-set td.value pre {
-    color:rgb(255, 94, 0) !important;
-    background-color: transparent !important;
-}
-
-.default td {
-    color: black;
-    text-align: left;
-}
-
-.user-set td i,
-.default td i {
-    color: black;
-}
-
-.copy-paste-icon {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTIwOCAwTDMzMi4xIDBjMTIuNyAwIDI0LjkgNS4xIDMzLjkgMTQuMWw2Ny45IDY3LjljOSA5IDE0LjEgMjEuMiAxNC4xIDMzLjlMNDQ4IDMzNmMwIDI2LjUtMjEuNSA0OC00OCA0OGwtMTkyIDBjLTI2LjUgMC00OC0yMS41LTQ4LTQ4bDAtMjg4YzAtMjYuNSAyMS41LTQ4IDQ4LTQ4ek00OCAxMjhsODAgMCAwIDY0LTY0IDAgMCAyNTYgMTkyIDAgMC0zMiA2NCAwIDAgNDhjMCAyNi41LTIxLjUgNDgtNDggNDhMNDggNTEyYy0yNi41IDAtNDgtMjEuNS00OC00OEwwIDE3NmMwLTI2LjUgMjEuNS00OCA0OC00OHoiLz48L3N2Zz4=);
-    background-repeat: no-repeat;
-    background-size: 14px 14px;
-    background-position: 0;
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    cursor: pointer;
-}
-</style><body><div class="sk-top-container" id="sk-container-id-1"><div class="sk-text-repr-fallback"><pre>LinearDiscriminantAnalysis()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br/>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input checked="" class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox"/><label class="sk-toggleable__label fitted sk-toggleable__label-arrow" for="sk-estimator-id-1"><div><div>LinearDiscriminantAnalysis</div></div><div><a class="sk-estimator-doc-link fitted" href="https://scikit-learn.org/1.7/modules/generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html" rel="noreferrer" target="_blank">?<span>Documentation for LinearDiscriminantAnalysis</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
-<div class="estimator-table">
-<details>
-<summary>Parameters</summary>
-<table class="parameters-table">
-<tbody>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('solver',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">solver </td>
-<td class="value">'svd'</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('shrinkage',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">shrinkage </td>
-<td class="value">None</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('priors',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">priors </td>
-<td class="value">None</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('n_components',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">n_components </td>
-<td class="value">None</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('store_covariance',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">store_covariance </td>
-<td class="value">False</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('tol',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">tol </td>
-<td class="value">0.0001</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('covariance_estimator',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">covariance_estimator </td>
-<td class="value">None</td>
-</tr>
-</tbody>
-</table>
-</details>
-</div>
-</div></div></div></div></div><script>function copyToClipboard(text, element) {
-    // Get the parameter prefix from the closest toggleable content
-    const toggleableContent = element.closest('.sk-toggleable__content');
-    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
-    const fullParamName = paramPrefix ? `${paramPrefix}${text}` : text;
-
-    const originalStyle = element.style;
-    const computedStyle = window.getComputedStyle(element);
-    const originalWidth = computedStyle.width;
-    const originalHTML = element.innerHTML.replace('Copied!', '');
-
-    navigator.clipboard.writeText(fullParamName)
-        .then(() => {
-            element.style.width = originalWidth;
-            element.style.color = 'green';
-            element.innerHTML = "Copied!";
-
-            setTimeout(() => {
-                element.innerHTML = originalHTML;
-                element.style = originalStyle;
-            }, 2000);
-        })
-        .catch(err => {
-            console.error('Failed to copy:', err);
-            element.style.color = 'red';
-            element.innerHTML = "Failed!";
-            setTimeout(() => {
-                element.innerHTML = originalHTML;
-                element.style = originalStyle;
-            }, 2000);
-        });
-    return false;
-}
-
-document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
-    const toggleableContent = element.closest('.sk-toggleable__content');
-    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
-    const paramName = element.parentElement.nextElementSibling.textContent.trim();
-    const fullParamName = paramPrefix ? `${paramPrefix}${paramName}` : paramName;
-
-    element.setAttribute('title', fullParamName);
-});
-</script></body>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[45]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>{'Algorithm': 'V1: LDA Baseline',
+ 'Split': 'Test',
+ 'Accuracy': 0.99,
+ 'Precision': 0.97,
+ 'Recall': 1.0,
+ 'F1-Score': 0.99,
+ 'AUC': 1.0}</pre>
 </div>
 </div>
 </div>
@@ -8274,13 +7738,12 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [46]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- V2: GridSearchCV Tuning ---"</span><span class="p">)</span>
-<span class="c1"># Lưu ý: shrinkage chỉ dùng được với solver='lsqr' hoặc 'eigen'</span>
 <span class="n">param_grid</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span><span class="s1">'solver'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'svd'</span><span class="p">]},</span>  <span class="c1"># svd không hỗ trợ shrinkage</span>
+    <span class="p">{</span><span class="s1">'solver'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'svd'</span><span class="p">]},</span>
     <span class="p">{</span><span class="s1">'solver'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'lsqr'</span><span class="p">,</span> <span class="s1">'eigen'</span><span class="p">],</span> 
      <span class="s1">'shrinkage'</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s1">'auto'</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]}</span>
 <span class="p">]</span>
@@ -8288,16 +7751,18 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
     <span class="n">LinearDiscriminantAnalysis</span><span class="p">(),</span>
     <span class="n">param_grid</span><span class="p">,</span>
-    <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">=</span><span class="n">kfold</span><span class="p">,</span>             <span class="c1"># Đổi cv=5 thành kfold để đồng bộ</span>
     <span class="n">scoring</span><span class="o">=</span><span class="s1">'accuracy'</span><span class="p">,</span>
     <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
 <span class="p">)</span>
-
 <span class="n">grid_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">v2_model</span> <span class="o">=</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">best_estimator_</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Best Params: </span><span class="si">{</span><span class="n">grid_search</span><span class="o">.</span><span class="n">best_params_</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="n">evaluate_model</span><span class="p">(</span><span class="n">v2_model</span><span class="p">,</span> <span class="s2">"V2: LDA Tuned (GridSearch)"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+
+<span class="n">evaluate_kfold</span><span class="p">(</span><span class="n">v2_model</span><span class="p">,</span> <span class="s2">"V2: LDA Tuned (GridSearch)"</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">kfold</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">v2_model</span><span class="p">,</span> <span class="s2">"V2: LDA Tuned (GridSearch)"</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">,</span> <span class="s2">"Validation"</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">v2_model</span><span class="p">,</span> <span class="s2">"V2: LDA Tuned (GridSearch)"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="s2">"Test"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8312,586 +7777,23 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>
 --- V2: GridSearchCV Tuning ---
-Best Params: {'solver': 'svd'}
-[V2: LDA Tuned (GridSearch)] Acc: 0.99 | Prec: 0.97 | Rec: 1.0 | F1: 0.99 | AUC: 1.0
+Best Params: {'shrinkage': 'auto', 'solver': 'lsqr'}
+[V2: LDA Tuned (GridSearch) | KFold] Acc: 0.99 | F1: 0.99 | AUC: 1.0
+[V2: LDA Tuned (GridSearch) | Validation] Acc: 0.99 | F1: 0.98 | AUC: 1.0
+[V2: LDA Tuned (GridSearch) | Test] Acc: 0.99 | F1: 0.99 | AUC: 1.0
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
-<style>#sk-container-id-2 {
-  /* Definition of color scheme common for light and dark mode */
-  --sklearn-color-text: #000;
-  --sklearn-color-text-muted: #666;
-  --sklearn-color-line: gray;
-  /* Definition of color scheme for unfitted estimators */
-  --sklearn-color-unfitted-level-0: #fff5e6;
-  --sklearn-color-unfitted-level-1: #f6e4d2;
-  --sklearn-color-unfitted-level-2: #ffe0b3;
-  --sklearn-color-unfitted-level-3: chocolate;
-  /* Definition of color scheme for fitted estimators */
-  --sklearn-color-fitted-level-0: #f0f8ff;
-  --sklearn-color-fitted-level-1: #d4ebff;
-  --sklearn-color-fitted-level-2: #b3dbfd;
-  --sklearn-color-fitted-level-3: cornflowerblue;
-
-  /* Specific color for light theme */
-  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
-  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
-  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
-  --sklearn-color-icon: #696969;
-
-  @media (prefers-color-scheme: dark) {
-    /* Redefinition of color scheme for dark theme */
-    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
-    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
-    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
-    --sklearn-color-icon: #878787;
-  }
-}
-
-#sk-container-id-2 {
-  color: var(--sklearn-color-text);
-}
-
-#sk-container-id-2 pre {
-  padding: 0;
-}
-
-#sk-container-id-2 input.sk-hidden--visually {
-  border: 0;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-}
-
-#sk-container-id-2 div.sk-dashed-wrapped {
-  border: 1px dashed var(--sklearn-color-line);
-  margin: 0 0.4em 0.5em 0.4em;
-  box-sizing: border-box;
-  padding-bottom: 0.4em;
-  background-color: var(--sklearn-color-background);
-}
-
-#sk-container-id-2 div.sk-container {
-  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
-     but bootstrap.min.css set `[hidden] { display: none !important; }`
-     so we also need the `!important` here to be able to override the
-     default hidden behavior on the sphinx rendered scikit-learn.org.
-     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
-  display: inline-block !important;
-  position: relative;
-}
-
-#sk-container-id-2 div.sk-text-repr-fallback {
-  display: none;
-}
-
-div.sk-parallel-item,
-div.sk-serial,
-div.sk-item {
-  /* draw centered vertical line to link estimators */
-  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
-  background-size: 2px 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-/* Parallel-specific style estimator block */
-
-#sk-container-id-2 div.sk-parallel-item::after {
-  content: "";
-  width: 100%;
-  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
-  flex-grow: 1;
-}
-
-#sk-container-id-2 div.sk-parallel {
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  background-color: var(--sklearn-color-background);
-  position: relative;
-}
-
-#sk-container-id-2 div.sk-parallel-item {
-  display: flex;
-  flex-direction: column;
-}
-
-#sk-container-id-2 div.sk-parallel-item:first-child::after {
-  align-self: flex-end;
-  width: 50%;
-}
-
-#sk-container-id-2 div.sk-parallel-item:last-child::after {
-  align-self: flex-start;
-  width: 50%;
-}
-
-#sk-container-id-2 div.sk-parallel-item:only-child::after {
-  width: 0;
-}
-
-/* Serial-specific style estimator block */
-
-#sk-container-id-2 div.sk-serial {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--sklearn-color-background);
-  padding-right: 1em;
-  padding-left: 1em;
-}
-
-
-/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
-clickable and can be expanded/collapsed.
-- Pipeline and ColumnTransformer use this feature and define the default style
-- Estimators will overwrite some part of the style using the `sk-estimator` class
-*/
-
-/* Pipeline and ColumnTransformer style (default) */
-
-#sk-container-id-2 div.sk-toggleable {
-  /* Default theme specific background. It is overwritten whether we have a
-  specific estimator or a Pipeline/ColumnTransformer */
-  background-color: var(--sklearn-color-background);
-}
-
-/* Toggleable label */
-#sk-container-id-2 label.sk-toggleable__label {
-  cursor: pointer;
-  display: flex;
-  width: 100%;
-  margin-bottom: 0;
-  padding: 0.5em;
-  box-sizing: border-box;
-  text-align: center;
-  align-items: start;
-  justify-content: space-between;
-  gap: 0.5em;
-}
-
-#sk-container-id-2 label.sk-toggleable__label .caption {
-  font-size: 0.6rem;
-  font-weight: lighter;
-  color: var(--sklearn-color-text-muted);
-}
-
-#sk-container-id-2 label.sk-toggleable__label-arrow:before {
-  /* Arrow on the left of the label */
-  content: "▸";
-  float: left;
-  margin-right: 0.25em;
-  color: var(--sklearn-color-icon);
-}
-
-#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {
-  color: var(--sklearn-color-text);
-}
-
-/* Toggleable content - dropdown */
-
-#sk-container-id-2 div.sk-toggleable__content {
-  display: none;
-  text-align: left;
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-0);
-}
-
-#sk-container-id-2 div.sk-toggleable__content.fitted {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-0);
-}
-
-#sk-container-id-2 div.sk-toggleable__content pre {
-  margin: 0.2em;
-  border-radius: 0.25em;
-  color: var(--sklearn-color-text);
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-0);
-}
-
-#sk-container-id-2 div.sk-toggleable__content.fitted pre {
-  /* unfitted */
-  background-color: var(--sklearn-color-fitted-level-0);
-}
-
-#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {
-  /* Expand drop-down */
-  display: block;
-  width: 100%;
-  overflow: visible;
-}
-
-#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
-  content: "▾";
-}
-
-/* Pipeline/ColumnTransformer-specific style */
-
-#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
-  color: var(--sklearn-color-text);
-  background-color: var(--sklearn-color-unfitted-level-2);
-}
-
-#sk-container-id-2 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
-  background-color: var(--sklearn-color-fitted-level-2);
-}
-
-/* Estimator-specific style */
-
-/* Colorize estimator box */
-#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-2);
-}
-
-#sk-container-id-2 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-2);
-}
-
-#sk-container-id-2 div.sk-label label.sk-toggleable__label,
-#sk-container-id-2 div.sk-label label {
-  /* The background is the default theme color */
-  color: var(--sklearn-color-text-on-default-background);
-}
-
-/* On hover, darken the color of the background */
-#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {
-  color: var(--sklearn-color-text);
-  background-color: var(--sklearn-color-unfitted-level-2);
-}
-
-/* Label box, darken color on hover, fitted */
-#sk-container-id-2 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
-  color: var(--sklearn-color-text);
-  background-color: var(--sklearn-color-fitted-level-2);
-}
-
-/* Estimator label */
-
-#sk-container-id-2 div.sk-label label {
-  font-family: monospace;
-  font-weight: bold;
-  display: inline-block;
-  line-height: 1.2em;
-}
-
-#sk-container-id-2 div.sk-label-container {
-  text-align: center;
-}
-
-/* Estimator-specific */
-#sk-container-id-2 div.sk-estimator {
-  font-family: monospace;
-  border: 1px dotted var(--sklearn-color-border-box);
-  border-radius: 0.25em;
-  box-sizing: border-box;
-  margin-bottom: 0.5em;
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-0);
-}
-
-#sk-container-id-2 div.sk-estimator.fitted {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-0);
-}
-
-/* on hover */
-#sk-container-id-2 div.sk-estimator:hover {
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-2);
-}
-
-#sk-container-id-2 div.sk-estimator.fitted:hover {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-2);
-}
-
-/* Specification for estimator info (e.g. "i" and "?") */
-
-/* Common style for "i" and "?" */
-
-.sk-estimator-doc-link,
-a:link.sk-estimator-doc-link,
-a:visited.sk-estimator-doc-link {
-  float: right;
-  font-size: smaller;
-  line-height: 1em;
-  font-family: monospace;
-  background-color: var(--sklearn-color-background);
-  border-radius: 1em;
-  height: 1em;
-  width: 1em;
-  text-decoration: none !important;
-  margin-left: 0.5em;
-  text-align: center;
-  /* unfitted */
-  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
-  color: var(--sklearn-color-unfitted-level-1);
-}
-
-.sk-estimator-doc-link.fitted,
-a:link.sk-estimator-doc-link.fitted,
-a:visited.sk-estimator-doc-link.fitted {
-  /* fitted */
-  border: var(--sklearn-color-fitted-level-1) 1pt solid;
-  color: var(--sklearn-color-fitted-level-1);
-}
-
-/* On hover */
-div.sk-estimator:hover .sk-estimator-doc-link:hover,
-.sk-estimator-doc-link:hover,
-div.sk-label-container:hover .sk-estimator-doc-link:hover,
-.sk-estimator-doc-link:hover {
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-3);
-  color: var(--sklearn-color-background);
-  text-decoration: none;
-}
-
-div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
-.sk-estimator-doc-link.fitted:hover,
-div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
-.sk-estimator-doc-link.fitted:hover {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-3);
-  color: var(--sklearn-color-background);
-  text-decoration: none;
-}
-
-/* Span, style for the box shown on hovering the info icon */
-.sk-estimator-doc-link span {
-  display: none;
-  z-index: 9999;
-  position: relative;
-  font-weight: normal;
-  right: .2ex;
-  padding: .5ex;
-  margin: .5ex;
-  width: min-content;
-  min-width: 20ex;
-  max-width: 50ex;
-  color: var(--sklearn-color-text);
-  box-shadow: 2pt 2pt 4pt #999;
-  /* unfitted */
-  background: var(--sklearn-color-unfitted-level-0);
-  border: .5pt solid var(--sklearn-color-unfitted-level-3);
-}
-
-.sk-estimator-doc-link.fitted span {
-  /* fitted */
-  background: var(--sklearn-color-fitted-level-0);
-  border: var(--sklearn-color-fitted-level-3);
-}
-
-.sk-estimator-doc-link:hover span {
-  display: block;
-}
-
-/* "?"-specific style due to the `<a>` HTML tag */
-
-#sk-container-id-2 a.estimator_doc_link {
-  float: right;
-  font-size: 1rem;
-  line-height: 1em;
-  font-family: monospace;
-  background-color: var(--sklearn-color-background);
-  border-radius: 1rem;
-  height: 1rem;
-  width: 1rem;
-  text-decoration: none;
-  /* unfitted */
-  color: var(--sklearn-color-unfitted-level-1);
-  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
-}
-
-#sk-container-id-2 a.estimator_doc_link.fitted {
-  /* fitted */
-  border: var(--sklearn-color-fitted-level-1) 1pt solid;
-  color: var(--sklearn-color-fitted-level-1);
-}
-
-/* On hover */
-#sk-container-id-2 a.estimator_doc_link:hover {
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-3);
-  color: var(--sklearn-color-background);
-  text-decoration: none;
-}
-
-#sk-container-id-2 a.estimator_doc_link.fitted:hover {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-3);
-}
-
-.estimator-table summary {
-    padding: .5rem;
-    font-family: monospace;
-    cursor: pointer;
-}
-
-.estimator-table details[open] {
-    padding-left: 0.1rem;
-    padding-right: 0.1rem;
-    padding-bottom: 0.3rem;
-}
-
-.estimator-table .parameters-table {
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-.estimator-table .parameters-table tr:nth-child(odd) {
-    background-color: #fff;
-}
-
-.estimator-table .parameters-table tr:nth-child(even) {
-    background-color: #f6f6f6;
-}
-
-.estimator-table .parameters-table tr:hover {
-    background-color: #e0e0e0;
-}
-
-.estimator-table table td {
-    border: 1px solid rgba(106, 105, 104, 0.232);
-}
-
-.user-set td {
-    color:rgb(255, 94, 0);
-    text-align: left;
-}
-
-.user-set td.value pre {
-    color:rgb(255, 94, 0) !important;
-    background-color: transparent !important;
-}
-
-.default td {
-    color: black;
-    text-align: left;
-}
-
-.user-set td i,
-.default td i {
-    color: black;
-}
-
-.copy-paste-icon {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTIwOCAwTDMzMi4xIDBjMTIuNyAwIDI0LjkgNS4xIDMzLjkgMTQuMWw2Ny45IDY3LjljOSA5IDE0LjEgMjEuMiAxNC4xIDMzLjlMNDQ4IDMzNmMwIDI2LjUtMjEuNSA0OC00OCA0OGwtMTkyIDBjLTI2LjUgMC00OC0yMS41LTQ4LTQ4bDAtMjg4YzAtMjYuNSAyMS41LTQ4IDQ4LTQ4ek00OCAxMjhsODAgMCAwIDY0LTY0IDAgMCAyNTYgMTkyIDAgMC0zMiA2NCAwIDAgNDhjMCAyNi41LTIxLjUgNDgtNDggNDhMNDggNTEyYy0yNi41IDAtNDgtMjEuNS00OC00OEwwIDE3NmMwLTI2LjUgMjEuNS00OCA0OC00OHoiLz48L3N2Zz4=);
-    background-repeat: no-repeat;
-    background-size: 14px 14px;
-    background-position: 0;
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    cursor: pointer;
-}
-</style><body><div class="sk-top-container" id="sk-container-id-2"><div class="sk-text-repr-fallback"><pre>LinearDiscriminantAnalysis()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br/>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input checked="" class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox"/><label class="sk-toggleable__label fitted sk-toggleable__label-arrow" for="sk-estimator-id-2"><div><div>LinearDiscriminantAnalysis</div></div><div><a class="sk-estimator-doc-link fitted" href="https://scikit-learn.org/1.7/modules/generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html" rel="noreferrer" target="_blank">?<span>Documentation for LinearDiscriminantAnalysis</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
-<div class="estimator-table">
-<details>
-<summary>Parameters</summary>
-<table class="parameters-table">
-<tbody>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('solver',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">solver </td>
-<td class="value">'svd'</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('shrinkage',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">shrinkage </td>
-<td class="value">None</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('priors',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">priors </td>
-<td class="value">None</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('n_components',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">n_components </td>
-<td class="value">None</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('store_covariance',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">store_covariance </td>
-<td class="value">False</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('tol',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">tol </td>
-<td class="value">0.0001</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('covariance_estimator',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">covariance_estimator </td>
-<td class="value">None</td>
-</tr>
-</tbody>
-</table>
-</details>
-</div>
-</div></div></div></div></div><script>function copyToClipboard(text, element) {
-    // Get the parameter prefix from the closest toggleable content
-    const toggleableContent = element.closest('.sk-toggleable__content');
-    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
-    const fullParamName = paramPrefix ? `${paramPrefix}${text}` : text;
-
-    const originalStyle = element.style;
-    const computedStyle = window.getComputedStyle(element);
-    const originalWidth = computedStyle.width;
-    const originalHTML = element.innerHTML.replace('Copied!', '');
-
-    navigator.clipboard.writeText(fullParamName)
-        .then(() => {
-            element.style.width = originalWidth;
-            element.style.color = 'green';
-            element.innerHTML = "Copied!";
-
-            setTimeout(() => {
-                element.innerHTML = originalHTML;
-                element.style = originalStyle;
-            }, 2000);
-        })
-        .catch(err => {
-            console.error('Failed to copy:', err);
-            element.style.color = 'red';
-            element.innerHTML = "Failed!";
-            setTimeout(() => {
-                element.innerHTML = originalHTML;
-                element.style = originalStyle;
-            }, 2000);
-        });
-    return false;
-}
-
-document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
-    const toggleableContent = element.closest('.sk-toggleable__content');
-    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
-    const paramName = element.parentElement.nextElementSibling.textContent.trim();
-    const fullParamName = paramPrefix ? `${paramPrefix}${paramName}` : paramName;
-
-    element.setAttribute('title', fullParamName);
-});
-</script></body>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[46]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>{'Algorithm': 'V2: LDA Tuned (GridSearch)',
+ 'Split': 'Test',
+ 'Accuracy': 0.99,
+ 'Precision': 0.97,
+ 'Recall': 1.0,
+ 'F1-Score': 0.99,
+ 'AUC': 1.0}</pre>
 </div>
 </div>
 </div>
@@ -8901,23 +7803,26 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [47]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- V3: Ensemble Learning (Stacking) ---"</span><span class="p">)</span>
 <span class="n">base_estimators</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s1">'lda'</span><span class="p">,</span> <span class="n">v2_model</span><span class="p">),</span>  <span class="c1"># LDA đã tune làm base</span>
+    <span class="p">(</span><span class="s1">'lda'</span><span class="p">,</span> <span class="n">v2_model</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'rf'</span><span class="p">,</span>  <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">))</span>
 <span class="p">]</span>
 
 <span class="n">v3_model</span> <span class="o">=</span> <span class="n">StackingClassifier</span><span class="p">(</span>
     <span class="n">estimators</span><span class="o">=</span><span class="n">base_estimators</span><span class="p">,</span>
     <span class="n">final_estimator</span><span class="o">=</span><span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
-    <span class="n">cv</span><span class="o">=</span><span class="mi">5</span>
+    <span class="n">cv</span><span class="o">=</span><span class="n">kfold</span>
 <span class="p">)</span>
 
+<span class="c1"># Đánh giá 3 bước</span>
+<span class="n">evaluate_kfold</span><span class="p">(</span><span class="n">v3_model</span><span class="p">,</span> <span class="s2">"V3: LDA Stacking Ensemble"</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">kfold</span><span class="p">)</span>
 <span class="n">v3_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">evaluate_model</span><span class="p">(</span><span class="n">v3_model</span><span class="p">,</span> <span class="s2">"V3: LDA Stacking Ensemble"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">v3_model</span><span class="p">,</span> <span class="s2">"V3: LDA Stacking Ensemble"</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">,</span> <span class="s2">"Validation"</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">v3_model</span><span class="p">,</span> <span class="s2">"V3: LDA Stacking Ensemble"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="s2">"Test"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8932,866 +7837,22 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>
 --- V3: Ensemble Learning (Stacking) ---
-[V3: LDA Stacking Ensemble] Acc: 0.99 | Prec: 0.97 | Rec: 1.0 | F1: 0.99 | AUC: 1.0
+[V3: LDA Stacking Ensemble | KFold] Acc: 0.99 | F1: 0.99 | AUC: 1.0
+[V3: LDA Stacking Ensemble | Validation] Acc: 1.0 | F1: 1.0 | AUC: 1.0
+[V3: LDA Stacking Ensemble | Test] Acc: 0.99 | F1: 0.99 | AUC: 1.0
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[19]:</div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
-<style>#sk-container-id-3 {
-  /* Definition of color scheme common for light and dark mode */
-  --sklearn-color-text: #000;
-  --sklearn-color-text-muted: #666;
-  --sklearn-color-line: gray;
-  /* Definition of color scheme for unfitted estimators */
-  --sklearn-color-unfitted-level-0: #fff5e6;
-  --sklearn-color-unfitted-level-1: #f6e4d2;
-  --sklearn-color-unfitted-level-2: #ffe0b3;
-  --sklearn-color-unfitted-level-3: chocolate;
-  /* Definition of color scheme for fitted estimators */
-  --sklearn-color-fitted-level-0: #f0f8ff;
-  --sklearn-color-fitted-level-1: #d4ebff;
-  --sklearn-color-fitted-level-2: #b3dbfd;
-  --sklearn-color-fitted-level-3: cornflowerblue;
-
-  /* Specific color for light theme */
-  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
-  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
-  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
-  --sklearn-color-icon: #696969;
-
-  @media (prefers-color-scheme: dark) {
-    /* Redefinition of color scheme for dark theme */
-    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
-    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
-    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
-    --sklearn-color-icon: #878787;
-  }
-}
-
-#sk-container-id-3 {
-  color: var(--sklearn-color-text);
-}
-
-#sk-container-id-3 pre {
-  padding: 0;
-}
-
-#sk-container-id-3 input.sk-hidden--visually {
-  border: 0;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-}
-
-#sk-container-id-3 div.sk-dashed-wrapped {
-  border: 1px dashed var(--sklearn-color-line);
-  margin: 0 0.4em 0.5em 0.4em;
-  box-sizing: border-box;
-  padding-bottom: 0.4em;
-  background-color: var(--sklearn-color-background);
-}
-
-#sk-container-id-3 div.sk-container {
-  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
-     but bootstrap.min.css set `[hidden] { display: none !important; }`
-     so we also need the `!important` here to be able to override the
-     default hidden behavior on the sphinx rendered scikit-learn.org.
-     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
-  display: inline-block !important;
-  position: relative;
-}
-
-#sk-container-id-3 div.sk-text-repr-fallback {
-  display: none;
-}
-
-div.sk-parallel-item,
-div.sk-serial,
-div.sk-item {
-  /* draw centered vertical line to link estimators */
-  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
-  background-size: 2px 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-/* Parallel-specific style estimator block */
-
-#sk-container-id-3 div.sk-parallel-item::after {
-  content: "";
-  width: 100%;
-  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
-  flex-grow: 1;
-}
-
-#sk-container-id-3 div.sk-parallel {
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  background-color: var(--sklearn-color-background);
-  position: relative;
-}
-
-#sk-container-id-3 div.sk-parallel-item {
-  display: flex;
-  flex-direction: column;
-}
-
-#sk-container-id-3 div.sk-parallel-item:first-child::after {
-  align-self: flex-end;
-  width: 50%;
-}
-
-#sk-container-id-3 div.sk-parallel-item:last-child::after {
-  align-self: flex-start;
-  width: 50%;
-}
-
-#sk-container-id-3 div.sk-parallel-item:only-child::after {
-  width: 0;
-}
-
-/* Serial-specific style estimator block */
-
-#sk-container-id-3 div.sk-serial {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--sklearn-color-background);
-  padding-right: 1em;
-  padding-left: 1em;
-}
-
-
-/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
-clickable and can be expanded/collapsed.
-- Pipeline and ColumnTransformer use this feature and define the default style
-- Estimators will overwrite some part of the style using the `sk-estimator` class
-*/
-
-/* Pipeline and ColumnTransformer style (default) */
-
-#sk-container-id-3 div.sk-toggleable {
-  /* Default theme specific background. It is overwritten whether we have a
-  specific estimator or a Pipeline/ColumnTransformer */
-  background-color: var(--sklearn-color-background);
-}
-
-/* Toggleable label */
-#sk-container-id-3 label.sk-toggleable__label {
-  cursor: pointer;
-  display: flex;
-  width: 100%;
-  margin-bottom: 0;
-  padding: 0.5em;
-  box-sizing: border-box;
-  text-align: center;
-  align-items: start;
-  justify-content: space-between;
-  gap: 0.5em;
-}
-
-#sk-container-id-3 label.sk-toggleable__label .caption {
-  font-size: 0.6rem;
-  font-weight: lighter;
-  color: var(--sklearn-color-text-muted);
-}
-
-#sk-container-id-3 label.sk-toggleable__label-arrow:before {
-  /* Arrow on the left of the label */
-  content: "▸";
-  float: left;
-  margin-right: 0.25em;
-  color: var(--sklearn-color-icon);
-}
-
-#sk-container-id-3 label.sk-toggleable__label-arrow:hover:before {
-  color: var(--sklearn-color-text);
-}
-
-/* Toggleable content - dropdown */
-
-#sk-container-id-3 div.sk-toggleable__content {
-  display: none;
-  text-align: left;
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-0);
-}
-
-#sk-container-id-3 div.sk-toggleable__content.fitted {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-0);
-}
-
-#sk-container-id-3 div.sk-toggleable__content pre {
-  margin: 0.2em;
-  border-radius: 0.25em;
-  color: var(--sklearn-color-text);
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-0);
-}
-
-#sk-container-id-3 div.sk-toggleable__content.fitted pre {
-  /* unfitted */
-  background-color: var(--sklearn-color-fitted-level-0);
-}
-
-#sk-container-id-3 input.sk-toggleable__control:checked~div.sk-toggleable__content {
-  /* Expand drop-down */
-  display: block;
-  width: 100%;
-  overflow: visible;
-}
-
-#sk-container-id-3 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
-  content: "▾";
-}
-
-/* Pipeline/ColumnTransformer-specific style */
-
-#sk-container-id-3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
-  color: var(--sklearn-color-text);
-  background-color: var(--sklearn-color-unfitted-level-2);
-}
-
-#sk-container-id-3 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
-  background-color: var(--sklearn-color-fitted-level-2);
-}
-
-/* Estimator-specific style */
-
-/* Colorize estimator box */
-#sk-container-id-3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-2);
-}
-
-#sk-container-id-3 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-2);
-}
-
-#sk-container-id-3 div.sk-label label.sk-toggleable__label,
-#sk-container-id-3 div.sk-label label {
-  /* The background is the default theme color */
-  color: var(--sklearn-color-text-on-default-background);
-}
-
-/* On hover, darken the color of the background */
-#sk-container-id-3 div.sk-label:hover label.sk-toggleable__label {
-  color: var(--sklearn-color-text);
-  background-color: var(--sklearn-color-unfitted-level-2);
-}
-
-/* Label box, darken color on hover, fitted */
-#sk-container-id-3 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
-  color: var(--sklearn-color-text);
-  background-color: var(--sklearn-color-fitted-level-2);
-}
-
-/* Estimator label */
-
-#sk-container-id-3 div.sk-label label {
-  font-family: monospace;
-  font-weight: bold;
-  display: inline-block;
-  line-height: 1.2em;
-}
-
-#sk-container-id-3 div.sk-label-container {
-  text-align: center;
-}
-
-/* Estimator-specific */
-#sk-container-id-3 div.sk-estimator {
-  font-family: monospace;
-  border: 1px dotted var(--sklearn-color-border-box);
-  border-radius: 0.25em;
-  box-sizing: border-box;
-  margin-bottom: 0.5em;
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-0);
-}
-
-#sk-container-id-3 div.sk-estimator.fitted {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-0);
-}
-
-/* on hover */
-#sk-container-id-3 div.sk-estimator:hover {
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-2);
-}
-
-#sk-container-id-3 div.sk-estimator.fitted:hover {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-2);
-}
-
-/* Specification for estimator info (e.g. "i" and "?") */
-
-/* Common style for "i" and "?" */
-
-.sk-estimator-doc-link,
-a:link.sk-estimator-doc-link,
-a:visited.sk-estimator-doc-link {
-  float: right;
-  font-size: smaller;
-  line-height: 1em;
-  font-family: monospace;
-  background-color: var(--sklearn-color-background);
-  border-radius: 1em;
-  height: 1em;
-  width: 1em;
-  text-decoration: none !important;
-  margin-left: 0.5em;
-  text-align: center;
-  /* unfitted */
-  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
-  color: var(--sklearn-color-unfitted-level-1);
-}
-
-.sk-estimator-doc-link.fitted,
-a:link.sk-estimator-doc-link.fitted,
-a:visited.sk-estimator-doc-link.fitted {
-  /* fitted */
-  border: var(--sklearn-color-fitted-level-1) 1pt solid;
-  color: var(--sklearn-color-fitted-level-1);
-}
-
-/* On hover */
-div.sk-estimator:hover .sk-estimator-doc-link:hover,
-.sk-estimator-doc-link:hover,
-div.sk-label-container:hover .sk-estimator-doc-link:hover,
-.sk-estimator-doc-link:hover {
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-3);
-  color: var(--sklearn-color-background);
-  text-decoration: none;
-}
-
-div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
-.sk-estimator-doc-link.fitted:hover,
-div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
-.sk-estimator-doc-link.fitted:hover {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-3);
-  color: var(--sklearn-color-background);
-  text-decoration: none;
-}
-
-/* Span, style for the box shown on hovering the info icon */
-.sk-estimator-doc-link span {
-  display: none;
-  z-index: 9999;
-  position: relative;
-  font-weight: normal;
-  right: .2ex;
-  padding: .5ex;
-  margin: .5ex;
-  width: min-content;
-  min-width: 20ex;
-  max-width: 50ex;
-  color: var(--sklearn-color-text);
-  box-shadow: 2pt 2pt 4pt #999;
-  /* unfitted */
-  background: var(--sklearn-color-unfitted-level-0);
-  border: .5pt solid var(--sklearn-color-unfitted-level-3);
-}
-
-.sk-estimator-doc-link.fitted span {
-  /* fitted */
-  background: var(--sklearn-color-fitted-level-0);
-  border: var(--sklearn-color-fitted-level-3);
-}
-
-.sk-estimator-doc-link:hover span {
-  display: block;
-}
-
-/* "?"-specific style due to the `<a>` HTML tag */
-
-#sk-container-id-3 a.estimator_doc_link {
-  float: right;
-  font-size: 1rem;
-  line-height: 1em;
-  font-family: monospace;
-  background-color: var(--sklearn-color-background);
-  border-radius: 1rem;
-  height: 1rem;
-  width: 1rem;
-  text-decoration: none;
-  /* unfitted */
-  color: var(--sklearn-color-unfitted-level-1);
-  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
-}
-
-#sk-container-id-3 a.estimator_doc_link.fitted {
-  /* fitted */
-  border: var(--sklearn-color-fitted-level-1) 1pt solid;
-  color: var(--sklearn-color-fitted-level-1);
-}
-
-/* On hover */
-#sk-container-id-3 a.estimator_doc_link:hover {
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-3);
-  color: var(--sklearn-color-background);
-  text-decoration: none;
-}
-
-#sk-container-id-3 a.estimator_doc_link.fitted:hover {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-3);
-}
-
-.estimator-table summary {
-    padding: .5rem;
-    font-family: monospace;
-    cursor: pointer;
-}
-
-.estimator-table details[open] {
-    padding-left: 0.1rem;
-    padding-right: 0.1rem;
-    padding-bottom: 0.3rem;
-}
-
-.estimator-table .parameters-table {
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-.estimator-table .parameters-table tr:nth-child(odd) {
-    background-color: #fff;
-}
-
-.estimator-table .parameters-table tr:nth-child(even) {
-    background-color: #f6f6f6;
-}
-
-.estimator-table .parameters-table tr:hover {
-    background-color: #e0e0e0;
-}
-
-.estimator-table table td {
-    border: 1px solid rgba(106, 105, 104, 0.232);
-}
-
-.user-set td {
-    color:rgb(255, 94, 0);
-    text-align: left;
-}
-
-.user-set td.value pre {
-    color:rgb(255, 94, 0) !important;
-    background-color: transparent !important;
-}
-
-.default td {
-    color: black;
-    text-align: left;
-}
-
-.user-set td i,
-.default td i {
-    color: black;
-}
-
-.copy-paste-icon {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTIwOCAwTDMzMi4xIDBjMTIuNyAwIDI0LjkgNS4xIDMzLjkgMTQuMWw2Ny45IDY3LjljOSA5IDE0LjEgMjEuMiAxNC4xIDMzLjlMNDQ4IDMzNmMwIDI2LjUtMjEuNSA0OC00OCA0OGwtMTkyIDBjLTI2LjUgMC00OC0yMS41LTQ4LTQ4bDAtMjg4YzAtMjYuNSAyMS41LTQ4IDQ4LTQ4ek00OCAxMjhsODAgMCAwIDY0LTY0IDAgMCAyNTYgMTkyIDAgMC0zMiA2NCAwIDAgNDhjMCAyNi41LTIxLjUgNDgtNDggNDhMNDggNTEyYy0yNi41IDAtNDgtMjEuNS00OC00OEwwIDE3NmMwLTI2LjUgMjEuNS00OCA0OC00OHoiLz48L3N2Zz4=);
-    background-repeat: no-repeat;
-    background-size: 14px 14px;
-    background-position: 0;
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    cursor: pointer;
-}
-</style><body><div class="sk-top-container" id="sk-container-id-3"><div class="sk-text-repr-fallback"><pre>StackingClassifier(cv=5,
-                   estimators=[('lda', LinearDiscriminantAnalysis()),
-                               ('rf',
-                                RandomForestClassifier(n_estimators=50,
-                                                       random_state=42))],
-                   final_estimator=LogisticRegression(random_state=42))</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br/>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox"/><label class="sk-toggleable__label fitted sk-toggleable__label-arrow" for="sk-estimator-id-3"><div><div>StackingClassifier</div></div><div><a class="sk-estimator-doc-link fitted" href="https://scikit-learn.org/1.7/modules/generated/sklearn.ensemble.StackingClassifier.html" rel="noreferrer" target="_blank">?<span>Documentation for StackingClassifier</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
-<div class="estimator-table">
-<details>
-<summary>Parameters</summary>
-<table class="parameters-table">
-<tbody>
-<tr class="user-set">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('estimators',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">estimators </td>
-<td class="value">[('lda', ...), ('rf', ...)]</td>
-</tr>
-<tr class="user-set">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('final_estimator',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">final_estimator </td>
-<td class="value">LogisticRegre...ndom_state=42)</td>
-</tr>
-<tr class="user-set">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('cv',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">cv </td>
-<td class="value">5</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('stack_method',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">stack_method </td>
-<td class="value">'auto'</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('n_jobs',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">n_jobs </td>
-<td class="value">None</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('passthrough',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">passthrough </td>
-<td class="value">False</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('verbose',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">verbose </td>
-<td class="value">0</td>
-</tr>
-</tbody>
-</table>
-</details>
-</div>
-</div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><label>lda</label></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox"/><label class="sk-toggleable__label fitted sk-toggleable__label-arrow" for="sk-estimator-id-4"><div><div>LinearDiscriminantAnalysis</div></div><div><a class="sk-estimator-doc-link fitted" href="https://scikit-learn.org/1.7/modules/generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html" rel="noreferrer" target="_blank">?<span>Documentation for LinearDiscriminantAnalysis</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="lda__">
-<div class="estimator-table">
-<details>
-<summary>Parameters</summary>
-<table class="parameters-table">
-<tbody>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('solver',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">solver </td>
-<td class="value">'svd'</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('shrinkage',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">shrinkage </td>
-<td class="value">None</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('priors',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">priors </td>
-<td class="value">None</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('n_components',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">n_components </td>
-<td class="value">None</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('store_covariance',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">store_covariance </td>
-<td class="value">False</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('tol',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">tol </td>
-<td class="value">0.0001</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('covariance_estimator',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">covariance_estimator </td>
-<td class="value">None</td>
-</tr>
-</tbody>
-</table>
-</details>
-</div>
-</div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><label>rf</label></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox"/><label class="sk-toggleable__label fitted sk-toggleable__label-arrow" for="sk-estimator-id-5"><div><div>RandomForestClassifier</div></div><div><a class="sk-estimator-doc-link fitted" href="https://scikit-learn.org/1.7/modules/generated/sklearn.ensemble.RandomForestClassifier.html" rel="noreferrer" target="_blank">?<span>Documentation for RandomForestClassifier</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="rf__">
-<div class="estimator-table">
-<details>
-<summary>Parameters</summary>
-<table class="parameters-table">
-<tbody>
-<tr class="user-set">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('n_estimators',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">n_estimators </td>
-<td class="value">50</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('criterion',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">criterion </td>
-<td class="value">'gini'</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('max_depth',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">max_depth </td>
-<td class="value">None</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('min_samples_split',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">min_samples_split </td>
-<td class="value">2</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('min_samples_leaf',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">min_samples_leaf </td>
-<td class="value">1</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('min_weight_fraction_leaf',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">min_weight_fraction_leaf </td>
-<td class="value">0.0</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('max_features',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">max_features </td>
-<td class="value">'sqrt'</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('max_leaf_nodes',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">max_leaf_nodes </td>
-<td class="value">None</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('min_impurity_decrease',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">min_impurity_decrease </td>
-<td class="value">0.0</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('bootstrap',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">bootstrap </td>
-<td class="value">True</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('oob_score',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">oob_score </td>
-<td class="value">False</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('n_jobs',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">n_jobs </td>
-<td class="value">None</td>
-</tr>
-<tr class="user-set">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('random_state',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">random_state </td>
-<td class="value">42</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('verbose',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">verbose </td>
-<td class="value">0</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('warm_start',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">warm_start </td>
-<td class="value">False</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('class_weight',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">class_weight </td>
-<td class="value">None</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('ccp_alpha',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">ccp_alpha </td>
-<td class="value">0.0</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('max_samples',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">max_samples </td>
-<td class="value">None</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('monotonic_cst',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">monotonic_cst </td>
-<td class="value">None</td>
-</tr>
-</tbody>
-</table>
-</details>
-</div>
-</div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><label>final_estimator</label></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox"/><label class="sk-toggleable__label fitted sk-toggleable__label-arrow" for="sk-estimator-id-6"><div><div>LogisticRegression</div></div><div><a class="sk-estimator-doc-link fitted" href="https://scikit-learn.org/1.7/modules/generated/sklearn.linear_model.LogisticRegression.html" rel="noreferrer" target="_blank">?<span>Documentation for LogisticRegression</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="final_estimator__">
-<div class="estimator-table">
-<details>
-<summary>Parameters</summary>
-<table class="parameters-table">
-<tbody>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('penalty',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">penalty </td>
-<td class="value">'l2'</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('dual',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">dual </td>
-<td class="value">False</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('tol',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">tol </td>
-<td class="value">0.0001</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('C',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">C </td>
-<td class="value">1.0</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('fit_intercept',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">fit_intercept </td>
-<td class="value">True</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('intercept_scaling',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">intercept_scaling </td>
-<td class="value">1</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('class_weight',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">class_weight </td>
-<td class="value">None</td>
-</tr>
-<tr class="user-set">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('random_state',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">random_state </td>
-<td class="value">42</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('solver',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">solver </td>
-<td class="value">'lbfgs'</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('max_iter',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">max_iter </td>
-<td class="value">100</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('multi_class',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">multi_class </td>
-<td class="value">'deprecated'</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('verbose',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">verbose </td>
-<td class="value">0</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('warm_start',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">warm_start </td>
-<td class="value">False</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('n_jobs',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">n_jobs </td>
-<td class="value">None</td>
-</tr>
-<tr class="default">
-<td><i class="copy-paste-icon" onclick="copyToClipboard('l1_ratio',
-                          this.parentElement.nextElementSibling)"></i></td>
-<td class="param">l1_ratio </td>
-<td class="value">None</td>
-</tr>
-</tbody>
-</table>
-</details>
-</div>
-</div></div></div></div></div></div></div></div></div></div></div></div><script>function copyToClipboard(text, element) {
-    // Get the parameter prefix from the closest toggleable content
-    const toggleableContent = element.closest('.sk-toggleable__content');
-    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
-    const fullParamName = paramPrefix ? `${paramPrefix}${text}` : text;
-
-    const originalStyle = element.style;
-    const computedStyle = window.getComputedStyle(element);
-    const originalWidth = computedStyle.width;
-    const originalHTML = element.innerHTML.replace('Copied!', '');
-
-    navigator.clipboard.writeText(fullParamName)
-        .then(() => {
-            element.style.width = originalWidth;
-            element.style.color = 'green';
-            element.innerHTML = "Copied!";
-
-            setTimeout(() => {
-                element.innerHTML = originalHTML;
-                element.style = originalStyle;
-            }, 2000);
-        })
-        .catch(err => {
-            console.error('Failed to copy:', err);
-            element.style.color = 'red';
-            element.innerHTML = "Failed!";
-            setTimeout(() => {
-                element.innerHTML = originalHTML;
-                element.style = originalStyle;
-            }, 2000);
-        });
-    return false;
-}
-
-document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
-    const toggleableContent = element.closest('.sk-toggleable__content');
-    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
-    const paramName = element.parentElement.nextElementSibling.textContent.trim();
-    const fullParamName = paramPrefix ? `${paramPrefix}${paramName}` : paramName;
-
-    element.setAttribute('title', fullParamName);
-});
-</script></body>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[47]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>{'Algorithm': 'V3: LDA Stacking Ensemble',
+ 'Split': 'Test',
+ 'Accuracy': 0.99,
+ 'Precision': 0.97,
+ 'Recall': 1.0,
+ 'F1-Score': 0.99,
+ 'AUC': 1.0}</pre>
 </div>
 </div>
 </div>
@@ -9812,7 +7873,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [48]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">save_path</span> <span class="o">=</span> <span class="s1">'../experiment/LDA/'</span>
@@ -9824,6 +7885,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Đã lưu CSV tại: </span><span class="si">{</span><span class="n">csv_output</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Đã lưu models tại: </span><span class="si">{</span><span class="n">save_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df_results</span><span class="p">)</span>
 </pre></div>
@@ -9841,6 +7903,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <pre>
 ----------------------------------------
 Đã lưu CSV tại: ../experiment/LDA/lda_evaluation_results.csv
+Đã lưu models tại: ../experiment/LDA/
 ----------------------------------------
 </pre>
 </div>
@@ -9867,6 +7930,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <tr style="text-align: right;">
 <th></th>
 <th>Algorithm</th>
+<th>Split</th>
 <th>Accuracy</th>
 <th>Precision</th>
 <th>Recall</th>
@@ -9878,15 +7942,27 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <tr>
 <th>0</th>
 <td>V1: LDA Baseline</td>
+<td>KFold</td>
 <td>0.99</td>
 <td>0.97</td>
 <td>1.0</td>
-<td>0.99</td>
+<td>0.98</td>
 <td>1.0</td>
 </tr>
 <tr>
 <th>1</th>
-<td>V2: LDA Tuned (GridSearch)</td>
+<td>V1: LDA Baseline</td>
+<td>Validation</td>
+<td>0.99</td>
+<td>0.97</td>
+<td>1.0</td>
+<td>0.98</td>
+<td>1.0</td>
+</tr>
+<tr>
+<th>2</th>
+<td>V1: LDA Baseline</td>
+<td>Test</td>
 <td>0.99</td>
 <td>0.97</td>
 <td>1.0</td>
@@ -9894,8 +7970,59 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <td>1.0</td>
 </tr>
 <tr>
-<th>2</th>
+<th>3</th>
+<td>V2: LDA Tuned (GridSearch)</td>
+<td>KFold</td>
+<td>0.99</td>
+<td>0.97</td>
+<td>1.0</td>
+<td>0.99</td>
+<td>1.0</td>
+</tr>
+<tr>
+<th>4</th>
+<td>V2: LDA Tuned (GridSearch)</td>
+<td>Validation</td>
+<td>0.99</td>
+<td>0.97</td>
+<td>1.0</td>
+<td>0.98</td>
+<td>1.0</td>
+</tr>
+<tr>
+<th>5</th>
+<td>V2: LDA Tuned (GridSearch)</td>
+<td>Test</td>
+<td>0.99</td>
+<td>0.97</td>
+<td>1.0</td>
+<td>0.99</td>
+<td>1.0</td>
+</tr>
+<tr>
+<th>6</th>
 <td>V3: LDA Stacking Ensemble</td>
+<td>KFold</td>
+<td>0.99</td>
+<td>0.99</td>
+<td>1.0</td>
+<td>0.99</td>
+<td>1.0</td>
+</tr>
+<tr>
+<th>7</th>
+<td>V3: LDA Stacking Ensemble</td>
+<td>Validation</td>
+<td>1.00</td>
+<td>1.00</td>
+<td>1.0</td>
+<td>1.00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<th>8</th>
+<td>V3: LDA Stacking Ensemble</td>
+<td>Test</td>
 <td>0.99</td>
 <td>0.97</td>
 <td>1.0</td>
