@@ -1,0 +1,7 @@
+Algorithm,Split,Accuracy,Precision,Recall,F1-Score,AUC
+V1: DecisionTree Baseline,Validation,0.9951,0.9892,1.0,0.9946,0.9955
+V1: DecisionTree Baseline,Test,0.9975,0.9946,1.0,0.9973,0.9977
+V2: DecisionTree Tuned (GridSearch),Validation,0.9803,0.9783,0.9783,0.9783,0.9801
+V2: DecisionTree Tuned (GridSearch),Test,0.9802,0.9781,0.9781,0.9781,0.9801
+V3: DecisionTree Stacking Ensemble,Validation,1.0,1.0,1.0,1.0,1.0
+V3: DecisionTree Stacking Ensemble,Test,0.9975,0.9946,1.0,0.9973,0.9955
