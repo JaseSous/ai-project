@@ -1,0 +1,10 @@
+Algorithm,Split,Accuracy,Precision,Recall,F1-Score,AUC
+V1: Multi-Layer Perceptron Baseline,KFold,0.9959,0.9912,1.0,0.9955,1.0
+V1: Multi-Layer Perceptron Baseline,Validation,1.0,1.0,1.0,1.0,1.0
+V1: Multi-Layer Perceptron Baseline,Test,0.9877,0.9734,1.0,0.9865,1.0
+V2: Multi-Layer Perceptron Tuned (GridSearch),KFold,0.9986,0.9972,1.0,0.9986,1.0
+V2: Multi-Layer Perceptron Tuned (GridSearch),Validation,1.0,1.0,1.0,1.0,1.0
+V2: Multi-Layer Perceptron Tuned (GridSearch),Test,0.9975,0.9946,1.0,0.9973,1.0
+V3: Multi-Layer Perceptron Stacking Ensemble,KFold,0.9959,0.9912,1.0,0.9955,1.0
+V3: Multi-Layer Perceptron Stacking Ensemble,Validation,1.0,1.0,1.0,1.0,1.0
+V3: Multi-Layer Perceptron Stacking Ensemble,Test,0.9975,0.9946,1.0,0.9973,1.0

@@ -1,0 +1,10 @@
+Algorithm,Split,Accuracy,Precision,Recall,F1-Score,AUC
+V1: Logistic Regression Baseline,KFold,0.9919,0.9857,0.9971,0.9914,0.9998
+V1: Logistic Regression Baseline,Validation,0.9951,0.9892,1.0,0.9946,1.0
+V1: Logistic Regression Baseline,Test,0.9877,0.9734,1.0,0.9865,0.9999
+V2: Logistic Regression Tuned (GridSearch),KFold,0.9946,0.9912,0.9969,0.994,0.9998
+V2: Logistic Regression Tuned (GridSearch),Validation,0.9951,0.9892,1.0,0.9946,1.0
+V2: Logistic Regression Tuned (GridSearch),Test,0.9877,0.9734,1.0,0.9865,1.0
+V3: Logistic Regression Stacking Ensemble,KFold,0.9959,0.9912,1.0,0.9955,0.9999
+V3: Logistic Regression Stacking Ensemble,Validation,0.9951,0.9892,1.0,0.9946,1.0
+V3: Logistic Regression Stacking Ensemble,Test,0.9926,0.9839,1.0,0.9919,1.0
