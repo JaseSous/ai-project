@@ -1,0 +1,7 @@
+Algorithm,Split,Accuracy,Precision,Recall,F1-Score,AUC
+V1: RandomForest Baseline,Validation,0.9951,0.9892,1.0,0.9946,0.9998
+V1: RandomForest Baseline,Test,1.0,1.0,1.0,1.0,1.0
+V2: RandomForest Tuned (GridSearch),Validation,0.9951,0.9892,1.0,0.9946,0.9999
+V2: RandomForest Tuned (GridSearch),Test,1.0,1.0,1.0,1.0,1.0
+V3: RandomForest Stacking Ensemble,Validation,1.0,1.0,1.0,1.0,1.0
+V3: RandomForest Stacking Ensemble,Test,0.9975,0.9946,1.0,0.9973,1.0

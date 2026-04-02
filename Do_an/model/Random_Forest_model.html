@@ -7537,7 +7537,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -7576,7 +7576,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># 1. LOAD DỮ LIỆU ĐÃ SCALED</span>
@@ -7584,32 +7584,17 @@ a.anchor-link {
 <span class="n">target_col</span> <span class="o">=</span> <span class="s1">'class'</span>
 
 <span class="n">train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">'train_data.csv'</span><span class="p">))</span>
+<span class="n">valid_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">'valid_data.csv'</span><span class="p">))</span>
 <span class="n">test_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">'test_data.csv'</span><span class="p">))</span>
 
 <span class="n">X_train</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">target_col</span><span class="p">])</span>
 <span class="n">y_train</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span>
+
+<span class="n">X_valid</span> <span class="o">=</span> <span class="n">valid_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">target_col</span><span class="p">])</span>
+<span class="n">y_valid</span> <span class="o">=</span> <span class="n">valid_df</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span>
+
 <span class="n">X_test</span> <span class="o">=</span> <span class="n">test_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">target_col</span><span class="p">])</span>
 <span class="n">y_test</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span>
-
-<span class="c1"># 2. HÀM ĐÁNH GIÁ (Lưu kết quả chung vào list)</span>
-<span class="n">results_list</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">version_name</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">):</span>
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-    <span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
-    
-    <span class="n">res</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">'Version'</span><span class="p">:</span> <span class="n">version_name</span><span class="p">,</span>
-        <span class="s1">'Accuracy'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span>
-        <span class="s1">'Precision'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span>
-        <span class="s1">'Recall'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span>
-        <span class="s1">'F1-Score'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span>
-        <span class="s1">'AUC'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
-    <span class="p">}</span>
-    
-    <span class="n">results_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">version_name</span><span class="si">}</span><span class="s2">] Acc: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'Accuracy'</span><span class="p">]</span><span class="si">}</span><span class="s2"> | F1: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'F1-Score'</span><span class="p">]</span><span class="si">}</span><span class="s2"> | AUC: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">'AUC'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">model</span>
 </pre></div>
 </div>
 </div>
@@ -7631,33 +7616,34 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">results_list</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Dự đoán và trích xuất các chỉ số phân loại theo yêu cầu (Acc, Prec, Rec, F1, AUC)"""</span>
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-    <span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="c1"># Lấy xác suất của class 1 để tính AUC</span>
-    
-    <span class="n">acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">prec</span> <span class="o">=</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">rec</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">f1</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
-    
+<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">X_split</span><span class="p">,</span> <span class="n">y_split</span><span class="p">,</span> <span class="n">split_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Dự đoán và trích xuất các chỉ số phân loại theo yêu cầu (Acc, Prec, Rec, F1, AUC)."""</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_split</span><span class="p">)</span>
+    <span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_split</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># Xác suất class 1 để tính AUC</span>
+
+    <span class="n">acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_split</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">prec</span> <span class="o">=</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_split</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">rec</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_split</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_split</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_split</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
+
     <span class="n">res</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">'Algorithm'</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
-        <span class="s1">'Accuracy'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-        <span class="s1">'Precision'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">prec</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-        <span class="s1">'Recall'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-        <span class="s1">'F1-Score'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-        <span class="s1">'AUC'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">auc</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="s1">'Split'</span><span class="p">:</span> <span class="n">split_name</span><span class="p">,</span>
+        <span class="s1">'Accuracy'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="s1">'Precision'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">prec</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="s1">'Recall'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="s1">'F1-Score'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="s1">'AUC'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">auc</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
     <span class="p">}</span>
-    
+
     <span class="n">results_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">] Acc: </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> | Prec: </span><span class="si">{</span><span class="n">prec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> | Rec: </span><span class="si">{</span><span class="n">rec</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> | F1: </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> | AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">split_name</span><span class="si">}</span><span class="s2">] Acc: </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | Prec: </span><span class="si">{</span><span class="n">prec</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | Rec: </span><span class="si">{</span><span class="n">rec</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | F1: </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | AUC: </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">res</span>
 </pre></div>
 </div>
@@ -7680,7 +7666,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- V1: Baseline Random Forest ---"</span><span class="p">)</span>
@@ -7688,7 +7674,8 @@ a.anchor-link {
 <span class="n">RandomForest_baseline_model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">RandomForest_baseline_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-<span class="n">evaluate_model</span><span class="p">(</span><span class="n">RandomForest_baseline_model</span><span class="p">,</span> <span class="s2">"V1: RF Baseline"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">RandomForest_baseline_model</span><span class="p">,</span> <span class="s2">"V1: RandomForest Baseline"</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">,</span> <span class="s2">"Validation"</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">RandomForest_baseline_model</span><span class="p">,</span> <span class="s2">"V1: RandomForest Baseline"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="s2">"Test"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7702,14 +7689,14 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>--- V1: Baseline Random Forest ---
-[V1: RF Baseline] Acc: 1.00 | Prec: 1.00 | Rec: 1.00 | F1: 1.00 | AUC: 1.00
+[V1: RandomForest Baseline] Acc: 1.00 | Prec: 1.00 | Rec: 1.00 | F1: 1.00 | AUC: 1.00
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'Algorithm': 'V1: RF Baseline',
+<pre>{'Algorithm': 'V1: RandomForest Baseline',
  'Accuracy': 1.0,
  'Precision': 1.0,
  'Recall': 1.0,
@@ -7735,7 +7722,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- V2: GridSearchCV Tuning ---"</span><span class="p">)</span>
@@ -7759,7 +7746,8 @@ a.anchor-link {
 <span class="n">RandomForest_tuned_model</span> <span class="o">=</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">best_estimator_</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Best Params found by CV: </span><span class="si">{</span><span class="n">grid_search</span><span class="o">.</span><span class="n">best_params_</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="n">evaluate_model</span><span class="p">(</span><span class="n">RandomForest_tuned_model</span><span class="p">,</span> <span class="s2">"V2: RF Tuned (GridSearch)"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">RandomForest_tuned_model</span><span class="p">,</span> <span class="s2">"V2: RandomForest Tuned (GridSearch)"</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">,</span> <span class="s2">"Validation"</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">RandomForest_tuned_model</span><span class="p">,</span> <span class="s2">"V2: RandomForest Tuned (GridSearch)"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="s2">"Test"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7773,15 +7761,21 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>--- V2: GridSearchCV Tuning ---
-Best Params found by CV: {'max_depth': None, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 200}
-[V2: RF Tuned (GridSearch)] Acc: 1.00 | Prec: 1.00 | Rec: 1.00 | F1: 1.00 | AUC: 1.00
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Best Params found by CV: {'max_depth': None, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 200}
+[V2: RandomForest Tuned (GridSearch)] Acc: 1.00 | Prec: 1.00 | Rec: 1.00 | F1: 1.00 | AUC: 1.00
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'Algorithm': 'V2: RF Tuned (GridSearch)',
+<pre>{'Algorithm': 'V2: RandomForest Tuned (GridSearch)',
  'Accuracy': 1.0,
  'Precision': 1.0,
  'Recall': 1.0,
@@ -7796,7 +7790,7 @@ Best Params found by CV: {'max_depth': None, 'max_features': 'sqrt', 'min_sample
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"--- V3: Ensemble Learning (Stacking) ---"</span><span class="p">)</span>
@@ -7813,7 +7807,8 @@ Best Params found by CV: {'max_depth': None, 'max_features': 'sqrt', 'min_sample
 <span class="p">)</span>
 
 <span class="n">RandomForest_stacking_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">evaluate_model</span><span class="p">(</span><span class="n">RandomForest_stacking_model</span><span class="p">,</span> <span class="s2">"V3: RF Stacking Ensemble"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">RandomForest_stacking_model</span><span class="p">,</span> <span class="s2">"V3: RandomForest Stacking Ensemble"</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">,</span> <span class="s2">"Validation"</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">RandomForest_stacking_model</span><span class="p">,</span> <span class="s2">"V3: RandomForest Stacking Ensemble"</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="s2">"Test"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7827,14 +7822,14 @@ Best Params found by CV: {'max_depth': None, 'max_features': 'sqrt', 'min_sample
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>--- V3: Ensemble Learning (Stacking) ---
-[V3: RF Stacking Ensemble] Acc: 1.00 | Prec: 0.99 | Rec: 1.00 | F1: 1.00 | AUC: 1.00
+[V3: RandomForest Stacking Ensemble] Acc: 1.00 | Prec: 0.99 | Rec: 1.00 | F1: 1.00 | AUC: 1.00
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'Algorithm': 'V3: RF Stacking Ensemble',
+<pre>{'Algorithm': 'V3: RandomForest Stacking Ensemble',
  'Accuracy': 1.0,
  'Precision': 0.99,
  'Recall': 1.0,
@@ -7860,17 +7855,24 @@ Best Params found by CV: {'max_depth': None, 'max_features': 'sqrt', 'min_sample
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># CẤU HÌNH ĐƯỜNG DẪN LƯU</span>
 <span class="n">save_path</span> <span class="o">=</span> <span class="s1">'../experiment/Random Forest/'</span>
 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="c1"># 1. TỔNG HỢP &amp; LƯU CSV</span>
+<span class="c1"># 1. TỔNG HỢP &amp; LƯU CSV (bao gồm cả Validation và Test)</span>
 <span class="n">df_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results_list</span><span class="p">)</span>
-<span class="n">csv_output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'Random_Forest_evaluation_results.csv'</span><span class="p">)</span>
+<span class="n">csv_output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'Random_Forest_evaluation_results_with_valid.csv'</span><span class="p">)</span>
 <span class="n">df_results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">csv_output</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Lưu riêng từng file để dễ xem trong experiment</span>
+<span class="n">valid_csv_output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'Random_Forest_validation_results.csv'</span><span class="p">)</span>
+<span class="n">test_csv_output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'Random_Forest_test_results.csv'</span><span class="p">)</span>
+
+<span class="n">df_results</span><span class="p">[</span><span class="n">df_results</span><span class="p">[</span><span class="s1">'Split'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Validation'</span><span class="p">]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">valid_csv_output</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df_results</span><span class="p">[</span><span class="n">df_results</span><span class="p">[</span><span class="s1">'Split'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Test'</span><span class="p">]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">test_csv_output</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># 2. LƯU MODELS (.pkl)</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">'Random_Forest_baseline.pkl'</span><span class="p">),</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -7883,7 +7885,9 @@ Best Params found by CV: {'max_depth': None, 'max_features': 'sqrt', 'min_sample
     <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">RandomForest_stacking_model</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Đã lưu file CSV tại: </span><span class="si">{</span><span class="n">csv_output</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Đã lưu file CSV tổng tại: </span><span class="si">{</span><span class="n">csv_output</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Đã lưu validation results tại: </span><span class="si">{</span><span class="n">valid_csv_output</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Đã lưu test results tại: </span><span class="si">{</span><span class="n">test_csv_output</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Đã lưu models tại: </span><span class="si">{</span><span class="n">save_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
 
@@ -7939,7 +7943,7 @@ Best Params found by CV: {'max_depth': None, 'max_features': 'sqrt', 'min_sample
 <tbody>
 <tr>
 <th>0</th>
-<td>V1: RF Baseline</td>
+<td>V1: RandomForest Baseline</td>
 <td>1.0</td>
 <td>1.00</td>
 <td>1.0</td>
@@ -7948,7 +7952,7 @@ Best Params found by CV: {'max_depth': None, 'max_features': 'sqrt', 'min_sample
 </tr>
 <tr>
 <th>1</th>
-<td>V2: RF Tuned (GridSearch)</td>
+<td>V2: RandomForest Tuned (GridSearch)</td>
 <td>1.0</td>
 <td>1.00</td>
 <td>1.0</td>
@@ -7957,7 +7961,7 @@ Best Params found by CV: {'max_depth': None, 'max_features': 'sqrt', 'min_sample
 </tr>
 <tr>
 <th>2</th>
-<td>V3: RF Stacking Ensemble</td>
+<td>V3: RandomForest Stacking Ensemble</td>
 <td>1.0</td>
 <td>0.99</td>
 <td>1.0</td>
@@ -7976,7 +7980,7 @@ Best Params found by CV: {'max_depth': None, 'max_features': 'sqrt', 'min_sample
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter<span class="w"> </span>nbconvert<span class="w"> </span>--to<span class="w"> </span>html<span class="w"> </span>Random_Forest_model.ipynb
@@ -7993,7 +7997,7 @@ Best Params found by CV: {'max_depth': None, 'max_features': 'sqrt', 'min_sample
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
 <pre>[NbConvertApp] Converting notebook Random_Forest_model.ipynb to html
-[NbConvertApp] Writing 328953 bytes to Random_Forest_model.html
+[NbConvertApp] Writing 306635 bytes to Random_Forest_model.html
 </pre>
 </div>
 </div>
