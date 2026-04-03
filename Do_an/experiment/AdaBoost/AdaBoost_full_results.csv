@@ -1,0 +1,10 @@
+Algorithm,Split,Accuracy,Precision,Recall,F1-Score,AUC
+V1: AdaBoost Baseline,KFold,0.9865,0.9797,0.9913,0.9854,0.9987
+V1: AdaBoost Baseline,Validation,0.9901,0.9891,0.9891,0.9891,0.9999
+V1: AdaBoost Baseline,Test,0.9975,0.9946,1.0,0.9973,0.9992
+V2: AdaBoost Tuned (GridSearch),KFold,0.9986,0.9972,1.0,0.9986,0.9999
+V2: AdaBoost Tuned (GridSearch),Validation,1.0,1.0,1.0,1.0,1.0
+V2: AdaBoost Tuned (GridSearch),Test,1.0,1.0,1.0,1.0,1.0
+V3: AdaBoost Stacking Ensemble,KFold,0.9959,0.9972,0.9943,0.9957,0.9959
+V3: AdaBoost Stacking Ensemble,Validation,1.0,1.0,1.0,1.0,1.0
+V3: AdaBoost Stacking Ensemble,Test,0.9827,0.9944,0.9672,0.9806,0.9814
