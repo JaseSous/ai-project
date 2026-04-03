@@ -1,0 +1,10 @@
+Algorithm,Split,Accuracy,Precision,Recall,F1-Score,AUC
+V1: Random Tree Baseline,KFold,0.9959,0.9918,1.0,0.9958,1.0
+V1: Random Tree Baseline,Validation,1.0,1.0,1.0,1.0,1.0
+V1: Random Tree Baseline,Test,1.0,1.0,1.0,1.0,1.0
+V2: Random Tree Tuned (GridSearch),KFold,0.9973,0.9944,1.0,0.9972,1.0
+V2: Random Tree Tuned (GridSearch),Validation,1.0,1.0,1.0,1.0,1.0
+V2: Random Tree Tuned (GridSearch),Test,1.0,1.0,1.0,1.0,1.0
+V3: Random Tree Stacking Ensemble,KFold,0.9959,0.9972,0.9936,0.9954,0.9955
+V3: Random Tree Stacking Ensemble,Validation,1.0,1.0,1.0,1.0,1.0
+V3: Random Tree Stacking Ensemble,Test,1.0,1.0,1.0,1.0,1.0
