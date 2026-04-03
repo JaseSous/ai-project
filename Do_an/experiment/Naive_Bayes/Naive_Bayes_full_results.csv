@@ -1,0 +1,10 @@
+Algorithm,Split,Accuracy,Precision,Recall,F1-Score,AUC
+V1: Naive Bayes Baseline,KFold,0.8338,0.8461,0.7746,0.8086,0.9346
+V1: Naive Bayes Baseline,Validation,0.8818,0.8864,0.8478,0.8667,0.9627
+V1: Naive Bayes Baseline,Test,0.8691,0.8495,0.8634,0.8564,0.9525
+V2: Naive Bayes Tuned (GridSearch),KFold,0.8338,0.8461,0.7746,0.8086,0.9346
+V2: Naive Bayes Tuned (GridSearch),Validation,0.8818,0.8864,0.8478,0.8667,0.9627
+V2: Naive Bayes Tuned (GridSearch),Test,0.8691,0.8495,0.8634,0.8564,0.9525
+V3: Naive Bayes Stacking Ensemble,KFold,0.9959,0.9944,0.9973,0.9958,0.9987
+V3: Naive Bayes Stacking Ensemble,Validation,1.0,1.0,1.0,1.0,1.0
+V3: Naive Bayes Stacking Ensemble,Test,0.9975,0.9946,1.0,0.9973,0.9977
