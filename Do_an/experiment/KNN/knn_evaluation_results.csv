@@ -1,0 +1,10 @@
+Algorithm,Split,Accuracy,Precision,Recall,F1-Score,AUC
+V1: kNN Baseline,KFold,0.99,0.99,1.0,0.99,1.0
+V1: kNN Baseline,Validation,1.0,0.99,1.0,0.99,1.0
+V1: kNN Baseline,Test,1.0,0.99,1.0,0.99,1.0
+V2: kNN Tuned (GridSearch),KFold,1.0,0.99,1.0,1.0,1.0
+V2: kNN Tuned (GridSearch),Validation,1.0,1.0,1.0,1.0,1.0
+V2: kNN Tuned (GridSearch),Test,1.0,0.99,1.0,1.0,1.0
+V3: kNN Stacking Ensemble,KFold,1.0,0.99,1.0,1.0,1.0
+V3: kNN Stacking Ensemble,Validation,1.0,1.0,1.0,1.0,1.0
+V3: kNN Stacking Ensemble,Test,1.0,0.99,1.0,1.0,1.0
